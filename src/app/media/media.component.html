@@ -1,0 +1,33 @@
+<div class="logo">
+  <img src="/assets/testify.jpg" alt="" />
+</div>
+
+<div class="card">
+  <div class="card-head">
+    Chat With our team and you will get reply as soon as possible with our
+    Testify Team
+  </div>
+  <div class="card-body">
+    <div
+      *ngFor="let chat of chats"
+      [ngClass]="{
+        underbody: chat.from === 'user',
+        underbodyreplyfromserver: chat.from === 'server'
+      }"
+    >
+      {{ chat.value }}
+    </div>
+  </div>
+</div>
+<div>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Type your doubt hear</mat-label>
+      <input
+        matInput
+        placeholder="type your doubt related to your question"
+        (keyup.enter)="message($event)"
+      />
+    </mat-form-field>
+  </form>
+</div>

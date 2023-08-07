@@ -1,0 +1,246 @@
+<div class="parent-container" *ngIf="beforetest">
+  <div class="example-button-row">
+    <button
+      mat-raised-button
+      color="primary"
+      id="createtest"
+      (click)="createTest()"
+      style="margin-bottom: 15px"
+    >
+      Start
+    </button>
+
+    <mat-form-field style="float: right">
+      <mat-label>Difficulty</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let def of difficulty" [value]="def.name">
+          {{ def.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--
+        Difficulty-level
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" >
+       
+        <mat-button-toggle value="bold">11-12</mat-button-toggle>
+    
+        <mat-button-toggle value="italic">State</mat-button-toggle>
+        <mat-button-toggle value="underline">Jee-Mains</mat-button-toggle>
+        <mat-button-toggle value="bold">Jee-Advance</mat-button-toggle>
+        <mat-button-toggle value="bold">Above Jee-advance</mat-button-toggle>
+      </mat-button-toggle-group>
+    -->
+    <h1 class="warn" id="warnTag1" *ngIf="warnph">
+      Choose atleast one topic from Physics
+    </h1>
+    <h1 class="warn" id="warnTag2" *ngIf="warnch">
+      Choose atleast one topic from Chemistry
+    </h1>
+    <h1 class="warn" id="warnTag3" *ngIf="warnme">
+      Choose atleast one topic from MatheMatics
+    </h1>
+  </div>
+
+  <div
+    class="container1"
+    [ngClass]="coll ? 'container-md' : ''"
+    (resized)="onResized($event)"
+  >
+    <section class="card">
+      <mat-card>
+        <mat-card-header class="card-head"
+          >Physics Topic
+          <section class="btn-header">
+            <mat-slide-toggle
+              (click)="forAll('Physics')"
+              id="pyAllBtn"
+              [checked]="pySt"
+              >For All</mat-slide-toggle
+            >
+          </section>
+        </mat-card-header>
+
+        <mat-card-content>
+          <section class="card-body">
+            <span>
+              <ul style="list-style: none">
+                <li *ngFor="let topic of Physics">
+                  <mat-slide-toggle
+                    class="b"
+                    [id]="topic.name"
+                    [checked]="pyCheck[topic.idNo]"
+                    (click)="forOne(topic.idNo, 'Physics')"
+                    >{{ topic.name }}</mat-slide-toggle
+                  >
+                </li>
+              </ul>
+            </span>
+          </section>
+        </mat-card-content>
+      </mat-card>
+    </section>
+    <section class="card">
+      <mat-card>
+        <mat-card-header class="card-head"
+          >Chemistry Topic
+          <section class="btn-header">
+            <mat-slide-toggle
+              (click)="forAll('Chemistry')"
+              id="chAllBtn"
+              [checked]="chSt"
+              >For All</mat-slide-toggle
+            >
+          </section>
+        </mat-card-header>
+
+        <mat-card-content>
+          <section class="card-body">
+            <span>
+              <ul style="list-style: none">
+                <li *ngFor="let topic of Chemistry">
+                  <mat-slide-toggle
+                    class="b"
+                    [id]="topic.name"
+                    [checked]="chCheck[topic.idNo]"
+                    (click)="forOne(topic.idNo, 'Chemistry')"
+                    >{{ topic.name }}</mat-slide-toggle
+                  >
+                </li>
+              </ul>
+            </span>
+          </section>
+        </mat-card-content>
+      </mat-card>
+    </section>
+    <section class="card">
+      <mat-card>
+        <mat-card-header class="card-head"
+          >Mathematics Topic
+          <section class="btn-header">
+            <mat-slide-toggle
+              (click)="forAll('MatheMatics')"
+              id="meAllBtn"
+              [checked]="meSt"
+              >For All</mat-slide-toggle
+            >
+          </section>
+        </mat-card-header>
+
+        <mat-card-content>
+          <section class="card-body">
+            <span>
+              <ul style="list-style: none">
+                <li *ngFor="let topic of MatheMatics">
+                  <mat-slide-toggle
+                    class="b"
+                    [id]="topic.name"
+                    [checked]="meCheck[topic.idNo]"
+                    (click)="forOne(topic.idNo, 'MatheMatics')"
+                    >{{ topic.name }}</mat-slide-toggle
+                  >
+                </li>
+              </ul>
+            </span>
+          </section>
+        </mat-card-content>
+      </mat-card>
+    </section>
+  </div>
+</div>
+<div class="test" *ngIf="aftertest">
+  <div class="questionTag">Question 1</div>
+  <div class="questionString">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
+    perspiciatis accusamus aperiam consectetur eaque impedit magni enim adipisci
+    soluta! Delectus eveniet dicta excepturi sunt, deserunt ab? Magnam
+    praesentium facere exercitationem possimus voluptatem quisquam illum ab,
+    laborum nihil repellendus laboriosam corporis, accusamus quos deserunt
+    delectus recusandae nemo, molestias qui. Ratione, commodi.
+  </div>
+  <div *ngIf="true">
+    <img
+      src="/assets/IMG_20230717_095732 (1).jpg"
+      alt=""
+      class="questionImage"
+    />
+  </div>
+
+  <div class="restBody" id="restBody" (resized)="onResized($event)">
+    <div class="twobox">
+      <div class="option">
+        <!--
+                <div class="answerTag" >A</div>
+                //-->
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">A</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, id?
+        </div>
+
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">C</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
+          asperiores!
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+    </div>
+    <div class="twobox">
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">B</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam,
+          culpa!
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">D</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. At,
+          voluptatibus?
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chooseoption">
+    Options
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value="bold">A</mat-button-toggle>
+
+      <mat-button-toggle value="italic">B</mat-button-toggle>
+      <mat-button-toggle value="underline">C</mat-button-toggle>
+      <mat-button-toggle value="bold">D</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <section>
+    <button mat-raised-button color="primary" style="float: left; margin: 15px">
+      Previous
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      style="float: right; margin: 15px"
+    >
+      Next
+    </button>
+  </section>
+</div>

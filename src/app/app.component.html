@@ -1,0 +1,25 @@
+<button
+  mat-raised-button
+  color="primary"
+  style="margin: 1.5rem"
+  (click)="showsidehead()"
+  *ngIf="!sidehead"
+>
+  Exit Full Screen
+</button>
+<app-sidenav
+  (onToggleSideNav)="onToggleSideNav($event)"
+  *ngIf="sidehead"
+></app-sidenav>
+<app-header
+  [collapsed]="isSideNavCollapsed"
+  [screenWidth]="screenWidth"
+  (maximize)="maximize($event)"
+  *ngIf="sidehead"
+></app-header>
+<app-body
+  [collapsed]="isSideNavCollapsed"
+  [screenWidth]="screenWidth"
+  [sidehead]="!sidehead"
+>
+</app-body>

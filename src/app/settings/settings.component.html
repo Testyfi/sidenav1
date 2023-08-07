@@ -1,0 +1,85 @@
+<div class="card" (resized)="onResized($event)">
+  <div class="card-head">
+    <div>Profile Settings</div>
+    <div style="float: right; margin-right: 2rem" *ngIf="mbscreen">
+      <img class="img" src="/assets/profile-bg-3.png" alt="" />
+    </div>
+    <img
+      class="profilepicture"
+      id="profilepicture"
+      src="{{ profile.getprofile() }}"
+      alt=""
+    />
+  </div>
+  <div class="card-body">
+    <div *ngIf="!updat">
+      <ul style="list-style-type: none">
+        <li style="margin: 5px">Name: {{ name }}</li>
+        <li style="margin: 5px">Email: {{ email }}</li>
+        <li style="margin: 5px">Mobile: {{ mobilenumber }}</li>
+      </ul>
+    </div>
+    <form
+      class="example-form"
+      *ngIf="updat"
+      [formGroup]="form"
+      (ngSubmit)="getformValue()"
+    >
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Your Name</mat-label>
+          <input matInput placeholder="Ex. Sagar" formControlName="name" />
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Enter your email</mat-label>
+          <input
+            matInput
+            placeholder="pat@example.com"
+            formControlName="emailform"
+            required
+          />
+          <mat-error *ngIf="getemailobject().get('emailform').invalid">{{
+            getEmailErrorMessage()
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <div id="mobileNumber">
+          <mat-form-field class="btn">
+            <mat-label>Enter your Mobile Number</mat-label>
+            <input
+              matInput
+              placeholder="{{ mobilenumber }}"
+              formControlName="mobile"
+              required
+            />
+            <mat-error *ngIf="getmobileobject().get('mobile').invalid">{{
+              getErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div>
+        <div>
+          <label> Profile Picture</label>
+        </div>
+        <input
+          type="file"
+          accept="image/*"
+          (change)="getloadFile($event)"
+          formControlName="profilepicture"
+        />
+      </div>
+      <div style="margin-top: 1rem" *ngIf="updat">
+        <button mat-raised-button color="primary">Submit</button>
+      </div>
+    </form>
+  </div>
+  <div style="margin: auto; padding: 1rem" *ngIf="!updat">
+    <button mat-raised-button color="primary" (click)="update()">
+      Change Your Profile
+    </button>
+  </div>
+</div>

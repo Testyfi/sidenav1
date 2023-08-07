@@ -1,0 +1,93 @@
+.para {
+  font-size: 20px;
+  border: transparent;
+  border-radius: 2px;
+  padding: 5px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  margin: 1.5rem 1rem 1.5rem 0;
+  box-shadow: 0 0.25rem 0.5rem #e6edef;
+  color: #495057;
+  width: auto;
+  //margin-left: 2px;
+  position: relative;
+  //margin: 5px;
+  height: auto;
+  .card-head {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #edf1f7;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #ffffff;
+  }
+
+  .card-body {
+    padding: 1rem 1.5rem;
+    background-color: #ffe3e3;
+    min-height: 300px;
+    //margin-bottom: 50px;
+  }
+  .underbody {
+    background-color: #ffffff;
+    margin: 4px;
+    max-width: 90%;
+
+    height: max-content + 20px;
+
+    border-radius: 10px;
+    padding: 0.8rem;
+  }
+  .underbodyreplyfromserver {
+    background-color: #fac0c0;
+    margin: 4px;
+    max-width: 90%;
+    //margin-left: 50px;
+    height: max-content + 20px;
+
+    border-radius: 10px;
+    padding: 0.8rem;
+  }
+}
+.container-flex {
+  // padding: 1rem 1.5rem;
+  //max-width: 100%;
+  display: block;
+}
+.container-block {
+  // max-width: 50%;
+  display: block;
+}
+.stepsimage {
+  width: 100%;
+  margin: 5px;
+  padding: 1rem;
+}
+.big-container-flex {
+  display: flex;
+}
+.big-container-block {
+  display: block;
+}
+.logo {
+  margin-left: 30%;
+  margin-right: 40%;
+  //margin: auto;
+  // height: 100px;
+}
+.example-form {
+  min-width: 150px;
+  //max-width: 500px;
+  width: 85%;
+  // margin-top: 30%;
+  //margin-bottom: ;
+  //position: absolute;
+  bottom: 5px;
+}
+
+.example-full-width {
+  width: 100%;
+}

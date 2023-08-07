@@ -1,0 +1,76 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  margin: 1.5rem 1.5rem 1.5rem 0;
+  //box-shadow: 0 .25rem .5rem #e6edef;
+  box-shadow: 0 0.25rem 0.5rem #959c9c;
+  //width: auto;
+  //color: #725e5e;
+  //min-width: 350px;
+  // width: 400px;
+  //position: relative;
+  //margin: 8px;
+
+  .card-head {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #edf1f7;
+    font-size: 1.5rem;
+    font-weight: 500;
+    //align-items: center;
+    //display: flex;
+    // min-height: 300px;
+    background-color: #f3faff;
+    color: #690101;
+    line-height: 2rem;
+    .but {
+      float: right;
+    }
+  }
+  .img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .card-body {
+    padding: 1rem 1.25rem;
+    display: flex;
+    font-size: 1rem;
+    font-weight: 400;
+    background-color: #ffffff;
+  }
+  .profilepicture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    //padding: 0.5rem;
+    border: 10px solid white;
+    margin: 1rem;
+  }
+  .profile {
+    align-items: center;
+    margin: 1rem;
+    max-width: 500px;
+  }
+}
+.btn {
+  //margin: 8px;
+}
+:host ::ng-deep mat-progress-bar {
+  padding: 0.5rem;
+  height: 20px;
+  // color: green;
+  // background-color: #3efa0e;
+}
+
+:host ::ng-deep mat-progress-bar .mdc-linear-progress__bar-inner {
+  border-width: 10px;
+  color: #3efa0e;
+  //padding: 0.5rem;
+}
+.style2 .mat-progress-bar-fill::after {
+  background-color: #3efa0e;
+}
+.example-form {
+}
