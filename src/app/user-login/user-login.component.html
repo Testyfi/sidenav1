@@ -1,0 +1,188 @@
+<div *ngIf="loading" class="spinner-overlay">
+  <div class="spinner"></div>
+</div>
+
+<div class="navbar">
+  <a class="navbar-brand">Testify</a>
+  <!--
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+    </ul>
+    -->
+</div>
+
+<div class="wrapper">
+  <div class="intro">
+    <h2>Welcome to Testify!</h2>
+    <p>
+      Testify is an online platform designed to help you practice and assess
+      your knowledge in various subjects. Whether you're a student preparing for
+      exams, a professional seeking to sharpen your skills, or simply someone
+      who loves learning, Testify provides a convenient and interactive way to
+      test your understanding.
+    </p>
+    <h3>Key Features of Testify:</h3>
+    <ul>
+      <li>
+        Diverse Question Bank: Explore a vast collection of questions across
+        multiple subjects and topics.
+      </li>
+      <li>
+        Customizable Quizzes: Create personalized quizzes based on specific
+        subjects, topics, or difficulty levels.
+      </li>
+      <li>
+        Performance Tracking: Monitor your performance and see detailed insights
+        into your strengths and areas for improvement.
+      </li>
+      <li>
+        User-Friendly Interface: Enjoy a seamless and intuitive user experience,
+        making learning and practicing enjoyable.
+      </li>
+      <li>
+        Progress Syncing: Your progress is saved, allowing you to continue where
+        you left off across devices.
+      </li>
+    </ul>
+    <p>
+      At Testify, our mission is to empower learners of all levels to enhance
+      their knowledge and skills through effective practice and assessment. We
+      believe that consistent practice is the key to mastery, and we're here to
+      support you on your learning journey. Get ready to challenge yourself,
+      gain confidence, and Testify your knowledge! Start exploring Testify today
+      and unlock a world of learning opportunities.
+    </p>
+  </div>
+
+  <div class="main" [class.scaledown]="chk">
+    <input type="checkbox" id="chk" aria-hidden="true" [(ngModel)]="chk" />
+
+    <div class="signup">
+      <form (ngSubmit)="signup()" #signupForm="ngForm">
+        <label for="chk" aria-hidden="true">Sign up</label>
+        <input
+          #signupfirstName="ngModel"
+          type="text"
+          name="firstName"
+          id="firstName"
+          placeholder="First Name"
+          [(ngModel)]="firstName"
+          required
+        />
+        <div
+          *ngIf="signupfirstName.invalid && signupfirstName.touched"
+          class="error"
+        >
+          First Name is required.
+        </div>
+        <input
+          #signuplastName="ngModel"
+          type="text"
+          name="lastName"
+          id="lastName"
+          placeholder="Last Name"
+          [(ngModel)]="lastName"
+          required
+        />
+        <div
+          *ngIf="signuplastName.invalid && signuplastName.touched"
+          class="error"
+        >
+          Last Name is required.
+        </div>
+        <input
+          #signupEmail="ngModel"
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="Email"
+          required
+          email
+        />
+        <div *ngIf="signupEmail.invalid && signupEmail.touched" class="error">
+          Please enter a valid email.
+        </div>
+        <input
+          #signupPhone="ngModel"
+          type="tel"
+          id="phone"
+          name="phone"
+          [(ngModel)]="phone"
+          pattern="[0-9]{10}"
+          required
+          placeholder="Phone"
+        />
+        <div *ngIf="signupPhone.invalid && signupPhone.touched" class="error">
+          Please enter a valid 10-digit phone number.
+        </div>
+        <input
+          #signupPass="ngModel"
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Password"
+          required
+          minlength="6"
+        />
+        <div *ngIf="signupPass.invalid && signupPass.touched" class="error">
+          Password must be at least 6 characters long.
+        </div>
+        <button type="submit" [disabled]="signupForm.invalid">Sign up</button>
+      </form>
+    </div>
+
+    <div class="login">
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+        <label for="chk" aria-hidden="true">Login</label>
+        <input
+          #loginEmail="ngModel"
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="loginemail"
+          placeholder="Email"
+          required
+          email
+        />
+        <div *ngIf="loginEmail.invalid && loginEmail.touched" class="error">
+          Please enter a valid email.
+        </div>
+        <input
+          #loginPass="ngModel"
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="loginpass"
+          placeholder="Password"
+          required
+        />
+        <div *ngIf="loginPass.invalid && loginPass.touched" class="error">
+          Password is required.
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div
+  style="
+    margin-top: 5px;
+    padding: 0.5rem;
+    height: 30px;
+
+    background-color: rgb(56, 0, 53);
+    color: aliceblue;
+  "
+>
+  <div style="margin-left: 45%">@Testify</div>
+</div>

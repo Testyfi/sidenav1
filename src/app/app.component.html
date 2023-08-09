@@ -3,23 +3,26 @@
   color="primary"
   style="margin: 1.5rem"
   (click)="showsidehead()"
-  *ngIf="!sidehead"
+  *ngIf="!sidehead && !loggedin"
 >
   Exit Full Screen
 </button>
 <app-sidenav
   (onToggleSideNav)="onToggleSideNav($event)"
-  *ngIf="sidehead"
+  *ngIf="sidehead && !loggedin"
 ></app-sidenav>
 <app-header
   [collapsed]="isSideNavCollapsed"
   [screenWidth]="screenWidth"
   (maximize)="maximize($event)"
-  *ngIf="sidehead"
+  *ngIf="sidehead && !loggedin"
 ></app-header>
 <app-body
   [collapsed]="isSideNavCollapsed"
   [screenWidth]="screenWidth"
   [sidehead]="!sidehead"
+  *ngIf="!loggedin"
 >
 </app-body>
+
+<app-user-login *ngIf="loggedin" (logged)="setlogged($event)"></app-user-login>

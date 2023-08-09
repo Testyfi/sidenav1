@@ -11,6 +11,7 @@ interface SideNavToggle {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  loggedin = true;
   profilepicture = '';
   title = 'sidenav';
   isSideNavCollapsed = false;
@@ -31,5 +32,8 @@ export class AppComponent {
     this.profilepicture = data;
     console.log(this.profilepicture);
     // console.log('hellow');
+  }
+  setlogged(status: boolean) {
+    this.loggedin = status;
   }
 }

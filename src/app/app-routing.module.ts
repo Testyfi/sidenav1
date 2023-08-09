@@ -7,24 +7,22 @@ import { MediaComponent } from './media/media.component';
 import { CoupensComponent } from './coupens/coupens.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ProductsComponent } from './products/products.component';
+import { UserLoginComponent } from './user-login/user-login.component';
 
 const routes: Routes = [
-
-{path: '', redirectTo:'dashboard',pathMatch:'full'},
- {path: 'dashboard', component:DashboardComponent},
- {path: 'products', component:ProductsComponent},
- {path: 'statistics', component:StatisticsComponent},
- {path: 'coupens', component:CoupensComponent},
- {path: 'pages', component:PagesComponent},
- {path: 'media', component:MediaComponent},
- {path: 'settings', component:SettingsComponent}
- 
- 
- 
+  { path: '', redirectTo: 'user-login', pathMatch: 'full' },
+  { path: 'user-login', component: UserLoginComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'products', component: ProductsComponent },
+  { path: 'statistics', component: StatisticsComponent },
+  { path: 'coupens', component: CoupensComponent },
+  { path: 'pages', component: PagesComponent },
+  { path: 'media', component: MediaComponent },
+  { path: 'settings', component: SettingsComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

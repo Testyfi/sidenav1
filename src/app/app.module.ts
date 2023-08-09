@@ -40,6 +40,7 @@ import {
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { NgIf } from '@angular/common';
+import { UserLoginComponent } from './user-login/user-login.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { NgIf } from '@angular/common';
     MediaComponent,
     SettingsComponent,
     HeaderComponent,
+    UserLoginComponent,
   ],
   imports: [
     BrowserModule,
