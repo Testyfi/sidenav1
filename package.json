@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "@canvasjs/angular-charts": "^1.0.3",
+    "@canvasjs/charts": "^3.7.15",
     "angular-resize-event": "^3.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
