@@ -31,6 +31,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {
   FormControl,
   FormGroupDirective,
@@ -83,6 +84,7 @@ import { UserLoginComponent } from './user-login/user-login.component';
     MatInputModule,
     ReactiveFormsModule,
     NgIf,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
