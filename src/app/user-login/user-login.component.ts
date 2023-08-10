@@ -54,7 +54,7 @@ export class UserLoginComponent implements OnInit {
       email: this.loginemail,
       password: this.loginpass,
     };
-    console.log(loginData);
+    //console.log(loginData);
 
     this.http.post(`${environment.backend}/userlogin`, loginData).subscribe(
       (response) => {
