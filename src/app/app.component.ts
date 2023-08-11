@@ -25,6 +25,10 @@ export class AppComponent {
   maximize(data: boolean) {
     this.sidehead = !data;
   }
+  logout(data: boolean) {
+    this.loggedin = data;
+    console.log(this.loggedin);
+  }
   showsidehead() {
     this.sidehead = true;
   }

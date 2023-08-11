@@ -101,6 +101,7 @@ export class SettingsComponent implements OnInit {
   getloadFile(event: any) {
     //let element: HTMLElement = document.getElementById('profilepicture');
     this.propicsrc = URL.createObjectURL(event.target.files[0]);
+    console.log(this.propicsrc);
     // console.log(event);
   }
   updat = false;

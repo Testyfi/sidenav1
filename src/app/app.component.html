@@ -16,6 +16,7 @@
   [screenWidth]="screenWidth"
   (maximize)="maximize($event)"
   *ngIf="sidehead && !loggedin"
+  (logout)="logout($event)"
 ></app-header>
 <app-body
   [collapsed]="isSideNavCollapsed"

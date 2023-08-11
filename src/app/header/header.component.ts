@@ -9,7 +9,11 @@ import {
   SimpleChanges,
   signal,
 } from '@angular/core';
+import { userItems } from './useritems';
 import { ProfilepictureupdateService } from '../profilepictureupdate.service';
+import { HttpClient } from '@angular/common/http';
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -17,12 +21,19 @@ import { ProfilepictureupdateService } from '../profilepictureupdate.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(public profile: ProfilepictureupdateService) {}
+  constructor(
+    public profile: ProfilepictureupdateService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
+
   @Input() collapsed = false;
   @Input() screenWidth = 0;
   @Output() maximize: EventEmitter<boolean> = new EventEmitter();
+  @Output() logout: EventEmitter<boolean> = new EventEmitter();
   //profilepicture = this.profile.message();
   canShowSearchAsOverlay = false;
+  userItems = userItems;
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.checkCanShowSearchAsOverlay(window.innerWidth);
@@ -49,5 +60,13 @@ export class HeaderComponent implements OnInit {
   }
   expand() {
     this.maximize.emit(true);
+  }
+  userfunction(lable: string) {
+    if (lable == 'Profile') {
+      this.router.navigate(['/settings']);
+    } else {
+      localStorage.removeItem('token');
+      this.logout.emit(true);
+    }
   }
 }

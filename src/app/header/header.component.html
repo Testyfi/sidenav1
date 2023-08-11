@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="head-user-avatar-container">
-        <div class="head-user-avatar">
+        <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverLay">
           <img
             src="{{ profile.getprofile() }}"
             alt="user"
@@ -59,5 +59,27 @@
     <button class="search-btn">
       <i class="far fa-search search-icon"></i>
     </button>
+  </div>
+</ng-template>
+<ng-template #userOverLay>
+  <div class="overlay overlay-user overlay-fall" cdkMenu>
+    <ul>
+      <li>
+        <a style="text-decoration: none" [routerLink]="['settings']">
+          <i class="icon" [ngClass]="'far fa-user'"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+      <li>
+        <a
+          style="text-decoration: none"
+          (click)="userfunction('userlogout')"
+          [routerLink]="['user-login']"
+        >
+          <i class="icon" [ngClass]="'far fa-power-off'"></i>
+          <span>Logout</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </ng-template>
