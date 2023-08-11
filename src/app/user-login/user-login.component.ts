@@ -19,7 +19,7 @@ export class UserLoginComponent implements OnInit {
   loginpass: string = '';
   chk: boolean = false;
   loading: boolean = false;
-
+  refferalcode = '';
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
@@ -33,8 +33,9 @@ export class UserLoginComponent implements OnInit {
       phone: this.phone,
       email: this.email,
       password: this.password,
+      refferal: this.refferalcode,
     };
-
+    //console.log(signupData);
     this.http.post(`${environment.backend}/usersignup`, signupData).subscribe(
       (response) => {
         this.loading = false;

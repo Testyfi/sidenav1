@@ -126,13 +126,22 @@
           id="password"
           name="password"
           [(ngModel)]="password"
-          placeholder="Password"
+          placeholder="password"
           required
           minlength="6"
         />
         <div *ngIf="signupPass.invalid && signupPass.touched" class="error">
           Password must be at least 6 characters long.
         </div>
+        <input
+          #signupRefferalCode="ngModel"
+          type="text"
+          id="refferalcode"
+          name="refferalcode"
+          [(ngModel)]="refferalcode"
+          placeholder="Refferal code"
+          required
+        />
         <button type="submit" [disabled]="signupForm.invalid">Sign up</button>
       </form>
     </div>
