@@ -23,7 +23,10 @@ export class UserLoginComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) this.router.navigate(['/home']);
+    if (localStorage.getItem('token')) {
+      this.router.navigate(['/dashboard']);
+      this.logged.emit(false);
+    }
   }
   signup() {
     this.loading = true;
