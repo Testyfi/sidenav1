@@ -95,19 +95,6 @@
           Last Name is required.
         </div>
         <input
-          #signupEmail="ngModel"
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="email"
-          placeholder="Email"
-          required
-          email
-        />
-        <div *ngIf="signupEmail.invalid && signupEmail.touched" class="error">
-          Please enter a valid email.
-        </div>
-        <input
           #signupPhone="ngModel"
           type="tel"
           id="phone"
@@ -120,6 +107,20 @@
         <div *ngIf="signupPhone.invalid && signupPhone.touched" class="error">
           Please enter a valid 10-digit phone number.
         </div>
+        <input
+          #signupEmail="ngModel"
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="Email"
+          required
+          email
+        />
+        <div *ngIf="signupEmail.invalid && signupEmail.touched" class="error">
+          Please enter a valid email.
+        </div>
+
         <input
           #signupPass="ngModel"
           type="password"
