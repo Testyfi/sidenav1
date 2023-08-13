@@ -8,13 +8,19 @@ import {
   OnChanges,
   SimpleChanges,
   signal,
+  Signal,
 } from '@angular/core';
 import { userItems } from './useritems';
 import { ProfilepictureupdateService } from '../profilepictureupdate.service';
 import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
-
+interface userprofile {
+  path: string | null | undefined;
+  name: string | null | undefined;
+  email: string | null | undefined;
+  phonenumber: string | null | undefined;
+}
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -32,6 +38,8 @@ export class HeaderComponent implements OnInit {
   @Output() maximize: EventEmitter<boolean> = new EventEmitter();
   @Output() logout: EventEmitter<boolean> = new EventEmitter();
   //profilepicture = this.profile.message();
+  profilepicturesignal: Signal<userprofile> = this.profile.getprofile();
+
   canShowSearchAsOverlay = false;
   userItems = userItems;
   @HostListener('window:resize', ['$event'])

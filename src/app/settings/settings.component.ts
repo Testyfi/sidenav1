@@ -5,6 +5,8 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { Injectable, Signal, signal } from '@angular/core';
+
 import { ProfilepictureupdateService } from '../profilepictureupdate.service';
 import {
   FormControl,
@@ -23,6 +25,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 //import { Event } from 'socket.io';
 import { Event } from '@angular/router';
 import { json } from 'express';
+
+interface userprofile {
+  path: string | null | undefined;
+  name: string | null | undefined;
+  email: string | null | undefined;
+  phonenumber: string | null | undefined;
+}
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -43,10 +52,18 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  name: string | null | undefined = 'Anuj Kumar Sharma';
-  email: string | null | undefined = 'anuj.as598@gmail.com';
+  name = 'anuj kumar sharma';
+  path = '/assets/user3.jpg';
+  email = 'anuj.as598@gmail.com';
   mobilenumber: string | null | undefined = '9517415732';
-
+  phonenumber = '9517415732';
+  profiledata: userprofile = {
+    name: this.name,
+    email: this.email,
+    phonenumber: this.phonenumber,
+    path: this.path,
+  };
+  profiledatasignal: Signal<userprofile> = signal(this.profiledata);
   mbscreen = true;
   //profileupdateform = FormGroup;
   constructor(public profile: ProfilepictureupdateService) {}
@@ -111,7 +128,8 @@ export class SettingsComponent implements OnInit {
   setprofile() {
     this.updat = false;
     //console.log(document.getElementById('updateprofile'));
-    this.profile.setprofile(this.propicsrc);
+    this.profiledata.path = this.propicsrc;
+    this.profile.setprofile(this.profiledata);
     //this.changeprofile.emit(this.propicsrc);
     // console.log(this.propicsrc);
     //console.log(updateprofile.value);
@@ -139,9 +157,11 @@ export class SettingsComponent implements OnInit {
   }
   getformValue() {
     //console.log(this.form.value.emailform);
-    this.name = this.form.value.name;
-    this.email = this.form.value.emailform;
-    this.mobilenumber = this.form.value.mobile;
+
+    this.profiledata.name = this.form.value.name; // = signal(this.form.value.name);
+    this.profiledata.email = this.form.value.emailform;
+    this.profiledata.phonenumber = this.form.value.mobile;
+
     this.setprofile();
   }
   getEmailErrorMessage() {

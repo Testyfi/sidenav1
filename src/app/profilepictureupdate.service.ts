@@ -1,16 +1,31 @@
-import { Injectable, signal } from '@angular/core';
-
+import { Injectable, Signal, signal } from '@angular/core';
+interface userprofile {
+  path: string | null | undefined;
+  name: string | null | undefined;
+  email: string | null | undefined;
+  phonenumber: string | null | undefined;
+}
 @Injectable({
   providedIn: 'root',
 })
 export class ProfilepictureupdateService {
   constructor() {}
-  path = signal('/assets/user3.jpg');
-  setprofile(data: string) {
-    this.path.set(data);
+  data: userprofile = {
+    path: '/assets/user3.jpg',
+    name: 'Anuj Kumar Sharma',
+    email: 'anuj.as598@gmail.com',
+    phonenumber: '9517415732',
+  };
+  profiledatasignal: Signal<userprofile> = signal(this.data);
+  setprofile(data: userprofile) {
+    this.data.path = data.path;
+    this.data.name = data.name;
+    this.data.email = data.email;
+    this.data.phonenumber = data.phonenumber;
+    this.profiledatasignal = signal(this.data);
     //console.log(data);
   }
   getprofile() {
-    return this.path();
+    return this.profiledatasignal;
   }
 }

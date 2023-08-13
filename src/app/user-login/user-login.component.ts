@@ -3,7 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-
+import { ProfilepictureupdateService } from '../profilepictureupdate.service';
+interface userprofile {
+  path: string | null | undefined;
+  name: string | null | undefined;
+  email: string | null | undefined;
+  phonenumber: string | null | undefined;
+}
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -11,6 +17,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class UserLoginComponent implements OnInit {
   @Output() logged = new EventEmitter<boolean>();
+
   firstName: string = '';
   lastName: string = '';
   phone: string = '';
@@ -21,7 +28,18 @@ export class UserLoginComponent implements OnInit {
   chk: boolean = false;
   loading: boolean = false;
   refferalcode = '';
-  constructor(private http: HttpClient, private router: Router) {}
+  profilepicturesrc = '';
+  up: userprofile = {
+    path: this.profilepicturesrc,
+    name: this.firstName + ' ' + this.lastName,
+    phonenumber: this.phone,
+    email: this.email,
+  };
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    public profile: ProfilepictureupdateService
+  ) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
@@ -79,6 +97,11 @@ export class UserLoginComponent implements OnInit {
           localStorage.setItem('token', response.token);
 
           this.logged.emit(false);
+          this.up.name = response.first_name + ' ' + response.last_name;
+          this.up.email = response.email;
+          this.up.phonenumber = response.phone;
+          this.up.path = response.profile_picture;
+          this.profile.setprofile(this.up);
           this.router.navigate(['/dashboard']);
         },
         (error) => {

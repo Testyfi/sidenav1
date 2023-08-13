@@ -7,16 +7,18 @@
     <img
       class="profilepicture"
       id="profilepicture"
-      src="{{ profile.getprofile() }}"
+      src="{{ profile.getprofile()().path }}"
       alt=""
     />
   </div>
   <div class="card-body">
     <div *ngIf="!updat">
       <ul style="list-style-type: none">
-        <li style="margin: 5px">Name: {{ name }}</li>
-        <li style="margin: 5px">Email: {{ email }}</li>
-        <li style="margin: 5px">Mobile: {{ mobilenumber }}</li>
+        <li style="margin: 5px">Name: {{ profile.getprofile()().name }}</li>
+        <li style="margin: 5px">Email: {{ profile.getprofile()().email }}</li>
+        <li style="margin: 5px">
+          Mobile: {{ profile.getprofile()().phonenumber }}
+        </li>
       </ul>
     </div>
     <form
