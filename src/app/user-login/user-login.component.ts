@@ -61,19 +61,31 @@ export class UserLoginComponent implements OnInit {
     };
     //console.log(loginData);
 
-    this.http.post(`${environment.backend}/userlogin`, loginData).subscribe(
-      (response) => {
-        this.loading = false;
-        localStorage.setItem('token', response.toString());
+    this.http
+      .post<{
+        user_id: string;
+        first_name: string;
+        last_name: string;
+        email: string;
+        phone: string;
+        token: string;
+        profile_picture: string;
+        wallet: number;
+      }>(`${environment.backend}/userlogin`, loginData)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          this.loading = false;
+          localStorage.setItem('token', response.token);
 
-        this.logged.emit(false);
-        this.router.navigate(['/dashboard']);
-      },
-      (error) => {
-        this.loading = false;
-        console.log(error);
-        alert(error.error);
-      }
-    );
+          this.logged.emit(false);
+          this.router.navigate(['/dashboard']);
+        },
+        (error) => {
+          this.loading = false;
+          console.log(error);
+          alert(error.error);
+        }
+      );
   }
 }

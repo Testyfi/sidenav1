@@ -208,11 +208,11 @@
 }
 .ripple:hover,
 .ripple:focus {
-  background: #eff2f3 radial-gradient(circle, transparent 1%, #eff2f3 1%)
+  background: #e4e9eb radial-gradient(circle, transparent 1%, #e7eaeb 1%)
     center/15000%;
 }
 .ripple:active {
-  background-color: #bec2c4;
+  background-color: #a7b4bb;
   background-size: 100%;
   transition: background 0s;
 }
