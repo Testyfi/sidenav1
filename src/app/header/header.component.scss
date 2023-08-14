@@ -201,6 +201,26 @@
     }
   }
 }
+.overlay-wallet {
+  ul {
+    padding: 0.2rem 0;
+    list-style: none;
+    width: 9rem;
+    li {
+      padding: 0.3rem 1rem;
+      font-size: 14px;
+      font-weight: 400;
+      color: #495057;
+      cursor: pointer;
+      .icon {
+        margin-right: 0.6rem;
+      }
+    }
+    li:hover {
+      background: #eff2f3;
+    }
+  }
+}
 .ripple {
   background-position: center;
   background-color: #fff;

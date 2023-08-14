@@ -9,6 +9,7 @@ interface userprofile {
   name: string | null | undefined;
   email: string | null | undefined;
   phonenumber: string | null | undefined;
+  wallet: number;
 }
 @Component({
   selector: 'app-user-login',
@@ -29,11 +30,13 @@ export class UserLoginComponent implements OnInit {
   loading: boolean = false;
   refferalcode = '';
   profilepicturesrc = '';
+
   up: userprofile = {
     path: this.profilepicturesrc,
     name: this.firstName + ' ' + this.lastName,
     phonenumber: this.phone,
     email: this.email,
+    wallet: 0,
   };
   constructor(
     private http: HttpClient,
@@ -101,6 +104,7 @@ export class UserLoginComponent implements OnInit {
           this.up.email = response.email;
           this.up.phonenumber = response.phone;
           this.up.path = response.profile_picture;
+          this.up.wallet = response.wallet;
           this.profile.setprofile(this.up);
           this.router.navigate(['/dashboard']);
         },

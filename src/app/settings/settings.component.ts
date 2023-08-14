@@ -31,6 +31,7 @@ interface userprofile {
   name: string | null | undefined;
   email: string | null | undefined;
   phonenumber: string | null | undefined;
+  wallet: number;
 }
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -62,6 +63,7 @@ export class SettingsComponent implements OnInit {
     email: this.email,
     phonenumber: this.phonenumber,
     path: this.path,
+    wallet: 0,
   };
   profiledatasignal: Signal<userprofile> = signal(this.profiledata);
   mbscreen = true;

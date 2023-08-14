@@ -4,6 +4,7 @@ interface userprofile {
   name: string | null | undefined;
   email: string | null | undefined;
   phonenumber: string | null | undefined;
+  wallet: number;
 }
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,7 @@ export class ProfilepictureupdateService {
     name: 'Anuj Kumar Sharma',
     email: 'anuj.as598@gmail.com',
     phonenumber: '9517415732',
+    wallet: 0,
   };
   profiledatasignal: Signal<userprofile> = signal(this.data);
   setprofile(data: userprofile) {

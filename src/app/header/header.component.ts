@@ -20,6 +20,7 @@ interface userprofile {
   name: string | null | undefined;
   email: string | null | undefined;
   phonenumber: string | null | undefined;
+  wallet: number;
 }
 @Component({
   selector: 'app-header',
