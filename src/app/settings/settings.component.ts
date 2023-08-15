@@ -116,7 +116,7 @@ export class SettingsComponent implements OnInit {
   getNumber(mobile: string) {
     this.mbl = mobile;
   }
-  propicsrc = '/assets/user3.jpg';
+  propicsrc = this.profile.getprofile()().path;
   getloadFile(event: any) {
     //let element: HTMLElement = document.getElementById('profilepicture');
     this.propicsrc = URL.createObjectURL(event.target.files[0]);
