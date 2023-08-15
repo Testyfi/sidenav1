@@ -70,7 +70,7 @@ export class UserLoginComponent implements OnInit {
       phone: this.phone,
       email: this.email,
       password: this.password,
-      refferal: this.refferal_code,
+      refferal_code: this.refferal_code,
     };
     //console.log(signupData);
     this.http.post(`${environment.backend}/usersignup`, signupData).subscribe(
