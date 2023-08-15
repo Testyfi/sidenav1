@@ -39,7 +39,8 @@ export class PagesComponent implements OnInit {
   ob: Observable<IEmployee[]> = new Observable<IEmployee[]>();
   data: IEmployee[] = [];
   url: string = 'http://192.168.1.44:8000/data';
-
+  diff: string = '';
+  warndiff: boolean = false;
   em = [this.pyCheck, this.chCheck, this.meCheck];
   constructor(private http: HttpClient) {}
 
@@ -258,8 +259,9 @@ export class PagesComponent implements OnInit {
       }
     }
     this.warnme = start;
-
-    if (!this.warnch && !this.warnme && !this.warnph) {
+    if (this.diff == '') this.warndiff = true;
+    else this.warndiff = false;
+    if (!this.warnch && !this.warnme && !this.warnph && !this.warndiff) {
       this.getEmployees();
       this.beforetest = false;
       this.aftertest = true;

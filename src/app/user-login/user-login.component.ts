@@ -28,7 +28,7 @@ export class UserLoginComponent implements OnInit {
   loginpass: string = '';
   chk: boolean = false;
   loading: boolean = false;
-  refferalcode = '';
+  refferal_code = '';
   profilepicturesrc = '';
 
   up: userprofile = {
@@ -70,7 +70,7 @@ export class UserLoginComponent implements OnInit {
       phone: this.phone,
       email: this.email,
       password: this.password,
-      refferal: this.refferalcode,
+      refferal: this.refferal_code,
     };
     //console.log(signupData);
     this.http.post(`${environment.backend}/usersignup`, signupData).subscribe(

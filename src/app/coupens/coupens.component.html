@@ -1,21 +1,35 @@
 <div class="logo">
   <img src="/assets/testify.jpg" alt="" />
 </div>
-<div class="card">
-  <div class="card-head">Testify coupons</div>
-  <div class="card-body">
-    <ul>
-      <li>
-        Reffer Some One With Your RefferCode and you will get
-        <span style="color: #ff0404; font-size: larger">@200</span> Rupee in
-        your Testify Wallet
-      </li>
-      <li>
-        Your coupon code is
-        <span style="color: #ff0404; font-size: larger"
-          >testify@{{ profile.getprofile()().phonenumber }}</span
-        >
-      </li>
-    </ul>
+<div>
+  <div class="card">
+    <div class="card-head">Reffer And Earn</div>
+    <div class="card-body">
+      <ul>
+        <li>
+          Reffer Some One With Your RefferCode and you will get
+          <span style="color: #ff0404; font-size: larger">@200</span> Rupee in
+          your Testify Wallet
+        </li>
+        <li>
+          Your coupon code is
+          <span style="color: #ff0404; font-size: larger"
+            >testify@{{ profile.getprofile()().phonenumber }}</span
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">Add Money From UPI</div>
+    <div class="card-body">
+      <mat-form-field class="example-full-width">
+        <mat-label>Enter Amount</mat-label>
+        <input matInput value="300" />
+      </mat-form-field>
+      <div style="margin-top: 0.2rem">
+        <button mat-raised-button color="primary">Add Money</button>
+      </div>
+    </div>
   </div>
 </div>

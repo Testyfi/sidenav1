@@ -5,7 +5,7 @@ export const combo = [
     rate: 199,
     id: 7,
   },
-
+  /*
   {
     name: 'Jee Mains ,Create Your test',
     image: '/assets/combo.jpg',
@@ -24,4 +24,5 @@ export const combo = [
     rate: 299,
     id: 8,
   },
+  */
 ];

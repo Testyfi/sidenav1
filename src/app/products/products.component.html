@@ -1,5 +1,5 @@
-<div id="allcourses" style="margin-left: 20%" (resized)="onResized($event)">
-  <div class="courseheading">Explore top courses</div>
+<div id="allcourses" style="margin: auto" (resized)="onResized($event)">
+  <div class="courseheading">Explore Create Your Test Facility</div>
   <div id="displaycourses1">
     <div class="card" *ngFor="let course of combo">
       <div class="card-head">{{ course.name }}</div>
@@ -9,13 +9,28 @@
         </div>
         <div>@{{ course.rate }}/Month</div>
         <div>
-          <button mat-raised-button color="primary">Buy now</button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="buy('1')"
+            *ngIf="!createtest"
+          >
+            Buy now
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="start()"
+            *ngIf="createtest"
+          >
+            Start
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="displaycourses">
+  <div id="displaycourses" *ngIf="false">
     <div class="card" *ngFor="let course of courses">
       <div class="card-head">{{ course.name }}</div>
       <div class="card-body">
