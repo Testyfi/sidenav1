@@ -24,7 +24,9 @@ export class ProfilepictureupdateService {
     this.data.name = data.name;
     this.data.email = data.email;
     this.data.phonenumber = data.phonenumber;
+    this.data.wallet = data.wallet;
     this.profiledatasignal = signal(this.data);
+
     //console.log(data);
   }
   getprofile() {

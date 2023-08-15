@@ -50,6 +50,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkCanShowSearchAsOverlay(window.innerWidth);
+    console.log(this.profilepicturesignal().email);
   }
   getHeadClass(): string {
     let styleClass = '';

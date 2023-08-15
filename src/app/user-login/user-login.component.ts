@@ -70,7 +70,7 @@ export class UserLoginComponent implements OnInit {
       phone: this.phone,
       email: this.email,
       password: this.password,
-      refferal_code: this.refferal_code,
+      referral_code: this.refferal_code,
     };
     //console.log(signupData);
     this.http.post(`${environment.backend}/usersignup`, signupData).subscribe(
@@ -107,7 +107,6 @@ export class UserLoginComponent implements OnInit {
       }>(`${environment.backend}/userlogin`, loginData)
       .subscribe(
         (response) => {
-          console.log(response);
           this.loading = false;
           localStorage.setItem('token', JSON.stringify(response));
 
@@ -117,7 +116,9 @@ export class UserLoginComponent implements OnInit {
           this.up.phonenumber = response.phone;
           this.up.path = response.profile_picture;
           this.up.wallet = response.wallet;
+
           this.profile.setprofile(this.up);
+
           this.router.navigate(['/dashboard']);
         },
         (error) => {
