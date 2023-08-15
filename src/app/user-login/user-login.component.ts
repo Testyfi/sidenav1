@@ -46,6 +46,18 @@ export class UserLoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
+      let str: any = '';
+      str = localStorage.getItem('token');
+
+      let response = JSON.parse(str);
+      //console.log(response.email);
+      //let response = JSON.parse(localStorage.getItem('token'));
+      this.up.name = response.first_name + ' ' + response.last_name;
+      this.up.email = response.email;
+      this.up.phonenumber = response.phone;
+      this.up.path = response.profile_picture;
+      this.up.wallet = response.wallet;
+      this.profile.setprofile(this.up);
       this.router.navigate(['/dashboard']);
       this.logged.emit(false);
     }
@@ -97,7 +109,7 @@ export class UserLoginComponent implements OnInit {
         (response) => {
           console.log(response);
           this.loading = false;
-          localStorage.setItem('token', response.token);
+          localStorage.setItem('token', JSON.stringify(response));
 
           this.logged.emit(false);
           this.up.name = response.first_name + ' ' + response.last_name;
