@@ -5,6 +5,8 @@ import { combo } from './combo';
 import { NONE_TYPE } from '@angular/compiler';
 import { ProfilepictureupdateService } from '../profilepictureupdate.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -12,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
   constructor(
+    private http: HttpClient,
     public profile: ProfilepictureupdateService,
     private router: Router
   ) {}
@@ -58,11 +61,29 @@ export class ProductsComponent implements OnInit {
     }
   }
   createtest = false;
+  loading = false;
   buy(id: string) {
     if (id == '1') {
-      if (this.profile.getprofile()().wallet > 200) {
+      if (this.profile.getprofile()().wallet >= 200) {
         this.profile.getprofile()().wallet =
           this.profile.getprofile()().wallet - 200;
+        this.loading = true;
+        this.http
+          .get(`${environment.backend}/users/64d8d9b37b81e63e98ec2a15/purchase`)
+          .subscribe(
+            (response) => {
+              console.log(response);
+              this.loading = false;
+              //localStorage.setItem('token', JSON.stringify(response));
+
+              //this.router.navigate(['/dashboard']);
+            },
+            (error) => {
+              this.loading = false;
+              console.log(error);
+              alert(error.error);
+            }
+          );
         this.createtest = true;
       } else {
         alert(

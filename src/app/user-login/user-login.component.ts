@@ -104,9 +104,11 @@ export class UserLoginComponent implements OnInit {
         token: string;
         profile_picture: string;
         wallet: number;
+        purchased: boolean;
       }>(`${environment.backend}/userlogin`, loginData)
       .subscribe(
         (response) => {
+          console.log(response);
           this.loading = false;
           localStorage.setItem('token', JSON.stringify(response));
 
