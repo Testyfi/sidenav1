@@ -262,7 +262,7 @@ export class PagesComponent implements OnInit {
     if (this.diff == '') this.warndiff = true;
     else this.warndiff = false;
     if (!this.warnch && !this.warnme && !this.warnph && !this.warndiff) {
-      this.getEmployees();
+      //this.getEmployees();
       this.beforetest = false;
       this.aftertest = true;
     }

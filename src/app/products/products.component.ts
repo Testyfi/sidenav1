@@ -7,6 +7,7 @@ import { ProfilepictureupdateService } from '../profilepictureupdate.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -62,21 +63,27 @@ export class ProductsComponent implements OnInit {
   }
   createtest = false;
   loading = false;
+
   buy(id: string) {
     if (id == '1') {
       if (this.profile.getprofile()().wallet >= 200) {
         this.profile.getprofile()().wallet =
           this.profile.getprofile()().wallet - 200;
         this.loading = true;
+
         this.http
-          .get(`${environment.backend}/users/64d8d9b37b81e63e98ec2a15/purchase`)
+          .get(
+            `${environment.backend}/users/64d8d9b37b81e63e98ec2a15/purchase`,
+            { headers: this.getHeader() }
+          )
           .subscribe(
             (response) => {
-              console.log(response);
+              console.log(response + 'come from server');
               this.loading = false;
               //localStorage.setItem('token', JSON.stringify(response));
 
               //this.router.navigate(['/dashboard']);
+              this.createtest = true;
             },
             (error) => {
               this.loading = false;
@@ -84,7 +91,6 @@ export class ProductsComponent implements OnInit {
               alert(error.error);
             }
           );
-        this.createtest = true;
       } else {
         alert(
           'your Account balance is low please add atleast ' +
@@ -93,6 +99,15 @@ export class ProductsComponent implements OnInit {
         );
       }
     }
+  }
+  getHeader() {
+    let str: any = '';
+    str = localStorage.getItem('token');
+
+    let response = JSON.parse(str);
+    const token: string = response.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return headers;
   }
   start() {
     this.router.navigate(['/pages']);
