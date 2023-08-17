@@ -26,7 +26,7 @@ export class ProductsComponent implements OnInit {
   onResized(event: ResizedEvent) {
     this.num = event.newRect.width;
     // console.log(this.num);
-
+    /*
     if (this.num < 550) {
       let e: any = document.getElementById('displaycourses');
       e.style.display = 'block';
@@ -44,9 +44,11 @@ export class ProductsComponent implements OnInit {
       e = document.getElementById('allcourses');
       e.style = NONE_TYPE;
     }
+    */
   }
   ngOnInit(): void {
     this.num = window.innerWidth;
+    /*
     if (this.num < 550) {
       let e: any = document.getElementById('displaycourses');
       e.style.display = 'block';
@@ -60,6 +62,7 @@ export class ProductsComponent implements OnInit {
       e = document.getElementById('allcourses');
       e.style = NONE_TYPE;
     }
+    */
   }
   createtest = this.profile.getprofile()().purchased;
   loading = false;
@@ -71,13 +74,21 @@ export class ProductsComponent implements OnInit {
 
         this.http
           .get(
-            `${environment.backend}/users/64d8d9b37b81e63e98ec2a15/purchase`,
+            `${environment.backend}/users/${
+              this.profile.getprofile()().user_id
+            }/purchase`,
             { headers: this.getHeader() }
           )
           .subscribe(
             (response) => {
               this.profile.getprofile()().wallet =
                 this.profile.getprofile()().wallet - 200;
+              let str: any = '';
+              str = localStorage.getItem('token');
+              localStorage.removeItem('token');
+              let res = JSON.parse(str);
+              res.wallet = res.wallet - 200;
+              localStorage.setItem('token', JSON.stringify(res));
               console.log(response + 'come from server');
               this.loading = false;
               //localStorage.setItem('token', JSON.stringify(response));
