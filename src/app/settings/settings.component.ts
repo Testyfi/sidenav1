@@ -25,14 +25,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 //import { Event } from 'socket.io';
 import { Event } from '@angular/router';
 import { json } from 'express';
+import { userprofile } from 'src/app/profile';
+import { userdata } from 'src/app/profiledata';
 
-interface userprofile {
-  path: string | null | undefined;
-  name: string | null | undefined;
-  email: string | null | undefined;
-  phonenumber: string | null | undefined;
-  wallet: number;
-}
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -53,31 +48,20 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  name = 'anuj kumar sharma';
-  path = '/assets/user3.jpg';
-  email = 'anuj.as598@gmail.com';
-  mobilenumber: string | null | undefined = '9517415732';
-  phonenumber = '9517415732';
-  profiledata: userprofile = {
-    name: this.name,
-    email: this.email,
-    phonenumber: this.phonenumber,
-    path: this.path,
-    wallet: 0,
-  };
-  profiledatasignal: Signal<userprofile> = signal(this.profiledata);
-  mbscreen = true;
-  //profileupdateform = FormGroup;
   constructor(public profile: ProfilepictureupdateService) {}
 
-  form = new FormGroup({
-    name: new FormControl(this.name),
+  // profiledatasignal: Signal<userprofile> = signal(this.profiledata);
+  mbscreen = true;
+  //profileupdateform = FormGroup;
 
-    emailform: new FormControl(this.email, [
+  form = new FormGroup({
+    name: new FormControl(this.profile.getprofile()().name),
+
+    emailform: new FormControl(this.profile.getprofile()().email, [
       Validators.required,
       Validators.email,
     ]),
-    mobile: new FormControl(this.mobilenumber, [
+    mobile: new FormControl(this.profile.getprofile()().phonenumber, [
       Validators.required,
       Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
     ]),
@@ -120,7 +104,7 @@ export class SettingsComponent implements OnInit {
   getloadFile(event: any) {
     //let element: HTMLElement = document.getElementById('profilepicture');
     this.propicsrc = URL.createObjectURL(event.target.files[0]);
-    console.log(this.propicsrc);
+    //console.log(this.propicsrc);
     // console.log(event);
   }
   updat = false;
@@ -130,8 +114,9 @@ export class SettingsComponent implements OnInit {
   setprofile() {
     this.updat = false;
     //console.log(document.getElementById('updateprofile'));
-    this.profiledata.path = this.propicsrc;
-    this.profile.setprofile(this.profiledata);
+
+    this.profile.getprofile()().path = this.propicsrc;
+
     //this.changeprofile.emit(this.propicsrc);
     // console.log(this.propicsrc);
     //console.log(updateprofile.value);
@@ -160,9 +145,9 @@ export class SettingsComponent implements OnInit {
   getformValue() {
     //console.log(this.form.value.emailform);
 
-    this.profiledata.name = this.form.value.name; // = signal(this.form.value.name);
-    this.profiledata.email = this.form.value.emailform;
-    this.profiledata.phonenumber = this.form.value.mobile;
+    this.profile.getprofile()().name = this.form.value.name; // = signal(this.form.value.name);
+    this.profile.getprofile()().email = this.form.value.emailform;
+    this.profile.getprofile()().phonenumber = this.form.value.mobile;
 
     this.setprofile();
   }

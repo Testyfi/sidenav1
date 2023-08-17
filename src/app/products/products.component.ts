@@ -61,14 +61,12 @@ export class ProductsComponent implements OnInit {
       e.style = NONE_TYPE;
     }
   }
-  createtest = false;
+  createtest = this.profile.getprofile()().purchased;
   loading = false;
 
   buy(id: string) {
     if (id == '1') {
       if (this.profile.getprofile()().wallet >= 200) {
-        this.profile.getprofile()().wallet =
-          this.profile.getprofile()().wallet - 200;
         this.loading = true;
 
         this.http
@@ -78,6 +76,8 @@ export class ProductsComponent implements OnInit {
           )
           .subscribe(
             (response) => {
+              this.profile.getprofile()().wallet =
+                this.profile.getprofile()().wallet - 200;
               console.log(response + 'come from server');
               this.loading = false;
               //localStorage.setItem('token', JSON.stringify(response));

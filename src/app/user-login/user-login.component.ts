@@ -4,13 +4,9 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ProfilepictureupdateService } from '../profilepictureupdate.service';
-interface userprofile {
-  path: string | null | undefined;
-  name: string | null | undefined;
-  email: string | null | undefined;
-  phonenumber: string | null | undefined;
-  wallet: number;
-}
+import { userprofile } from 'src/app/profile';
+import { userdata } from 'src/app/profiledata';
+
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -31,13 +27,7 @@ export class UserLoginComponent implements OnInit {
   refferal_code = '';
   profilepicturesrc = '';
 
-  up: userprofile = {
-    path: this.profilepicturesrc,
-    name: this.firstName + ' ' + this.lastName,
-    phonenumber: this.phone,
-    email: this.email,
-    wallet: 0,
-  };
+  up: userprofile = userdata;
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -57,6 +47,10 @@ export class UserLoginComponent implements OnInit {
       this.up.phonenumber = response.phone;
       this.up.path = response.profile_picture;
       this.up.wallet = response.wallet;
+      this.up.token = response.token;
+      this.up.purchased = response.purchased;
+      this.up.user_id = response.user_id;
+
       this.profile.setprofile(this.up);
       this.router.navigate(['/dashboard']);
       this.logged.emit(false);
@@ -118,6 +112,9 @@ export class UserLoginComponent implements OnInit {
           this.up.phonenumber = response.phone;
           this.up.path = response.profile_picture;
           this.up.wallet = response.wallet;
+          this.up.token = response.token;
+          this.up.purchased = response.purchased;
+          this.up.user_id = response.user_id;
 
           this.profile.setprofile(this.up);
 

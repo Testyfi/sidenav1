@@ -36,12 +36,7 @@
       <div class="example-container">
         <mat-form-field>
           <mat-label>Enter your email</mat-label>
-          <input
-            matInput
-            placeholder="pat@example.com"
-            formControlName="emailform"
-            required
-          />
+          <input matInput formControlName="emailform" required />
           <mat-error *ngIf="getemailobject().get('emailform').invalid">{{
             getEmailErrorMessage()
           }}</mat-error>
@@ -51,12 +46,7 @@
         <div id="mobileNumber">
           <mat-form-field class="btn">
             <mat-label>Enter your Mobile Number</mat-label>
-            <input
-              matInput
-              placeholder="{{ mobilenumber }}"
-              formControlName="mobile"
-              required
-            />
+            <input matInput formControlName="mobile" required />
             <mat-error *ngIf="getmobileobject().get('mobile').invalid">{{
               getErrorMessage()
             }}</mat-error>
