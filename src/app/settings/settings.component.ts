@@ -122,18 +122,32 @@ export class SettingsComponent implements OnInit {
   setprofile() {
     this.loading = true;
     this.updat = false;
-    console.log(this.form.get('profilepicture')?.value);
+    //console.log(this.form.get('profilepicture')?.value);
 
-    this.profile.getprofile()().path = this.propicsrc;
     const formData = new FormData();
     formData.append('profileImage', this.form.get('profilepicture')?.value);
     this.http
-      .put(`${environment.backend}/users/{user_id}/profile`, formData, {
-        headers: this.getHeader(),
-      })
+      .put(
+        `${environment.backend}/users/${
+          this.profile.getprofile()().user_id
+        }/profile`,
+        formData,
+        {
+          headers: this.getHeader(),
+        }
+      )
       .subscribe(
         (response) => {
-          console.log('success');
+          this.profile.getprofile()().path = this.propicsrc;
+          let str: any = '';
+          str = localStorage.getItem('token');
+
+          let res = JSON.parse(str);
+
+          res.profilepicturesrc = this.propicsrc;
+          localStorage.setItem('token', res.stringify());
+          alert('Your Profile Changed Successfully');
+          //console.log('success');
           // handle response
           this.loading = false;
         },
