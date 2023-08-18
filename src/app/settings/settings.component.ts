@@ -27,6 +27,10 @@ import { Event } from '@angular/router';
 import { json } from 'express';
 import { userprofile } from 'src/app/profile';
 import { userdata } from 'src/app/profiledata';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -48,25 +52,24 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  constructor(public profile: ProfilepictureupdateService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    public profile: ProfilepictureupdateService
+  ) {}
 
   // profiledatasignal: Signal<userprofile> = signal(this.profiledata);
   mbscreen = true;
+  hide = true;
+  loading = false;
   //profileupdateform = FormGroup;
 
   form = new FormGroup({
-    name: new FormControl(this.profile.getprofile()().name),
-
-    emailform: new FormControl(this.profile.getprofile()().email, [
-      Validators.required,
-      Validators.email,
-    ]),
-    mobile: new FormControl(this.profile.getprofile()().phonenumber, [
-      Validators.required,
-      Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
-    ]),
-
     profilepicture: new FormControl(),
+  });
+  formpassword = new FormGroup({
+    oldpassword: new FormControl(''),
+    newpassword: new FormControl(''),
   });
   /*
   emailFormControl = new FormControl('', [
@@ -145,10 +148,6 @@ export class SettingsComponent implements OnInit {
   getformValue() {
     //console.log(this.form.value.emailform);
 
-    this.profile.getprofile()().name = this.form.value.name; // = signal(this.form.value.name);
-    this.profile.getprofile()().email = this.form.value.emailform;
-    this.profile.getprofile()().phonenumber = this.form.value.mobile;
-
     this.setprofile();
   }
   getEmailErrorMessage() {
@@ -175,5 +174,53 @@ export class SettingsComponent implements OnInit {
       l = new FormControl();
     }
     return l;
+  }
+  changepass = false;
+  changepassword() {
+    this.changepass = false;
+    let str: any = '';
+    str = this.formpassword.value.newpassword;
+    if (str.length > 0) {
+      str = this.formpassword.value.oldpassword;
+      if (str.length > 0) {
+        this.loading = true;
+        const changepassworddata = {
+          existing_password: this.formpassword.value.oldpassword,
+          new_password: this.formpassword.value.newpassword,
+        };
+        this.http
+          .put(
+            `${environment.backend}/users/${
+              this.profile.getprofile()().user_id
+            }/changepassword`,
+            changepassworddata,
+            { headers: this.getHeader() }
+          )
+          .subscribe(
+            (response) => {
+              //handle success
+              alert('password change success fully');
+              this.loading = false;
+            },
+            (error) => {
+              alert(error.error);
+              this.loading = false;
+              // handle error
+            }
+          );
+      }
+    }
+  }
+  changepasscall() {
+    this.changepass = true;
+  }
+  getHeader() {
+    let str: any = '';
+    str = localStorage.getItem('token');
+
+    let response = JSON.parse(str);
+    const token: string = response.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return headers;
   }
 }
