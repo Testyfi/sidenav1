@@ -79,13 +79,23 @@
   </div>
   <div style="margin: auto" *ngIf="!updat && !changepass">
     <div style="margin-bottom: 1rem">
-      <button mat-raised-button color="primary" (click)="changepasscall()">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="changepasscall()"
+        [disabled]="loading"
+      >
         Change Password
       </button>
     </div>
 
     <div style="margin-top: 1rem; margin-bottom: 1rem">
-      <button mat-raised-button color="primary" (click)="update()">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="update()"
+        [disabled]="loading"
+      >
         Change Profile Picture
       </button>
     </div>

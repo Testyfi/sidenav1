@@ -9,6 +9,7 @@ import { Injectable, Signal, signal } from '@angular/core';
 
 import { ProfilepictureupdateService } from '../profilepictureupdate.service';
 import {
+  FormBuilder,
   FormControl,
   FormGroupDirective,
   NgForm,
@@ -53,6 +54,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class SettingsComponent implements OnInit {
   constructor(
+    private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
     public profile: ProfilepictureupdateService
@@ -106,7 +108,10 @@ export class SettingsComponent implements OnInit {
   propicsrc = this.profile.getprofile()().path;
   getloadFile(event: any) {
     //let element: HTMLElement = document.getElementById('profilepicture');
+    console.log(event.target.files[0]);
+    const c = event.target.files[0];
     this.propicsrc = URL.createObjectURL(event.target.files[0]);
+    this.form.get('profilepicture')?.setValue(c);
     //console.log(this.propicsrc);
     // console.log(event);
   }
@@ -115,11 +120,29 @@ export class SettingsComponent implements OnInit {
     this.updat = true;
   }
   setprofile() {
+    this.loading = true;
     this.updat = false;
-    //console.log(document.getElementById('updateprofile'));
+    console.log(this.form.get('profilepicture')?.value);
 
     this.profile.getprofile()().path = this.propicsrc;
-
+    const formData = new FormData();
+    formData.append('profileImage', this.form.get('profilepicture')?.value);
+    this.http
+      .put(`${environment.backend}/users/{user_id}/profile`, formData, {
+        headers: this.getHeader(),
+      })
+      .subscribe(
+        (response) => {
+          console.log('success');
+          // handle response
+          this.loading = false;
+        },
+        (error) => {
+          alert(error.error);
+          this.loading = false;
+          // handle error
+        }
+      );
     //this.changeprofile.emit(this.propicsrc);
     // console.log(this.propicsrc);
     //console.log(updateprofile.value);
@@ -147,7 +170,7 @@ export class SettingsComponent implements OnInit {
   }
   getformValue() {
     //console.log(this.form.value.emailform);
-
+    //console.log(this.form);
     this.setprofile();
   }
   getEmailErrorMessage() {
@@ -183,31 +206,35 @@ export class SettingsComponent implements OnInit {
     if (str.length > 0) {
       str = this.formpassword.value.oldpassword;
       if (str.length > 0) {
-        this.loading = true;
-        const changepassworddata = {
-          existing_password: this.formpassword.value.oldpassword,
-          new_password: this.formpassword.value.newpassword,
-        };
-        this.http
-          .put(
-            `${environment.backend}/users/${
-              this.profile.getprofile()().user_id
-            }/changepassword`,
-            changepassworddata,
-            { headers: this.getHeader() }
-          )
-          .subscribe(
-            (response) => {
-              //handle success
-              alert('password change success fully');
-              this.loading = false;
-            },
-            (error) => {
-              alert(error.error);
-              this.loading = false;
-              // handle error
-            }
-          );
+        if (this.formpassword.value.newpassword != str) {
+          this.loading = true;
+          const changepassworddata = {
+            existing_password: this.formpassword.value.oldpassword,
+            new_password: this.formpassword.value.newpassword,
+          };
+          this.http
+            .put(
+              `${environment.backend}/users/${
+                this.profile.getprofile()().user_id
+              }/passwordchange`,
+              changepassworddata,
+              { headers: this.getHeader() }
+            )
+            .subscribe(
+              (response) => {
+                //handle success
+                alert('password change success fully');
+                this.loading = false;
+              },
+              (error) => {
+                alert(error.error);
+                this.loading = false;
+                // handle error
+              }
+            );
+        } else {
+          alert('NewPassword and OldPassword is same');
+        }
       }
     }
   }
