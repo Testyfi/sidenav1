@@ -108,7 +108,7 @@ export class SettingsComponent implements OnInit {
   propicsrc = this.profile.getprofile()().path;
   getloadFile(event: any) {
     //let element: HTMLElement = document.getElementById('profilepicture');
-    console.log(event.target.files[0]);
+    // console.log(event.target.files[0]);
     const c = event.target.files[0];
     this.propicsrc = URL.createObjectURL(event.target.files[0]);
     this.form.get('profilepicture')?.setValue(c);
@@ -138,18 +138,18 @@ export class SettingsComponent implements OnInit {
       )
       .subscribe(
         (response) => {
-          this.profile.getprofile()().path = this.propicsrc;
           let str: any = '';
           str = localStorage.getItem('token');
 
           let res = JSON.parse(str);
 
           res.profilepicturesrc = this.propicsrc;
-          localStorage.setItem('token', res.stringify());
+          localStorage.setItem('token', JSON.stringify(res));
           alert('Your Profile Changed Successfully');
           //console.log('success');
           // handle response
           this.loading = false;
+          this.profile.getprofile()().path = this.propicsrc;
         },
         (error) => {
           alert(error.error);
