@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { IEmployee } from './employee';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { difficulty } from './Difficulty';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',
@@ -42,7 +43,7 @@ export class PagesComponent implements OnInit {
   diff: string = '';
   warndiff: boolean = false;
   em = [this.pyCheck, this.chCheck, this.meCheck];
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getEmployees(): void {
     try {
@@ -263,8 +264,9 @@ export class PagesComponent implements OnInit {
     else this.warndiff = false;
     if (!this.warnch && !this.warnme && !this.warnph && !this.warndiff) {
       //this.getEmployees();
-      this.beforetest = false;
-      this.aftertest = true;
+      //this.beforetest = false;
+      //this.aftertest = true;
+      this.router.navigate(['/questionviewer']);
     }
   }
 }

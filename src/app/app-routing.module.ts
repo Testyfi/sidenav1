@@ -8,6 +8,7 @@ import { CoupensComponent } from './coupens/coupens.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ProductsComponent } from './products/products.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { QuestionviewerComponent } from './questionviewer/questionviewer.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'user-login', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'pages', component: PagesComponent },
   { path: 'media', component: MediaComponent },
   { path: 'settings', component: SettingsComponent },
+  { path: 'questionviewer', component: QuestionviewerComponent },
 ];
 
 @NgModule({

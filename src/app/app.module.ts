@@ -42,6 +42,8 @@ import {
 import { ErrorStateMatcher } from '@angular/material/core';
 import { NgIf } from '@angular/common';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { QuestionviewerComponent } from './questionviewer/questionviewer.component';
+import { CdTimerModule } from 'angular-cd-timer';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { UserLoginComponent } from './user-login/user-login.component';
     SettingsComponent,
     HeaderComponent,
     UserLoginComponent,
+    QuestionviewerComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +88,7 @@ import { UserLoginComponent } from './user-login/user-login.component';
     ReactiveFormsModule,
     NgIf,
     MatProgressSpinnerModule,
+    CdTimerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,260 @@
+<div class="test">
+  <div class="questionTag">
+    Time Left
+    <cd-timer format="hms" [countdown]="true" [startTime]="10800"></cd-timer>
+  </div>
+  <div class="questionTag">Question 1</div>
+  <div class="questionTag">Type Numerical</div>
+  <div class="questionString">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
+    perspiciatis accusamus aperiam consectetur eaque impedit magni enim adipisci
+    soluta! Delectus eveniet dicta excepturi sunt, deserunt ab? Magnam
+    praesentium facere exercitationem possimus voluptatem quisquam illum ab,
+    laborum nihil repellendus laboriosam corporis, accusamus quos deserunt
+    delectus recusandae nemo, molestias qui. Ratione, commodi.
+  </div>
+  <div *ngIf="true">
+    <img
+      src="/assets/IMG_20230717_095732 (1).jpg"
+      alt=""
+      class="questionImage"
+    />
+  </div>
+
+  <div
+    class="restBody"
+    id="restBody"
+    (resized)="onResized($event)"
+    *ngIf="single || multiple"
+  >
+    <div class="twobox">
+      <div class="option">
+        <!--
+                  <div class="answerTag" >A</div>
+                  //-->
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">A</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, id?
+        </div>
+
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">B</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
+          asperiores!
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+    </div>
+    <div class="twobox">
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">C</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam,
+          culpa!
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">D</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. At,
+          voluptatibus?
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="listtype" *ngIf="list">
+    <div class="listoption">
+      <div
+        style="
+          margin-left: 1rem;
+          font-size: 1rem;
+          font-weight: 800;
+          color: #7e0202;
+
+          text-align: center;
+          margin: 5px;
+        "
+      >
+        List I
+      </div>
+      <div class="option">
+        <!--
+                  <div class="answerTag" >A</div>
+                  //-->
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">A</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, id?
+        </div>
+
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">B</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
+          asperiores!
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">C</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
+          asperiores!
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">D</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
+          asperiores!
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+    </div>
+    <div class="listoption">
+      <div
+        style="
+          margin-left: 1rem;
+          font-size: 1rem;
+          font-weight: 800;
+
+          color: #7e0202;
+          text-align: center;
+          margin: 5px;
+        "
+      >
+        List II
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">1</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam,
+          culpa!
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">2</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. At,
+          voluptatibus?
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">3</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. At,
+          voluptatibus?
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">4</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. At,
+          voluptatibus?
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">5</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. At,
+          voluptatibus?
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chooseoption" *ngIf="single || list">
+    Options
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value="bold">A</mat-button-toggle>
+
+      <mat-button-toggle value="italic">B</mat-button-toggle>
+      <mat-button-toggle value="underline">C</mat-button-toggle>
+      <mat-button-toggle value="bold">D</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="chooseoption" *ngIf="multiple">
+    Options
+    <mat-button-toggle-group
+      name="ingredients"
+      aria-label="Ingredients"
+      multiple
+    >
+      <mat-button-toggle value="flour">A</mat-button-toggle>
+      <mat-button-toggle value="eggs">B</mat-button-toggle>
+      <mat-button-toggle value="sugar">C</mat-button-toggle>
+      <mat-button-toggle value="sugar">D</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <form class="example-form" *ngIf="numerical">
+    <mat-form-field class="example-full-width">
+      <mat-label>Leave Your Answer</mat-label>
+      <textarea matInput placeholder="Ex. 1.23"></textarea>
+    </mat-form-field>
+  </form>
+
+  <section>
+    <button mat-raised-button color="primary" style="float: left; margin: 15px">
+      Previous
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      style="float: right; margin: 15px"
+    >
+      Next
+    </button>
+  </section>
+</div>
