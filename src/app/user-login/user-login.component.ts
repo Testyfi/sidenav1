@@ -6,6 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ProfilepictureupdateService } from '../profilepictureupdate.service';
 import { userprofile } from 'src/app/profile';
 import { userdata } from 'src/app/profiledata';
+import { json } from 'express';
 
 @Component({
   selector: 'app-user-login',
@@ -21,6 +22,7 @@ export class UserLoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   loginemail: string = '';
+  forgetemail: string = '';
   loginpass: string = '';
   chk: boolean = false;
   loading: boolean = false;
@@ -126,5 +128,31 @@ export class UserLoginComponent implements OnInit {
           alert(error.error);
         }
       );
+  }
+  forget = false;
+  forgetcall() {
+    this.forget = true;
+  }
+  forgetoff() {
+    this.forget = false;
+  }
+
+  forgotpassword() {
+    this.loading = true;
+    const data = {
+      email: this.forgetemail,
+    };
+    this.http.post<{}>(`${environment.backend}/forgotpass`, data).subscribe(
+      (response) => {
+        console.log(response);
+        this.forget = false;
+        this.loading = false;
+      },
+      (error) => {
+        console.log(error);
+        alert(error.error);
+        this.loading = false;
+      }
+    );
   }
 }

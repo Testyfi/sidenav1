@@ -145,11 +145,11 @@ export class SettingsComponent implements OnInit {
 
           res.profilepicturesrc = this.propicsrc;
           localStorage.setItem('token', JSON.stringify(res));
+          this.profile.getprofile()().path = this.propicsrc;
           alert('Your Profile Changed Successfully');
           //console.log('success');
           // handle response
           this.loading = false;
-          this.profile.getprofile()().path = this.propicsrc;
         },
         (error) => {
           alert(error.error);

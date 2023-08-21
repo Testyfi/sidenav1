@@ -148,8 +148,9 @@
     </div>
 
     <div class="login">
-      <form (ngSubmit)="login()" #loginForm="ngForm">
+      <form (ngSubmit)="login()" #loginForm="ngForm" *ngIf="!forget">
         <label for="chk" aria-hidden="true">Login</label>
+
         <input
           #loginEmail="ngModel"
           type="email"
@@ -177,6 +178,34 @@
         </div>
         <button type="submit" [disabled]="loginForm.invalid">Login</button>
       </form>
+      <form (ngSubmit)="forgotpassword()" #forgetForm="ngForm" *ngIf="forget">
+        <label for="chk" aria-hidden="true">Forgot Password</label>
+        <input
+          #forgetEmail="ngModel"
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="forgetemail"
+          placeholder="Email"
+          required
+          email
+        />
+        <div *ngIf="forgetEmail.invalid && forgetEmail.touched" class="error">
+          Please enter a valid email.
+        </div>
+
+        <button type="submit" [disabled]="forgetForm.invalid">Submit</button>
+      </form>
+      <div style="width: 120px; margin: auto" *ngIf="!forget">
+        <a style="text-decoration: none; cursor: pointer" (click)="forgetcall()"
+          >Forgot Password</a
+        >
+      </div>
+      <div style="width: 40px; margin: auto" *ngIf="forget">
+        <a style="text-decoration: none; cursor: pointer" (click)="forgetoff()"
+          >Login</a
+        >
+      </div>
     </div>
   </div>
 </div>
