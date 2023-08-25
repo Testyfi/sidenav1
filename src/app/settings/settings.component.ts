@@ -138,6 +138,7 @@ export class SettingsComponent implements OnInit {
       )
       .subscribe(
         (response) => {
+          this.profile.getprofile()().path = this.propicsrc;
           let str: any = '';
           str = localStorage.getItem('token');
 
@@ -145,11 +146,11 @@ export class SettingsComponent implements OnInit {
 
           res.profilepicturesrc = this.propicsrc;
           localStorage.setItem('token', JSON.stringify(res));
-          this.profile.getprofile()().path = this.propicsrc;
+
+          this.loading = false;
           alert('Your Profile Changed Successfully');
           //console.log('success');
           // handle response
-          this.loading = false;
         },
         (error) => {
           alert(error.error);

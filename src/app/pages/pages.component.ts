@@ -6,12 +6,14 @@ import { ResizedEvent } from 'angular-resize-event';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IEmployee } from './employee';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { difficulty } from './Difficulty';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { ProfilepictureupdateService } from '../profilepictureupdate.service';
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',
@@ -43,7 +45,16 @@ export class PagesComponent implements OnInit {
   diff: string = '';
   warndiff: boolean = false;
   em = [this.pyCheck, this.chCheck, this.meCheck];
-  constructor(private http: HttpClient, private router: Router) {}
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    public profile: ProfilepictureupdateService
+  ) {}
+  mappytopic = new Map<string, number>();
+  mapchtopic = new Map([]);
+  mapmttopic = new Map([]);
+  loading = false;
 
   getEmployees(): void {
     try {
@@ -107,12 +118,15 @@ export class PagesComponent implements OnInit {
   //a:boolean=false;
   ngOnInit(): void {
     for (let i = 0; i < Physics.length; i++) {
+      this.mappytopic.set(this.Physics[i].name, this.Physics[i].idNo);
       this.pyCheck[i] = false;
     }
     for (let i = 0; i < Chemistry.length; i++) {
+      this.mapchtopic.set(this.Chemistry[i].name, this.Chemistry[i].idNo);
       this.chCheck[i] = false;
     }
     for (let i = 0; i < MatheMatics.length; i++) {
+      this.mapmttopic.set(this.MatheMatics[i].name, this.MatheMatics[i].idNo);
       this.meCheck[i] = false;
     }
     this.num = window.innerWidth;
@@ -163,6 +177,7 @@ export class PagesComponent implements OnInit {
       }
     }
   }
+
   forOne(a: number, str: string) {
     if (str == 'Physics') {
       if (this.pyCheck[a]) {
@@ -266,7 +281,118 @@ export class PagesComponent implements OnInit {
       //this.getEmployees();
       //this.beforetest = false;
       //this.aftertest = true;
-      this.router.navigate(['/questionviewer']);
+      this.loading = true;
+      let array: string[] = [];
+      for (let i = 0; i < this.pyCheck.length; i++) {
+        if (this.pyCheck[i]) {
+          // console.log('Yesthis');
+          array.push(Physics[i].name);
+        }
+      }
+
+      let physics: number[] = [];
+      for (let i = 0; i < 20; i++) {
+        array = this.randomarray(array);
+        // console.log(array);
+        let temp: any = this.mappytopic.get(
+          array[Math.floor(Math.random() * array.length)]
+        );
+        physics.push(temp);
+      }
+      array = [];
+      for (let i = 0; i < this.chCheck.length; i++) {
+        if (this.chCheck[i]) {
+          // console.log('Yesthis');
+          array.push(Chemistry[i].name);
+        }
+      }
+
+      let chemistry: number[] = [];
+      for (let i = 0; i < 20; i++) {
+        array = this.randomarray(array);
+        // console.log(array);
+        let temp: any = this.mapchtopic.get(
+          array[Math.floor(Math.random() * array.length)]
+        );
+        chemistry.push(temp);
+      }
+      array = [];
+      for (let i = 0; i < this.meCheck.length; i++) {
+        if (this.meCheck[i]) {
+          // console.log('Yesthis');
+          array.push(MatheMatics[i].name);
+        }
+      }
+
+      let mathematics: number[] = [];
+      for (let i = 0; i < 20; i++) {
+        array = this.randomarray(array);
+        // console.log(array);
+        let temp: any = this.mapmttopic.get(
+          array[Math.floor(Math.random() * array.length)]
+        );
+        mathematics.push(temp);
+      }
+      let topicarray: number[] = [];
+      for (let i = 0; i < 20; i++) topicarray[i] = physics[i];
+      for (let i = 20; i < 40; i++) topicarray[i] = chemistry[i % 20];
+      for (let i = 40; i < 60; i++) topicarray[i] = mathematics[i % 20];
+
+      this.http
+        .post(
+          `${environment.backend}/users/${
+            this.profile.getprofile()().user_id
+          }/createTest`,
+          topicarray,
+          {
+            headers: this.getHeader(),
+          }
+        )
+        .subscribe(
+          (response) => {
+            console.log(response);
+            // handle success
+            this.loading = false;
+
+            //console.log(physics);
+            this.router.navigate(['/questionviewer']);
+          },
+          (error) => {
+            console.log('error');
+            console.log(error.error);
+            this.loading = false;
+            // handle error
+          }
+        );
     }
+  }
+  getHeader() {
+    let str: any = '';
+    str = localStorage.getItem('token');
+
+    let response = JSON.parse(str);
+    const token: string = response.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return headers;
+  }
+  randomarray(s: string[]) {
+    let a: number[] = [];
+    let map1 = new Map([]);
+    for (let b = 0; b < s.length; b++) {
+      a[b] = this.randomint();
+      map1.set(a[b], s[b]);
+    }
+    map1 = new Map([...map1.entries()].sort());
+
+    // Separately printing only keys
+    let index = 0;
+    for (let [key, value] of map1) {
+      s[index] = '' + value;
+      index += 1;
+    }
+    return s;
+  }
+  randomint() {
+    return Math.random() * 100;
   }
 }

@@ -32,12 +32,16 @@ export class QuestionviewerComponent implements OnInit {
     this.num = window.innerWidth;
 
     if (this.num < 900) {
-      let e: any = document.getElementById('restBody');
-      e.style.display = 'block';
+      if (this.single || this.multiple) {
+        let e: any = document.getElementById('restBody');
+        e.style.display = 'block';
+      }
       //console.log("yes");
     } else {
-      let e: any = document.getElementById('restBody');
-      e.style.display = 'flex';
+      if (this.single || this.multiple) {
+        let e: any = document.getElementById('restBody');
+        e.style.display = 'flex';
+      }
     }
   }
 }
