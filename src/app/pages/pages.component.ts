@@ -337,13 +337,15 @@ export class PagesComponent implements OnInit {
       for (let i = 0; i < 20; i++) topicarray[i] = physics[i];
       for (let i = 20; i < 40; i++) topicarray[i] = chemistry[i % 20];
       for (let i = 40; i < 60; i++) topicarray[i] = mathematics[i % 20];
-
+      const requestObj = {
+        questions: topicarray,
+      };
       this.http
         .post(
           `${environment.backend}/users/${
             this.profile.getprofile()().user_id
           }/createTest`,
-          topicarray,
+          requestObj,
           {
             headers: this.getHeader(),
           }
