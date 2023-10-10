@@ -28,8 +28,10 @@ export class UserLoginComponent implements OnInit {
   loading: boolean = false;
   refferal_code = '';
   profilepicturesrc = '';
-
+  verification: boolean = false;
   up: userprofile = userdata;
+  mobileotp: string = '';
+  emailotp: string = '';
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -58,6 +60,30 @@ export class UserLoginComponent implements OnInit {
       this.logged.emit(false);
     }
   }
+  userverification() {
+    this.loading = true;
+    const signupData = {
+      first_name: this.firstName,
+      // last_name: this.lastName,
+      phone: this.phone,
+      email: this.email,
+      // password: this.password,
+      // referral_code: this.refferal_code,
+    };
+    //console.log(signupData);
+    this.http.post(`${environment.backend}/usersignup`, signupData).subscribe(
+      (response) => {
+        this.loading = false;
+        alert(' Please Verify Your Mobile & Email.');
+        this.chk = false;
+        this.verification = true;
+      },
+      (error) => {
+        this.loading = false;
+        console.log(error);
+      }
+    );
+  }
   signup() {
     this.loading = true;
     const signupData = {
@@ -67,9 +93,11 @@ export class UserLoginComponent implements OnInit {
       email: this.email,
       password: this.password,
       referral_code: this.refferal_code,
+      secret_code: this.emailotp,
+      otp: this.mobileotp,
     };
     //console.log(signupData);
-    this.http.post(`${environment.backend}/usersignup`, signupData).subscribe(
+    this.http.post(`${environment.backend}/userverify`, signupData).subscribe(
       (response) => {
         this.loading = false;
         alert('Signup successful. Please Login now.');
@@ -104,7 +132,7 @@ export class UserLoginComponent implements OnInit {
       }>(`${environment.backend}/userlogin`, loginData)
       .subscribe(
         (response) => {
-          console.log(response);
+          // console.log(response);
           this.loading = false;
           localStorage.setItem('token', JSON.stringify(response));
 

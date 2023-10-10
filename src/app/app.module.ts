@@ -44,6 +44,8 @@ import { NgIf } from '@angular/common';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { QuestionviewerComponent } from './questionviewer/questionviewer.component';
 import { CdTimerModule } from 'angular-cd-timer';
+import { IntroductionComponent } from './introduction/introduction.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import { CdTimerModule } from 'angular-cd-timer';
     HeaderComponent,
     UserLoginComponent,
     QuestionviewerComponent,
+    IntroductionComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +92,7 @@ import { CdTimerModule } from 'angular-cd-timer';
     NgIf,
     MatProgressSpinnerModule,
     CdTimerModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

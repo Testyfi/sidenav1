@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularResizeEventModule } from 'angular-resize-event';
 
 interface SideNavToggle {
@@ -10,13 +10,14 @@ interface SideNavToggle {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   loggedin = true;
   profilepicture = '';
   title = 'sidenav';
   isSideNavCollapsed = false;
   screenWidth = 0;
   sidehead = true;
+  intro: boolean = true;
   onToggleSideNav(data: SideNavToggle): void {
     this.screenWidth = data.screenWidth;
 
@@ -34,10 +35,18 @@ export class AppComponent {
   }
   changeprofile(data: string) {
     this.profilepicture = data;
-    console.log(this.profilepicture);
+    // console.log(this.profilepicture);
     // console.log('hellow');
   }
   setlogged(status: boolean) {
     this.loggedin = status;
+  }
+  ngOnInit(): void {
+    if (localStorage.getItem('token')) {
+      this.intro = false;
+    }
+  }
+  getintro(status: boolean) {
+    this.intro = status;
   }
 }

@@ -9,9 +9,10 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { ProductsComponent } from './products/products.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { QuestionviewerComponent } from './questionviewer/questionviewer.component';
-
+import { IntroductionComponent } from './introduction/introduction.component';
 const routes: Routes = [
-  { path: '', redirectTo: 'user-login', pathMatch: 'full' },
+  { path: '', redirectTo: 'introduction', pathMatch: 'full' },
+  { path: 'introduction', component: IntroductionComponent },
   { path: 'user-login', component: UserLoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'products', component: ProductsComponent },

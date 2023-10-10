@@ -25,5 +25,9 @@
   *ngIf="!loggedin"
 >
 </app-body>
+<app-introduction *ngIf="intro" (intro)="getintro($event)"></app-introduction>
 
-<app-user-login *ngIf="loggedin" (logged)="setlogged($event)"></app-user-login>
+<app-user-login
+  *ngIf="loggedin && !intro"
+  (logged)="setlogged($event)"
+></app-user-login>
