@@ -15,6 +15,14 @@ import { ProfilepictureupdateService } from '../profilepictureupdate.service';
 import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
+import {
+  animate,
+  keyframes,
+  animation,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 interface userprofile {
   path: string | null | undefined;
   name: string | null | undefined;
