@@ -105,8 +105,8 @@ export class UserLoginComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-        alert('' + error.error);
-        console.log(error);
+        alert(error.error);
+        console.log(error.error);
       }
     );
   }
@@ -153,7 +153,7 @@ export class UserLoginComponent implements OnInit {
         (error) => {
           this.loading = false;
           console.log(error);
-          alert(error.toString());
+          alert(error.error);
         }
       );
   }
