@@ -105,7 +105,7 @@ export class UserLoginComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-        alert(error.error);
+        alert(error.response.data);
         console.log(error.error);
       }
     );
