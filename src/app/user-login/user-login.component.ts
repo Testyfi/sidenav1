@@ -82,6 +82,7 @@ export class UserLoginComponent implements OnInit {
         this.loading = false;
         alert(error.error);
         console.log(error.error);
+        this.chk = false;
       }
     );
   }
