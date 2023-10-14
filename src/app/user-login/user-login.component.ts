@@ -75,12 +75,12 @@ export class UserLoginComponent implements OnInit {
       (response) => {
         this.loading = false;
         alert(' Please Verify Your Mobile & Email.');
-        this.chk = false;
+        // this.chk = false;
         this.verification = true;
       },
       (error) => {
         this.loading = false;
-        console.log(error);
+        console.log(error.error);
       }
     );
   }
@@ -101,7 +101,7 @@ export class UserLoginComponent implements OnInit {
       (response) => {
         this.loading = false;
         alert('Signup successful. Please Login now.');
-        //this.chk = false;
+        this.chk = false;
       },
       (error) => {
         this.loading = false;
