@@ -122,7 +122,7 @@ export class SettingsComponent implements OnInit {
   setprofile() {
     this.loading = true;
     this.updat = false;
-    //console.log(this.form.get('profilepicture')?.value);
+    console.log(this.form.get('profilepicture')?.value);
 
     const formData = new FormData();
     formData.append('profileImage', this.form.get('profilepicture')?.value);
