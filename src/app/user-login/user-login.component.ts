@@ -101,7 +101,7 @@ export class UserLoginComponent implements OnInit {
       (response) => {
         this.loading = false;
         alert('Signup successful. Please Login now.');
-        this.chk = false;
+        //this.chk = false;
       },
       (error) => {
         this.loading = false;
