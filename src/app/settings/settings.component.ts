@@ -141,7 +141,7 @@ export class SettingsComponent implements OnInit {
           this.profile.getprofile()().path = this.propicsrc;
           let str: any = '';
           str = localStorage.getItem('token');
-
+          localStorage.removeItem('token');
           let res = JSON.parse(str);
 
           res.profilepicturesrc = this.propicsrc;
