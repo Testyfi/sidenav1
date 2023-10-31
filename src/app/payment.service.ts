@@ -25,7 +25,16 @@ export class PaymentService {
     };
 
     return this.http.post<Paymentresponse>(this.apiUrl, body, {
-      headers: headers,
+      headers: this.getHeader(),
     });
+  }
+  getHeader() {
+    let str: any = '';
+    str = localStorage.getItem('token');
+
+    let response = JSON.parse(str);
+    const token: string = response.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return headers;
   }
 }
