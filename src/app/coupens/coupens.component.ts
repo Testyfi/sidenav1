@@ -20,12 +20,14 @@ export class CoupensComponent {
     message: 'nomessage',
     data: this.d,
   };
+  /*
   seturl(data: any) {
     this.pay.code = data.code;
     this.pay.message = data.message;
     this.pay.success = data.success;
     this.pay.data.payment_url = data.data.payment_url;
   }
+  */
   async makepayrequest(amount: any) {
     /*
     var pay: Paymentresponse = {
@@ -37,14 +39,15 @@ export class CoupensComponent {
     */
 
     var token: any = this.profile.getprofile()().token;
-    var pay: Paymentresponse;
-    await this.payment.makePaymentRequest(amount, token).subscribe((data) => {
-      pay.success = data.success;
-      pay.code = data.code;
-      pay.message = data.message;
-      pay.data.payment_url = data.data.payment_url;
-      this.seturl(data);
+
+    this.payment.makePaymentRequest(amount, token).subscribe((data) => {
+      this.pay.success = data.success;
+      this.pay.code = data.code;
+      this.pay.message = data.message;
+      this.pay.data.payment_url = data.data.payment_url;
+      //this.seturl(data);
+      console.log(this.pay.data.payment_url);
     });
-    console.log(this.pay.data.payment_url);
+    console.log(this.pay.data.payment_url + '  hellow');
   }
 }
