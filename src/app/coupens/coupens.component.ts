@@ -13,15 +13,29 @@ export class CoupensComponent {
     public profile: ProfilepictureupdateService,
     public payment: PaymentService
   ) {}
-
+  d: Data = { payment_url: '' };
+  pay: Paymentresponse = {
+    success: false,
+    code: 409,
+    message: 'nomessage',
+    data: this.d,
+  };
+  seturl(data: any) {
+    this.pay.code = data.code;
+    this.pay.message = data.message;
+    this.pay.success = data.success;
+    this.pay.data.payment_url = data.data.payment_url;
+  }
   makepayrequest(amount: any) {
-    var d: Data = { payment_url: '' };
+    /*
     var pay: Paymentresponse = {
       success: false,
       code: 409,
       message: 'nomessage',
       data: d,
     };
+    */
+
     var token: any = this.profile.getprofile()().token;
     var pay: Paymentresponse;
     this.payment.makePaymentRequest(amount, token).subscribe((data) => {
@@ -29,7 +43,8 @@ export class CoupensComponent {
       pay.code = data.code;
       pay.message = data.message;
       pay.data.payment_url = data.data.payment_url;
+      this.seturl(data);
     });
-    console.log(pay.data.payment_url);
+    console.log(this.pay.data.payment_url);
   }
 }
