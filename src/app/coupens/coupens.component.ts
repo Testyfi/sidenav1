@@ -26,7 +26,7 @@ export class CoupensComponent {
     var pay: Paymentresponse;
     this.payment
       .makePaymentRequest(amount, token)
-      .subscribe((data) => (pay = data));
+      .subscribe((data) => console.log(data.data.payment_url));
     console.log(pay.data.payment_url);
   }
 }
