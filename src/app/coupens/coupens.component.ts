@@ -24,9 +24,12 @@ export class CoupensComponent {
     };
     var token: any = this.profile.getprofile()().token;
     var pay: Paymentresponse;
-    this.payment
-      .makePaymentRequest(amount, token)
-      .subscribe((data) => console.log(data.data.payment_url));
+    this.payment.makePaymentRequest(amount, token).subscribe((data) => {
+      pay.success = data.success;
+      pay.code = data.code;
+      pay.message = data.message;
+      pay.data = data.data;
+    });
     console.log(pay.data.payment_url);
   }
 }
