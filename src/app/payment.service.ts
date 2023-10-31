@@ -15,8 +15,8 @@ export class PaymentService {
   ): Observable<Paymentresponse> {
     console.log(token);
     const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + token,
-
+      Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6ImFudWpteW5AZ21haWwuY29tIiwiRmlyc3RfbmFtZSI6ImFudWoiLCJMYXN0X25hbWUiOiJzaGFybWEiLCJVaWQiOiI2NGUyOTgwMWZmNmE2YTU4NWFlZTAxMDkiLCJleHAiOjE2OTg3MjQzMzl9.E5WWbL-Xoi3ulPjammx5QVqO1WpJWmWaSSANJNVpNR4',
       'Content-Type': 'application/json',
     });
 
