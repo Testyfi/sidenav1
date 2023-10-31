@@ -14,8 +14,11 @@ export class CoupensComponent {
   ) {}
 
   makepayrequest(amount: any) {
+    var token: any = this.profile.getprofile()().token;
     var pay;
-    this.payment.makePaymentRequest(amount).subscribe((data) => (pay = data));
+    this.payment
+      .makePaymentRequest(amount, token)
+      .subscribe((data) => (pay = data));
     console.log(pay);
   }
 }

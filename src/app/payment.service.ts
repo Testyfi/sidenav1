@@ -9,10 +9,12 @@ import { Paymentresponse } from './paymentresponse';
 export class PaymentService {
   constructor(private http: HttpClient) {}
   private apiUrl = 'https://api.testtify.com/payment/phonepay/request';
-  makePaymentRequest(amount: number): Observable<Paymentresponse> {
+  makePaymentRequest(
+    amount: number,
+    token: string
+  ): Observable<Paymentresponse> {
     const headers = new HttpHeaders({
-      Authorization:
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6ImVudGFuZ2xlc29mdHdhcmVAZ21haWwuY29tIiwiRmlyc3RfbmFtZSI6IlRlc3QiLCJMYXN0X25hbWUiOiJUZXN0IiwiVWlkIjoiNjRlMWY4ODg3YmZmNzcyOWVmZjA0ZTg4IiwiZXhwIjoxNjk4NjQ0NDE1fQ.VwibHtKDZmIBGuBLhqsXva4C7VtEPLHoBVzN9_uhb30',
+      Authorization: token,
       'Content-Type': 'application/json',
     });
 
