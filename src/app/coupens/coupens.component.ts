@@ -28,6 +28,7 @@ export class CoupensComponent {
     this.pay.data.payment_url = data.data.payment_url;
   }
   */
+
   async makepayrequest(amount: any) {
     /*
     var pay: Paymentresponse = {
@@ -39,12 +40,15 @@ export class CoupensComponent {
     */
 
     var token: any = this.profile.getprofile()().token;
+    //let value = await Promise;
 
-    this.payment.makePaymentRequest(amount, token).subscribe((data) => {
+    await this.payment.makePaymentRequest(amount, token).subscribe((data) => {
       this.pay.success = data.success;
       this.pay.code = data.code;
       this.pay.message = data.message;
       this.pay.data.payment_url = data.data.payment_url;
+      //return data.data.payment_url;
+      //value=data.data.payment_url;
       //this.seturl(data);
       console.log(this.pay.data.payment_url);
     });
