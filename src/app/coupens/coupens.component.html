@@ -28,7 +28,13 @@
         <input matInput value="200" />
       </mat-form-field>
       <div style="margin-top: 0.2rem">
-        <button mat-raised-button color="primary">Add Money</button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="makepayrequest(1234)"
+        >
+          Add Money
+        </button>
       </div>
     </div>
   </div>
