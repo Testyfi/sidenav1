@@ -26,7 +26,7 @@ export class CoupensComponent {
     this.pay.success = data.success;
     this.pay.data.payment_url = data.data.payment_url;
   }
-  makepayrequest(amount: any) {
+  async makepayrequest(amount: any) {
     /*
     var pay: Paymentresponse = {
       success: false,
@@ -38,7 +38,7 @@ export class CoupensComponent {
 
     var token: any = this.profile.getprofile()().token;
     var pay: Paymentresponse;
-    this.payment.makePaymentRequest(amount, token).subscribe((data) => {
+    await this.payment.makePaymentRequest(amount, token).subscribe((data) => {
       pay.success = data.success;
       pay.code = data.code;
       pay.message = data.message;
