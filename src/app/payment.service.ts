@@ -13,8 +13,10 @@ export class PaymentService {
     amount: number,
     token: string
   ): Observable<Paymentresponse> {
+    console.log(token);
     const headers = new HttpHeaders({
-      Authorization: token,
+      Authorization: 'Bearer ' + token,
+
       'Content-Type': 'application/json',
     });
 
