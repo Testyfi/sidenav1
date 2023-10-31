@@ -28,7 +28,7 @@ export class CoupensComponent {
       pay.success = data.success;
       pay.code = data.code;
       pay.message = data.message;
-      pay.data = data.data;
+      pay.data.payment_url = data.data.payment_url;
     });
     console.log(pay.data.payment_url);
   }
