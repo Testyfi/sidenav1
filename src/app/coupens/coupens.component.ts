@@ -3,6 +3,7 @@ import { ProfilepictureupdateService } from '../profilepictureupdate.service';
 import { PaymentService } from '../payment.service';
 import { Paymentresponse } from '../paymentresponse';
 import { Data } from '../paymentresponse';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-coupens',
   templateUrl: './coupens.component.html',
@@ -11,7 +12,8 @@ import { Data } from '../paymentresponse';
 export class CoupensComponent {
   constructor(
     public profile: ProfilepictureupdateService,
-    public payment: PaymentService
+    public payment: PaymentService,
+    private router: Router
   ) {}
   d: Data = { payment_url: '' };
   pay: Paymentresponse = {
@@ -52,6 +54,7 @@ export class CoupensComponent {
       //this.seturl(data);
       console.log(this.pay.data.payment_url);
       //window.location.href = data.data.payment_url;
+      this.router.navigate([this.pay.data.payment_url]);
     });
     console.log(this.pay.data.payment_url + '  hellow');
   }
