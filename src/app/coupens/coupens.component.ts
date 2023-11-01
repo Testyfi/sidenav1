@@ -67,7 +67,7 @@ export class CoupensComponent {
     });
 
     //console.log(this.pay.data.payment_url + '  hellow');
-    window.open(this.pay.data.payment_url);
+    // window.open(this.pay.data.payment_url);
   }
   openurl(url: string) {
     window.open(url.toString());
