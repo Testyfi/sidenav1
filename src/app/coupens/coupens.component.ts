@@ -63,10 +63,14 @@ export class CoupensComponent {
       //window.location.assign(this.pay.data.payment_url);
       //window.location.href = this.pay.data.payment_url;
       //this.router.navigate([this.pay.data.payment_url]);
+      this.openurl(data.data.payment_url);
     });
     //console.log(this.pay.data.payment_url + '  hellow');
-    window.open(
-      'https://mercury-t2.phonepe.com/transact/pg?token=MjhjZWI4YmU1NzY1ZDE3Yzk4YWViY2Y0ODdmMzA1NWI3MzU2MmNiMzc1YjZkMDBhNmZjMmU4NTMyNzFkNzJiYmIzMjM5OTZlNDkwM2JlODdhMjEwYzQ4ZGUxYzYzYjU0MjNkZWU4ZjQ0MDViOTI4ZmE4OmMxNmU2MWUxMjYwYWQ1YTFlMTk3YmE0ODMxZDAxYmZl'
-    );
+    // window.open(
+    // 'https://mercury-t2.phonepe.com/transact/pg?token=MjhjZWI4YmU1NzY1ZDE3Yzk4YWViY2Y0ODdmMzA1NWI3MzU2MmNiMzc1YjZkMDBhNmZjMmU4NTMyNzFkNzJiYmIzMjM5OTZlNDkwM2JlODdhMjEwYzQ4ZGUxYzYzYjU0MjNkZWU4ZjQ0MDViOTI4ZmE4OmMxNmU2MWUxMjYwYWQ1YTFlMTk3YmE0ODMxZDAxYmZl'
+    //);
+  }
+  openurl(url: string) {
+    window.open(url);
   }
 }
