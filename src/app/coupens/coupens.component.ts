@@ -48,7 +48,7 @@ export class CoupensComponent {
     //let value = await Promise;
 
     this.payment.makePaymentRequest(amount, token).subscribe((data) => {
-      console.log(data.data.payment_url);
+      //console.log(data.data.payment_url);
       this.pay.success = data.success;
       this.pay.code = data.code;
       this.pay.message = data.message;
@@ -57,7 +57,7 @@ export class CoupensComponent {
       //value=data.data.payment_url;
       //this.seturl(data);
       console.log(this.pay.data.payment_url);
-      ///window.open(this.pay.data.payment_url);
+      window.open(this.pay.data.payment_url);
       //window.location.href = data.data.payment_url;
       //window.location.assign(this.pay.data.payment_url);
       //window.location.href = this.pay.data.payment_url;
