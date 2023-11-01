@@ -57,7 +57,8 @@ export class CoupensComponent {
       //value=data.data.payment_url;
       //this.seturl(data);
       //console.log(this.pay.data.payment_url);
-      window.open(this.pay.data.payment_url, '_blank');
+      // window.open(this.pay.data.payment_url, '_blank');
+      window.location.replace(data.data.payment_url);
       // window.location.href = data.data.payment_url;
       //window.location.assign(this.pay.data.payment_url);
       //window.location.href = this.pay.data.payment_url;
