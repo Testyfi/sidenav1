@@ -17,8 +17,6 @@ export class CoupensComponent {
     private router: Router,
     public sanitizer: DomSanitizer
   ) {}
-  name = 'Angular Iframe Src';
-  url: string = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
 
   d: Data = { payment_url: '' };
   pay: Paymentresponse = {
@@ -58,7 +56,7 @@ export class CoupensComponent {
       //value=data.data.payment_url;
       //this.seturl(data);
       console.log(this.pay.data.payment_url);
-      this.sanitizer.bypassSecurityTrustResourceUrl(this.pay.data.payment_url);
+      window.open(this.pay.data.payment_url);
       //window.location.href = data.data.payment_url;
       //window.location.assign(this.pay.data.payment_url);
       //window.location.href = this.pay.data.payment_url;
