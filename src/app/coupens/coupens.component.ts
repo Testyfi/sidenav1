@@ -53,7 +53,8 @@ export class CoupensComponent {
       //value=data.data.payment_url;
       //this.seturl(data);
       console.log(this.pay.data.payment_url);
-      //window.location.href = data.data.payment_url;
+
+      window.location.href = data.data.payment_url;
       //window.location.assign(this.pay.data.payment_url);
       //window.location.href = this.pay.data.payment_url;
       //this.router.navigate([this.pay.data.payment_url]);
