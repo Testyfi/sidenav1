@@ -56,7 +56,7 @@ export class CoupensComponent {
       //return data.data.payment_url;
       //value=data.data.payment_url;
       //this.seturl(data);
-      //console.log(this.pay.data.payment_url);
+      console.log(this.pay.data.payment_url);
       // window.open(this.pay.data.payment_url, '_blank');
       //window.location.replace(data.data.payment_url);
       // window.location.href = data.data.payment_url;
@@ -65,8 +65,6 @@ export class CoupensComponent {
       //this.router.navigate([this.pay.data.payment_url]);
     });
     //console.log(this.pay.data.payment_url + '  hellow');
-    window.open(
-      'https://mercury-t2.phonepe.com/transact/pg?token=NDI0NTY1NTBiOGQ5NDA1MjQxZjBhNjViMzQ3YzIwNjllOGVkNTZhY2JlOTk4NTA3YzkwNThjOWExMTY1OTI0MTg4Mzk1OTA5MDA3NGJlY2VmYzRkYTNiYzk5MTVlZmFhYWFmM2RhMDdmYzhiYzUxOWY3YTFlNDk1MGJkZmU3NDRkODphNzUxYmRlYTQ3OTRlMDQ2ZGFhMDA5MzQ4YTRlNThmMg'
-    );
+    //window.open('https://mercury-t2.phonepe.com/transact/pg?token=NDI0NTY1NTBiOGQ5NDA1MjQxZjBhNjViMzQ3YzIwNjllOGVkNTZhY2JlOTk4NTA3YzkwNThjOWExMTY1OTI0MTg4Mzk1OTA5MDA3NGJlY2VmYzRkYTNiYzk5MTVlZmFhYWFmM2RhMDdmYzhiYzUxOWY3YTFlNDk1MGJkZmU3NDRkODphNzUxYmRlYTQ3OTRlMDQ2ZGFhMDA5MzQ4YTRlNThmMg');
   }
 }
