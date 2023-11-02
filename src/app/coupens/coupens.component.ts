@@ -33,8 +33,13 @@ export class CoupensComponent {
     this.pay.data.payment_url = data.data.payment_url;
   }
   */
+  async make() {
+    await this.makepayrequest(10);
+    console.log(this.pay.data.payment_url);
+    window.location.assign(this.pay.data.payment_url);
+  }
 
-  makepayrequest(amount: any) {
+  async makepayrequest(amount: any) {
     /*
     var pay: Paymentresponse = {
       success: false,
@@ -68,7 +73,7 @@ export class CoupensComponent {
 
     //console.log(this.pay.data.payment_url + '  hellow');
     // window.open(this.pay.data.payment_url);
-    window.location.assign(this.pay.data.payment_url);
+    // window.location.assign(this.pay.data.payment_url);
   }
   openurl(url: string) {
     window.open(url.toString());
