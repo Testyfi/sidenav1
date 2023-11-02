@@ -66,7 +66,7 @@ export class CoupensComponent {
       //return data.data.payment_url;
       //value=data.data.payment_url;
       //this.seturl(data);
-      console.log(this.pay.data.payment_url);
+      //console.log(this.pay.data.payment_url);
       //window.open();
       //openWindow(this.pay.data.payment_url);
       //window.location.replace(data.data.payment_url);
@@ -78,7 +78,7 @@ export class CoupensComponent {
     });
 
     //console.log(this.pay.data.payment_url + '  hellow');
-    window.open(this.pay.data.payment_url);
+    //window.open(this.pay.data.payment_url);
   }
   openurl(url: string) {
     window.open(url.toString());
