@@ -41,9 +41,7 @@ export class CoupensComponent {
     window.location.assign(this.pay.data.payment_url);
   }
 
-  async makepayrequest(amount: any) {
-    const sleep = (ms: number) =>
-      new Promise((resolve) => setTimeout(resolve, ms));
+  makepayrequest(amount: any) {
     /*
     var pay: Paymentresponse = {
       success: false,
@@ -65,7 +63,7 @@ export class CoupensComponent {
       //return data.data.payment_url;
       //value=data.data.payment_url;
       //this.seturl(data);
-      //console.log(this.pay.data.payment_url);
+      console.log(this.pay.data.payment_url);
       // window.open(this.pay.data.payment_url, '_blank');
       //window.location.replace(data.data.payment_url);
       // window.location.href = data.data.payment_url;
@@ -77,9 +75,6 @@ export class CoupensComponent {
 
     //console.log(this.pay.data.payment_url + '  hellow');
     // window.open(this.pay.data.payment_url);
-    await sleep(5000);
-    console.log(this.pay.data.payment_url);
-    window.location.assign(this.pay.data.payment_url);
   }
   openurl(url: string) {
     window.open(url.toString());
