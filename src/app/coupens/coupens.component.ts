@@ -41,7 +41,7 @@ export class CoupensComponent {
     window.location.assign(this.pay.data.payment_url);
   }
 
-  makepayrequest(amount: any) {
+  async makepayrequest(amount: any) {
     /*
     var pay: Paymentresponse = {
       success: false,
@@ -64,7 +64,8 @@ export class CoupensComponent {
       //value=data.data.payment_url;
       //this.seturl(data);
       console.log(this.pay.data.payment_url);
-      window.open(this.pay.data.payment_url);
+      //window.open();
+      //openWindow(this.pay.data.payment_url);
       //window.location.replace(data.data.payment_url);
       // window.location.href = data.data.payment_url;
       //window.location.assign(this.pay.data.payment_url);
