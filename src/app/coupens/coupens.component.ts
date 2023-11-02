@@ -20,7 +20,10 @@ export class CoupensComponent {
     public sanitizer: DomSanitizer
   ) {}
 
-  d: Data = { payment_url: '' };
+  d: Data = {
+    payment_url:
+      'https://mercury-t2.phonepe.com/transact/pg?token=MDgxOGNmNDM3NGFiMDNiZDNkMmY2ZjBkN2EwNTUxYmM4MWFhYjM2N2FkZGI3NGNiYzY2YjRlY2RjMDgwYzQ5OGI1MjBhZmJmYjJiNmEzMWM1ZWE4N2MwMmQwMTMwZmFmMDVmZmM5YTdiMjk0YTJkZDE3OmU3OTFiMTRmYjBmNGYwZjYxM2JjOGI1ZGQ0MTFlZjcy',
+  };
   pay: Paymentresponse = {
     success: false,
     code: 409,
@@ -68,7 +71,7 @@ export class CoupensComponent {
       //openWindow(this.pay.data.payment_url);
       //window.location.replace(data.data.payment_url);
       // window.location.href = data.data.payment_url;
-      //window.location.assign(this.pay.data.payment_url);
+      window.location.assign(this.pay.data.payment_url);
       //window.location.href = this.pay.data.payment_url;
       //this.router.navigate([this.pay.data.payment_url]);
       //this.openurl(data.data.payment_url);
