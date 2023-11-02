@@ -59,12 +59,12 @@ export class CoupensComponent {
       this.pay.success = data.success;
       this.pay.code = data.code;
       this.pay.message = data.message;
-      this.pay.data.payment_url = data.data.payment_url;
+      this.pay.data.payment_url = '' + data.data.payment_url;
       //return data.data.payment_url;
       //value=data.data.payment_url;
       //this.seturl(data);
       console.log(this.pay.data.payment_url);
-      // window.open(this.pay.data.payment_url, '_blank');
+      window.open(this.pay.data.payment_url);
       //window.location.replace(data.data.payment_url);
       // window.location.href = data.data.payment_url;
       //window.location.assign(this.pay.data.payment_url);
