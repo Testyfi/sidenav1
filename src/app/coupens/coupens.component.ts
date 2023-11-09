@@ -58,8 +58,8 @@ export class CoupensComponent {
     //let value = await Promise;
 
     this.payment.makePaymentRequest(amount, token).subscribe((data) => {
-      window.location.href = data.data.payment_url;
-      //console.log(data.data.payment_url);
+      //window.location.href = data.data.payment_url;
+      console.log(data.data.payment_url);
       //this.pay.success = data.success;
       //this.pay.code = data.code;
       //this.pay.message = data.message;
@@ -80,7 +80,6 @@ export class CoupensComponent {
     });
 
     //console.log(this.pay.data.payment_url + '  hellow');
-    //window.open(this.pay.data.payment_url);
   }
   openurl(url: string) {
     window.open(url.toString());

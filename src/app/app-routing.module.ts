@@ -10,6 +10,7 @@ import { ProductsComponent } from './products/products.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { QuestionviewerComponent } from './questionviewer/questionviewer.component';
 import { IntroductionComponent } from './introduction/introduction.component';
+import { CheckoutpageComponent } from './checkoutpage/checkoutpage.component';
 const routes: Routes = [
   { path: '', redirectTo: 'introduction', pathMatch: 'full' },
   { path: 'introduction', component: IntroductionComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'media', component: MediaComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'questionviewer', component: QuestionviewerComponent },
+  { path: 'checkoutpage', component: CheckoutpageComponent },
 ];
 
 @NgModule({

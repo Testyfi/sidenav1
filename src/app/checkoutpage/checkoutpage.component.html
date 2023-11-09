@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-head">Complete Your Order</div>
+
+  <div class="card-body">Plan: {{ paymentname }}</div>
+  <div class="card-body">
+    Amount: {{ paymentamount }}
+    <i class="icon" [ngClass]="'fa fa-inr'"></i>
+  </div>
+  <div class="card-body">
+    <button mat-raised-button color="primary">
+      Pay {{ paymentamount }}& subscribe
+    </button>
+  </div>
+</div>
