@@ -11,6 +11,7 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { QuestionviewerComponent } from './questionviewer/questionviewer.component';
 import { IntroductionComponent } from './introduction/introduction.component';
 import { CheckoutpageComponent } from './checkoutpage/checkoutpage.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
 const routes: Routes = [
   { path: '', redirectTo: 'introduction', pathMatch: 'full' },
   { path: 'introduction', component: IntroductionComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { path: 'questionviewer', component: QuestionviewerComponent },
   { path: 'checkoutpage', component: CheckoutpageComponent },
+  { path: 'aboutus', component: AboutusComponent },
 ];
 
 @NgModule({

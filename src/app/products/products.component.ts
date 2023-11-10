@@ -113,11 +113,11 @@ export class ProductsComponent implements OnInit {
   }
   start(id: number) {
     if (id == 2) {
-      this.checkout.planamount = 499;
+      this.checkout.planamount = 299;
       this.checkout.planname = 'Pro Monthly';
     }
     if (id == 3) {
-      this.checkout.planamount = 4999;
+      this.checkout.planamount = 2499;
       this.checkout.planname = 'Pro Annual';
     }
     this.router.navigate(['/checkoutpage']);

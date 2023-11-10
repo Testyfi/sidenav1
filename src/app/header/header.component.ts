@@ -60,6 +60,9 @@ export class HeaderComponent implements OnInit {
     this.checkCanShowSearchAsOverlay(window.innerWidth);
     console.log(this.profilepicturesignal().email);
   }
+  aboutus() {
+    this.router.navigate(['/aboutus']);
+  }
   getHeadClass(): string {
     let styleClass = '';
     if (this.collapsed && this.screenWidth > 768) {

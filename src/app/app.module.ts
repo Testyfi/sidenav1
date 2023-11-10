@@ -47,6 +47,7 @@ import { CdTimerModule } from 'angular-cd-timer';
 import { IntroductionComponent } from './introduction/introduction.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CheckoutpageComponent } from './checkoutpage/checkoutpage.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { CheckoutpageComponent } from './checkoutpage/checkoutpage.component';
     QuestionviewerComponent,
     IntroductionComponent,
     CheckoutpageComponent,
+    AboutusComponent,
   ],
   imports: [
     BrowserModule,
