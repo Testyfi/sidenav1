@@ -1,6 +1,46 @@
 <div [ngClass]="contestclass" (resized)="onResized($event)">
   <div class="container-flex">
     <div class="card">
+      <div class="card-head">Ongoing Contests</div>
+      <div class="card-body" id="presenttest">
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Difficulty</th>
+
+            <th>Time Left</th>
+
+            <th>Topics</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>Rank Booster 100</td>
+            <td>Jee Advanced</td>
+            <td>180 Minutes</td>
+            <td>
+              Physics: Kinematics,Rotation,NLM;Chemistry: Alp,Dlp;Mathematics:
+              Complex Number,Probability,Permuation
+            </td>
+            <td>
+              <button mat-raised-button color="primary">Start</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Rank Booster 99</td>
+            <td>Jee Mains</td>
+            <td>150 Minutes</td>
+            <td>
+              Physics: Kinematics,Rotation,NLM;Chemistry: Alp,Dlp;Mathematics:
+              Complex Number,Probability,Permuation
+            </td>
+            <td>
+              <button mat-raised-button color="primary">Start</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
       <div class="card-head">Up Comming Test</div>
       <div class="card-body" id="upcomingtest">
         <table>
@@ -49,46 +89,7 @@
         </table>
       </div>
     </div>
-    <div class="card">
-      <div class="card-head">Present Test</div>
-      <div class="card-body" id="presenttest">
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Difficulty</th>
 
-            <th>Time Left</th>
-
-            <th>Topics</th>
-            <th></th>
-          </tr>
-          <tr>
-            <td>Rank Booster 100</td>
-            <td>Jee Advanced</td>
-            <td>180Minutes</td>
-            <td>
-              Physics: Kinematics,Rotation,NLM;Chemistry: Alp,Dlp;Mathematics:
-              Complex Number,Probability,Permuation
-            </td>
-            <td>
-              <button mat-raised-button color="primary">Start</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Rank Booster 99</td>
-            <td>Jee Mains</td>
-            <td>150Minutes</td>
-            <td>
-              Physics: Kinematics,Rotation,NLM;Chemistry: Alp,Dlp;Mathematics:
-              Complex Number,Probability,Permuation
-            </td>
-            <td>
-              <button mat-raised-button color="primary">Start</button>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
     <div class="card">
       <div class="card-head">Past Test</div>
       <div class="card-body" id="pasttest">
@@ -105,7 +106,7 @@
               Complex Number,Probability,Permuation
             </td>
             <td>Jee Advanced</td>
-            <td>180Minutes</td>
+            <td>180 Minutes</td>
             <td>
               <button mat-raised-button color="primary">Practice</button>
             </td>
@@ -116,7 +117,7 @@
               Complex Number,Probability,Permuation
             </td>
             <td>Jee Mains</td>
-            <td>150Minutes</td>
+            <td>150 Minutes</td>
             <td>
               <button mat-raised-button color="primary">Practice</button>
             </td>
