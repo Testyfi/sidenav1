@@ -4,17 +4,27 @@
     [(ngModel)]="selectedquestion"
     (selectionChange)="someSelection()"
   >
-    <mat-option *ngFor="let n of selectarry; let i = index" [value]="i + 1">{{
-      i + 1
-    }}</mat-option>
+    <mat-option *ngFor="let n of selectarry; let i = index" [value]="i + 1">
+      {{ i + 1 }}
+      <span
+        *ngIf="!rightorwrong[i] && rightorwrong[i] != undefined"
+        style="color: red"
+      >
+        Wrong</span
+      >
+      <span
+        *ngIf="rightorwrong[i] && rightorwrong[i] != undefined"
+        style="color: rgb(0, 255, 21)"
+      >
+        Right</span
+      >
+      <span *ngIf="rightorwrong[i] == undefined" style="color: rgb(0, 0, 0)">
+        unattempted</span
+      >
+    </mat-option>
   </mat-select>
 </mat-form-field>
-
 <div class="test">
-  <div class="questionTag">
-    Time Left
-    <cd-timer format="hms" [countdown]="true" [startTime]="10800"></cd-timer>
-  </div>
   <div class="questionTag">Question {{ index + 1 }}</div>
   <div class="questionTag" *ngIf="numerical">Type Numerical</div>
   <div class="questionTag" *ngIf="single">Type Single</div>
@@ -34,8 +44,8 @@
     <div class="twobox">
       <div class="option">
         <!--
-                  <div class="answerTag" >A</div>
-                  //-->
+                    <div class="answerTag" >A</div>
+                    //-->
         <!--   <div class="answerTag">A</div>//-->
         <div class="answerTag">A</div>
         <div *ngIf="optiona" [mathjax]="optionastring"></div>
@@ -90,8 +100,8 @@
       </div>
       <div class="option">
         <!--
-                  <div class="answerTag" >A</div>
-                  //-->
+                    <div class="answerTag" >A</div>
+                    //-->
         <!--   <div class="answerTag">A</div>//-->
         <div class="answerTag">A</div>
         <div *ngIf="true">
@@ -231,45 +241,23 @@
     </div>
   </div>
   <div class="chooseoption" *ngIf="single || list">
-    Options
-    <mat-button-toggle-group
-      name="fontStyle"
-      aria-label="Font Style"
-      #group="matButtonToggleGroup"
-      [(ngModel)]="sngans"
-    >
-      <mat-button-toggle value="A">A</mat-button-toggle>
-
-      <mat-button-toggle value="B">B</mat-button-toggle>
-      <mat-button-toggle value="C">C</mat-button-toggle>
-      <mat-button-toggle value="D">D</mat-button-toggle>
-    </mat-button-toggle-group>
+    Your Answer {{ answer[index] }}
+  </div>
+  <div class="chooseoption" *ngIf="single || list">
+    Correct Answer {{ currectanswer }}
   </div>
   <div class="chooseoption" *ngIf="multiple">
-    Options
-    <mat-button-toggle-group
-      name="ingredients"
-      aria-label="Ingredients"
-      multiple
-      [(ngModel)]="multanswer"
-    >
-      <mat-button-toggle value="A">A</mat-button-toggle>
-      <mat-button-toggle value="B">B</mat-button-toggle>
-      <mat-button-toggle value="C">C</mat-button-toggle>
-      <mat-button-toggle value="D">D</mat-button-toggle>
-    </mat-button-toggle-group>
+    Your Answer {{ answer[index] }}
   </div>
-  <form class="example-form" *ngIf="numerical">
-    <mat-form-field class="example-full-width">
-      <mat-label>Leave Your Answer</mat-label>
-      <textarea
-        matInput
-        placeholder="Ex. 1.23"
-        [(ngModel)]="numericanswer"
-        [ngModelOptions]="{ standalone: true }"
-      ></textarea>
-    </mat-form-field>
-  </form>
+  <div class="chooseoption" *ngIf="multiple">
+    Correct Answer {{ currectanswer }}
+  </div>
+  <div class="example-form" *ngIf="numerical">
+    Your Answer {{ answer[index] }}
+  </div>
+  <div class="example-form" *ngIf="numerical">
+    Correct Answer {{ currectanswer }}
+  </div>
 
   <section>
     <button
@@ -297,7 +285,7 @@
       *ngIf="index == maxindex"
       (click)="submit()"
     >
-      Submit
+      Home
     </button>
   </section>
 </div>

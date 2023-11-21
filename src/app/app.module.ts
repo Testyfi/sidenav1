@@ -32,6 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatGridListModule } from '@angular/material/grid-list';
 import {
   FormControl,
   FormGroupDirective,
@@ -48,7 +49,9 @@ import { IntroductionComponent } from './introduction/introduction.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CheckoutpageComponent } from './checkoutpage/checkoutpage.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
-
+import { MathjaxModule } from 'mathjax-angular';
+import { ResultComponent } from './result/result.component';
+import { AnalysisComponent } from './analysis/analysis.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +70,8 @@ import { AboutusComponent } from './aboutus/aboutus.component';
     IntroductionComponent,
     CheckoutpageComponent,
     AboutusComponent,
+    ResultComponent,
+    AnalysisComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,6 +102,8 @@ import { AboutusComponent } from './aboutus/aboutus.component';
     MatProgressSpinnerModule,
     CdTimerModule,
     FontAwesomeModule,
+    MathjaxModule.forRoot(),
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -12,6 +12,8 @@ import { QuestionviewerComponent } from './questionviewer/questionviewer.compone
 import { IntroductionComponent } from './introduction/introduction.component';
 import { CheckoutpageComponent } from './checkoutpage/checkoutpage.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
+import { ResultComponent } from './result/result.component';
+import { AnalysisComponent } from './analysis/analysis.component';
 const routes: Routes = [
   { path: '', redirectTo: 'introduction', pathMatch: 'full' },
   { path: 'introduction', component: IntroductionComponent },
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'questionviewer', component: QuestionviewerComponent },
   { path: 'checkoutpage', component: CheckoutpageComponent },
   { path: 'aboutus', component: AboutusComponent },
+  { path: 'result', component: ResultComponent },
+  { path: 'analysis', component: AnalysisComponent },
 ];
 
 @NgModule({

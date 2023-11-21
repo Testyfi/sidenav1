@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ResizedEvent } from 'angular-resize-event';
 import { Router } from '@angular/router';
-import { CdTimerModule } from 'angular-cd-timer';
-import { MathjaxModule } from 'mathjax-angular';
 import { GetpaperserviceService } from '../getpaperservice.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { ResizedEvent } from 'angular-resize-event';
+
 @Component({
-  selector: 'app-questionviewer',
-  templateUrl: './questionviewer.component.html',
-  styleUrls: ['./questionviewer.component.scss'],
+  selector: 'app-analysis',
+  templateUrl: './analysis.component.html',
+  styleUrls: ['./analysis.component.scss'],
 })
-export class QuestionviewerComponent implements OnInit {
+export class AnalysisComponent implements OnInit {
   constructor(
     private router: Router,
     public paperservice: GetpaperserviceService,
@@ -55,6 +54,7 @@ export class QuestionviewerComponent implements OnInit {
   wrong = 0;
   unattempted = this.maxindex + 1;
   rightorwrong: Array<boolean> = Array(this.maxindex + 1);
+  currectanswer = '';
   onResized(event: ResizedEvent) {
     this.num = event.newRect.width;
     //this.height = event.newRect.height;
@@ -83,8 +83,11 @@ export class QuestionviewerComponent implements OnInit {
         e.style.display = 'flex';
       }
     }
+    this.answer = this.paperservice.answer;
+    this.rightorwrong = this.paperservice.rightorwrong;
 
     let question = JSON.parse(this.paperservice.getquestion(0));
+    this.currectanswer = question.currectanswer;
     if (question.questiontype == 1) this.Single(question);
     if (question.questiontype == 2) this.Multiple(question);
     if (question.questiontype == 3) this.Numerical(question);
@@ -162,26 +165,12 @@ export class QuestionviewerComponent implements OnInit {
     return false;
   }
   getquestion(index: number) {
-    let question = JSON.parse(this.paperservice.getquestion(this.index));
-    if (question.questiontype == 1) {
-      this.savesingle(this.sngans);
-      this.sngans = '';
-      // this.sngans = this.answer[index];
-    }
-    if (question.questiontype == 2) {
-      this.savemult(this.arraytostring(this.multanswer));
-      this.multanswer = Array(4);
-      // this.multanswer = this.strtoarray(this.answer[index]);
-    }
-    if (question.questiontype == 3) {
-      this.savenumber(this.numericanswer);
-      this.numericanswer = '';
-      //this.numericanswer = this.answer[index];
-    }
     //console.log(this.sngans);
     //console.log(this.multanswer);
     this.index = index;
-    question = JSON.parse(this.paperservice.getquestion(index));
+
+    let question = JSON.parse(this.paperservice.getquestion(index));
+    this.currectanswer = question.currectanswer;
     if (question.questiontype == 1) {
       this.sngans = this.answer[index];
       this.Single(question);
@@ -203,63 +192,6 @@ export class QuestionviewerComponent implements OnInit {
     this.getquestion(this.selectedquestion - 1);
   }
   submit() {
-    let question = JSON.parse(this.paperservice.getquestion(this.index));
-    if (question.questiontype == 1) {
-      this.savesingle(this.sngans);
-      this.sngans = '';
-      // this.sngans = this.answer[index];
-    }
-    if (question.questiontype == 2) {
-      this.savemult(this.arraytostring(this.multanswer));
-      this.multanswer = Array(4);
-      // this.multanswer = this.strtoarray(this.answer[index]);
-    }
-    if (question.questiontype == 3) {
-      this.savenumber(this.numericanswer);
-      this.numericanswer = '';
-      //this.numericanswer = this.answer[index];
-    }
-
-    for (let i = 0; i < this.answer.length; i++) {
-      if (this.paperservice.getquestiontype(i) == 3) {
-        if (
-          this.twodigitafterdecimal(this.answer[i]) ==
-          this.paperservice.getanswer(i)
-        ) {
-          console.log(this.twodigitafterdecimal(this.answer[i]));
-          console.log(this.paperservice.getanswer(i));
-          this.right++;
-          this.unattempted--;
-          this.rightorwrong[i] = true;
-        } else {
-          if (this.answer[i] != undefined && this.answer[i].length > 0) {
-            this.wrong++;
-            this.unattempted--;
-            this.rightorwrong[i] = false;
-          }
-        }
-      } else {
-        if (this.answer[i] === this.paperservice.getanswerstring(i)) {
-          this.right++;
-          this.unattempted--;
-          this.rightorwrong[i] = true;
-        } else {
-          if (this.answer[i] != undefined && this.answer[i].length > 0) {
-            //console.log(this.answer[i]);
-            this.wrong++;
-            this.unattempted--;
-            this.rightorwrong[i] = false;
-          }
-        }
-      }
-    }
-    this.paperservice.setresult(
-      this.right,
-      this.wrong,
-      this.unattempted,
-      this.rightorwrong,
-      this.answer
-    );
     this.router.navigate(['/result']);
   }
   twodigitafterdecimal(s: string) {

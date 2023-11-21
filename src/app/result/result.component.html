@@ -1,0 +1,33 @@
+<div class="card1">
+  <div class="card-head1">Rank Booster 101 Result</div>
+
+  <div class="card-body1">
+    Right Answer
+    <span style="color: rgba(7, 180, 1, 0.769)">{{ right }} </span>
+  </div>
+  <div class="card-body1">
+    Wrong Answer
+    <span style="color: rgba(209, 0, 0, 0.769)"> {{ wrong }} </span>
+  </div>
+  <div class="card-body1">
+    Unattemped Question's
+    <span style="color: rgba(9, 26, 9, 0.769)"> {{ unattempted }} </span>
+  </div>
+
+  <button
+    mat-raised-button
+    color="accent"
+    style="margin-left: 1.3rem"
+    (click)="reattempt()"
+  >
+    Reattempt
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    style="float: right"
+    (click)="analysis()"
+  >
+    Analysis
+  </button>
+</div>

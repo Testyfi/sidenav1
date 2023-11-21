@@ -108,7 +108,9 @@
             <td>Jee Advanced</td>
             <td>180 Minutes</td>
             <td>
-              <button mat-raised-button color="primary">Practice</button>
+              <button mat-raised-button color="primary" (click)="getrequest()">
+                Practice
+              </button>
             </td>
           </tr>
           <tr>
@@ -146,4 +148,8 @@
     </div>
   </div>
   -->
+</div>
+<div *ngIf="loading" class="spinner-overlay">
+  <!--<mat-spinner></mat-spinner>-->
+  <div class="spinner"></div>
 </div>
