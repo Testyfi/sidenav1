@@ -6,18 +6,20 @@
   >
     <mat-option *ngFor="let n of selectarry; let i = index" [value]="i + 1">
       {{ i + 1 }}
-      <span
+
+      <i
         *ngIf="!rightorwrong[i] && rightorwrong[i] != undefined"
         style="color: red"
-      >
-        Wrong</span
-      >
-      <span
+        class="fa fa-times"
+        aria-hidden="true"
+      ></i>
+
+      <i
         *ngIf="rightorwrong[i] && rightorwrong[i] != undefined"
         style="color: rgb(0, 255, 21)"
-      >
-        Right</span
-      >
+        class="fa fa-check"
+        aria-hidden="true"
+      ></i>
       <span *ngIf="rightorwrong[i] == undefined" style="color: rgb(0, 0, 0)">
         unattempted</span
       >
