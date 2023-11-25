@@ -15,7 +15,7 @@ export class CheckoutpageComponent {
   ) {}
   paymentname: string = this.checkoutdata.planname;
   paymentamount: number = this.checkoutdata.planamount;
-  makepayrequest(amount: any) {
+  makepayrequest(amount: number) {
     console.log('click');
     /*
     var pay: Paymentresponse = {
