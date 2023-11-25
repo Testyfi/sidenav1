@@ -30,9 +30,9 @@ export class CheckoutpageComponent {
     //let value = await Promise;
 
     this.payment.makePaymentRequest(amount, token).subscribe((data) => {
-      //window.location.href = data.data.payment_url;
+      window.location.href = data.data.payment_url;
       console.log(data.data.payment_url);
-      window.open(data.data.payment_url);
+      //window.open(data.data.payment_url);
       //this.pay.success = data.success;
       //this.pay.code = data.code;
       //this.pay.message = data.message;
