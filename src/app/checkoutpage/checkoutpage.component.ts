@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CheckoutpagedataService } from '../checkoutpagedata.service';
 import { PaymentService } from '../payment.service';
 import { ProfilepictureupdateService } from '../profilepictureupdate.service';
@@ -7,14 +7,19 @@ import { ProfilepictureupdateService } from '../profilepictureupdate.service';
   templateUrl: './checkoutpage.component.html',
   styleUrls: ['./checkoutpage.component.scss'],
 })
-export class CheckoutpageComponent {
+export class CheckoutpageComponent implements OnInit {
   constructor(
     private checkoutdata: CheckoutpagedataService,
     private payment: PaymentService,
     public profile: ProfilepictureupdateService
   ) {}
-  paymentname: string = this.checkoutdata.planname;
-  paymentamount: number = this.checkoutdata.planamount;
+  paymentname: string = '';
+  paymentamount: number = 0;
+  ngOnInit(): void {
+    this.paymentname = this.checkoutdata.planname;
+    this.paymentamount = this.checkoutdata.planamount;
+  }
+
   makepayrequest(amount: number) {
     console.log('click');
     /*
