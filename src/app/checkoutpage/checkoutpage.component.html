@@ -6,7 +6,11 @@
     Amount: <i class="icon" [ngClass]="'fa fa-inr'"></i> {{ paymentamount }}
   </div>
   <div class="card-body">
-    <button mat-button color="primary" (click)="makepayrequest(paymentamount)">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="makepayrequest(paymentamount)"
+    >
       Pay {{ paymentamount }}& subscribe
     </button>
   </div>
