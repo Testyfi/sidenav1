@@ -1,27 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Paymentresponse } from './paymentresponse';
-
 @Injectable({
   providedIn: 'root',
 })
-export class PaymentService {
+export class RankboostertestService {
   constructor(private http: HttpClient) {}
-  private apiUrl = 'http://localhost:8080/payment/phonepay/request';
-  makePaymentRequest(
-    amount: number,
-    token: string
-  ): Observable<Paymentresponse> {
+  private apiUrl = 'http://localhost:8080/rankbooster/pasttest';
+  getpasttest(tag: string): Observable<any> {
     // console.log(token);
 
     const body = {
-      amount: amount,
+      tag: tag,
     };
-
-    return this.http.post<Paymentresponse>(this.apiUrl, body, {
+    var htrs = this.http.post<any>(this.apiUrl, body, {
       headers: this.getHeader(),
     });
+    //console.log(htrs);
+    return htrs;
   }
   getHeader() {
     let str: any = '';
