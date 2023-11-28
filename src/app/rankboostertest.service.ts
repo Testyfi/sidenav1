@@ -1,21 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class RankboostertestService {
   constructor(private http: HttpClient) {}
-  private apiUrl = 'http://localhost:8080/rankbooster/pasttest';
+  // private apiUrl = 'http://localhost:8080/rankbooster/pasttest';
   getpasttest(tag: string): Observable<any> {
     // console.log(token);
 
     const body = {
       tag: tag,
     };
-    var htrs = this.http.post<any>(this.apiUrl, body, {
-      headers: this.getHeader(),
-    });
+    var htrs = this.http.post<any>(
+      `${environment.backend}/rankbooster/pasttest`,
+      body,
+      {
+        headers: this.getHeader(),
+      }
+    );
     //console.log(htrs);
     return htrs;
   }

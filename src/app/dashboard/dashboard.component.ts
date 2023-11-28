@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   ) {}
   //private apiUrl = 'http://localhost:8080/rankbooster/pasttest';
   private apiUrl = `${environment.backend}/rankbooster/pasttest`;
+
   num: number = 0;
   contestclass = 'big-container-flex';
   loading: boolean = false;
@@ -34,26 +35,7 @@ export class DashboardComponent implements OnInit {
     this.num = window.innerWidth;
     if (this.num < 700) this.contestclass = 'big-container-block';
   }
-  getrequest() {
-    console.log('working');
 
-    this.http
-      .get<any>(`${environment.backend}/rankbooster/pasttest`)
-      .subscribe((data) => {
-        //Ch.a =
-        //'https://mercury-t2.phonepe.com/transact/pg?token=YjQ2MTRmYzEwNDA1MzJkYWYyODQ4NTFmMzM2ODUzM2EzYmE1ODliMDMwOWVjMjBjNjFlZmM0NDIzNDM5YzllMDQ1MWE5Y2ViNmU2NjFiN2YwYjkwZjFiMWE3MGNmZmE1MWU0NGY2M2FhMTgxZTZhZjM0MzRkMTI1MWIzYWY1NWUzMDphMzJlYmJjZDViZWFjMTQ1NmMwOTQ2N2YxOTAxY2FlNg';
-        //console.log(data.merchantUserId);
-        this.loading = true;
-        console.log(data.questions);
-        //this.questionstring = data.questions[0].questionstring;
-        let cs = JSON.stringify(data);
-        this.paperservice.setpaper(cs);
-        this.loading = false;
-        this.router.navigate(['/questionviewer']);
-        // this.openNewWindow(data.merchantUserId);
-        //window.open(data.merchantUserId, '_blank');
-      });
-  }
   rankboosterpasttest(s: string) {
     let obj = JSON.parse('{"questions":"[]"}');
     let c: Array<question> = new Array();
