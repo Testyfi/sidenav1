@@ -37,11 +37,11 @@ export class DashboardComponent implements OnInit {
   }
 
   rankboosterpasttest(s: string) {
+    this.loading = true;
     let obj = JSON.parse('{"questions":"[]"}');
     let c: Array<question> = new Array();
     console.log('called');
     this.rankbooster.getpasttest(s).subscribe((data) => {
-      this.loading = true;
       //console.log('datad');
       //console.log(data.data);
       let temp: question[] = [];
