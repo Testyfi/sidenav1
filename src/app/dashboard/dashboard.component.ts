@@ -41,8 +41,9 @@ export class DashboardComponent implements OnInit {
     let c: Array<question> = new Array();
     console.log('called');
     this.rankbooster.getpasttest(s).subscribe((data) => {
+      this.loading = true;
       //console.log('datad');
-      console.log(data.data);
+      //console.log(data.data);
       let temp: question[] = [];
 
       for (let i = 0; i < data.data.length; i++) {
@@ -126,11 +127,11 @@ export class DashboardComponent implements OnInit {
       obj.questions = temp;
       //console.log(obj.questions);
       //console.log(JSON.stringify(obj));
-      this.loading = true;
+
       //console.log(data.questions);
       //this.questionstring = data.questions[0].questionstring;
       let cs = JSON.stringify(obj);
-      console.log(obj.questions);
+      //console.log(obj.questions);
       //console.log(cs);
       this.paperservice.setpaper(cs);
       this.loading = false;
