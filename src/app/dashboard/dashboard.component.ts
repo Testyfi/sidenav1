@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
     console.log('called');
     this.rankbooster.getpasttest(s).subscribe((data) => {
       //console.log('datad');
-      //console.log(data.data);
+      console.log(data.data);
       let temp: question[] = [];
 
       for (let i = 0; i < data.data.length; i++) {
@@ -153,7 +153,7 @@ export class DashboardComponent implements OnInit {
   questiontype(s: string) {
     if (s[0] === 'S') return 1;
     if (s[0] === 'M') return 2;
-    if (s[2] === 'N') return 3;
+    if (s[0] === 'N') return 3;
     return 4;
   }
   getimageurl(s: string) {
