@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
     console.log('called');
     this.rankbooster.getpasttest(s).subscribe((data) => {
       //console.log('datad');
-      console.log(data.data);
+      // console.log(data.data);
       let temp: question[] = [];
 
       for (let i = 0; i < data.data.length; i++) {
