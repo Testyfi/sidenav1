@@ -2,10 +2,11 @@
   <div class="questionTag">
     Time Left
     <cd-timer
-      format="hms"
+      format="ms"
       [countdown]="true"
-      [startTime]="180"
+      [startTime]="timeinseconds"
       (onComplete)="getquestion(index + 1)"
+      #basicTimer
     ></cd-timer>
   </div>
   <div class="questionTag">Question {{ index + 1 }}</div>

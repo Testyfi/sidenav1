@@ -184,11 +184,12 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/questionviewer']);
     });
   }
-  rankboosterlivetest(s: string) {
+  rankboosterlivetest(s: string, t: string) {
     this.loading = true;
     let obj = JSON.parse('{"questions":"[]"}');
     let c: Array<question> = new Array();
     //console.log(s);
+    this.rankbooster.livetesttime = t;
     this.rankbooster.getlivetest(s).subscribe((data) => {
       //console.log('datad');
       //console.log(data.data);

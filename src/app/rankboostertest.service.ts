@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 export class RankboostertestService {
   constructor(private http: HttpClient) {}
   // private apiUrl = 'http://localhost:8080/rankbooster/pasttest';
+  livetesttime = '';
   getpasttest(tag: string): Observable<any> {
     // console.log(token);
 

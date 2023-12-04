@@ -1,22 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ResizedEvent } from 'angular-resize-event';
 import { Router } from '@angular/router';
-import { CdTimerModule } from 'angular-cd-timer';
+import { CdTimerComponent, CdTimerModule } from 'angular-cd-timer';
 import { MathjaxModule } from 'mathjax-angular';
 import { GetpaperserviceService } from '../getpaperservice.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { RankboostertestService } from '../rankboostertest.service';
+
 @Component({
   selector: 'app-livetest',
   templateUrl: './livetest.component.html',
   styleUrls: ['./livetest.component.scss'],
 })
-export class LivetestComponent {
+export class LivetestComponent implements AfterViewInit {
   constructor(
     private router: Router,
     public paperservice: GetpaperserviceService,
-    private http: HttpClient
+    private http: HttpClient,
+    private rnkbo: RankboostertestService
   ) {}
+  @ViewChild('basicTimer') cdtimer: CdTimerComponent | undefined;
 
+  timeinseconds = (3 * 60 * 60) / this.paperservice.totalquestion;
   private apiUrl = 'http://localhost:8080';
   num: number = 0;
   coll: boolean = false;
@@ -70,6 +81,7 @@ export class LivetestComponent {
     }
   }
   ngOnInit(): void {
+    // this.timeinseconds = 200;
     this.num = window.innerWidth;
 
     if (this.num < 900) {
@@ -84,11 +96,28 @@ export class LivetestComponent {
         e.style.display = 'flex';
       }
     }
-
-    let question = JSON.parse(this.paperservice.getquestion(0));
+    this.findquestionindex();
+    let question = JSON.parse(this.paperservice.getquestion(this.index));
     if (question.questiontype == 1) this.Single(question);
     if (question.questiontype == 2) this.Multiple(question);
     if (question.questiontype == 3) this.Numerical(question);
+  }
+  findquestionindex() {
+    var starttime = this.rnkbo.livetesttime.split('/');
+    var secondsgone = 0;
+    var mul = 1;
+    var date = new Date();
+
+    secondsgone = date.getSeconds() - parseInt(starttime[5]);
+    secondsgone =
+      date.getMinutes() * 60 - parseInt(starttime[4]) * 60 + secondsgone;
+    secondsgone =
+      date.getHours() * 60 * 60 -
+      parseInt(starttime[3]) * 60 * 60 +
+      secondsgone;
+    this.index = parseInt(secondsgone / this.timeinseconds + '');
+    this.timeinseconds =
+      this.timeinseconds - (secondsgone % this.timeinseconds);
   }
   Single(question: any) {
     this.single = true;
@@ -182,6 +211,7 @@ export class LivetestComponent {
     //console.log(this.sngans);
     //console.log(this.multanswer);
     this.index = index;
+    this.resetTimer();
     question = JSON.parse(this.paperservice.getquestion(index));
     if (question.questiontype == 1) {
       this.sngans = this.answer[index];
@@ -294,5 +324,20 @@ export class LivetestComponent {
   }
   savenumber(s: string) {
     this.answer[this.index] = s;
+  }
+  ngAfterViewInit() {
+    // You can access the cdTimer instance after the view is initialized
+    if (this.cdtimer) {
+      // Do something with the cdTimer
+    }
+  }
+  resetTimer() {
+    if (this.cdtimer) {
+      // Call a reset method on your cdTimer component
+      this.cdtimer.reset();
+      //this.cdtimer.autoStart = false;
+      this.cdtimer.startTime = (3 * 60 * 60) / this.paperservice.totalquestion;
+      this.cdtimer.start();
+    }
   }
 }
