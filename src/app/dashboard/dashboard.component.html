@@ -1,3 +1,4 @@
+<cd-timer format="hms" (onTick)="ontick()" style="display: none"></cd-timer>
 <div [ngClass]="contestclass" (resized)="onResized($event)">
   <div class="container-flex">
     <div class="card">
@@ -13,28 +14,21 @@
             <th>Topics</th>
             <th></th>
           </tr>
-          <tr>
-            <td>Rank Booster 100</td>
-            <td>Jee Advanced</td>
-            <td>180 Minutes</td>
+          <tr *ngFor="let i of ongoing">
+            <td>{{ i.Name }}</td>
+            <td>{{ i.Difficulty }}</td>
+            <td>{{ i.Duration }} Minutes</td>
             <td>
-              Physics: Kinematics,Rotation,NLM;Chemistry: Alp,Dlp;Mathematics:
-              Complex Number,Probability,Permuation
+              {{ i.Topics }}
             </td>
             <td>
-              <button mat-raised-button color="primary">Start</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Rank Booster 99</td>
-            <td>Jee Mains</td>
-            <td>150 Minutes</td>
-            <td>
-              Physics: Kinematics,Rotation,NLM;Chemistry: Alp,Dlp;Mathematics:
-              Complex Number,Probability,Permuation
-            </td>
-            <td>
-              <button mat-raised-button color="primary">Start</button>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="rankboosterlivetest(i.Name)"
+              >
+                Start
+              </button>
             </td>
           </tr>
         </table>
@@ -53,38 +47,15 @@
             <th>Topics</th>
             <th>Prize</th>
           </tr>
-          <tr>
-            <td>Rank Booster 101</td>
-            <td>Jee mains</td>
-            <td>22 Nov 2023 15:30</td>
-            <td>150 Minutes</td>
+          <tr *ngFor="let i of upcoming">
+            <td>{{ i.Name }}</td>
+            <td>{{ i.Difficulty }}</td>
+            <td>{{ i.StartAt }}</td>
+            <td>{{ i.Duration }} Minutes</td>
             <td>
-              Physics: Kinematics,Rotation,NLM;Chemistry: Alp,Dlp;Mathematics:
-              Complex Number,Probability,Permuation
+              {{ i.Topics }}
             </td>
-            <td>1 rank-5000;2 rank-2000;3 rank-1000</td>
-          </tr>
-          <tr>
-            <td>Rank Booster 102</td>
-            <td>Jee Advanced</td>
-            <td>25 Nov 2023 15:30</td>
-            <td>180 Minutes</td>
-            <td>
-              Physics: Kinematics,Rotation,NLM;Chemistry: Alp,Dlp;Mathematics:
-              Complex Number,Probability,Permuation
-            </td>
-            <td>1 rank-5000;2 rank-2000;3 rank-1000</td>
-          </tr>
-          <tr>
-            <td>Rank Booster 103</td>
-            <td>Jee mains</td>
-            <td>28 Nov 2023 15:30</td>
-            <td>150 Minutes</td>
-            <td>
-              Physics: Kinematics,Rotation,NLM;Chemistry: Alp,Dlp;Mathematics:
-              Complex Number,Probability,Permuation
-            </td>
-            <td>1 rank-5000;2 rank-2000;3 rank-1000</td>
+            <td>{{ i.Prize }}</td>
           </tr>
         </table>
       </div>
@@ -101,37 +72,18 @@
             <th>Duration</th>
             <th></th>
           </tr>
-          <tr>
-            <td>Rank Booster 1</td>
+          <tr *ngFor="let i of pasttest">
+            <td>{{ i.Name }}</td>
             <td>
-              Physics: Kinematics,Rotation,NLM;Chemistry: Alp,Dlp;Mathematics:
-              Complex Number,Probability,Permuation
+              {{ i.Topics }}
             </td>
-            <td>Jee Advanced</td>
-            <td>180 Minutes</td>
+            <td>{{ i.Difficulty }}</td>
+            <td>{{ i.Duration }} Minutes</td>
             <td>
               <button
                 mat-raised-button
                 color="primary"
-                (click)="rankboosterpasttest('Rank Booster 1')"
-              >
-                Practice
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>Rank Booster 2</td>
-            <td>
-              Physics: Kinematics,Rotation,NLM;Chemistry: Alp,Dlp;Mathematics:
-              Complex Number,Probability,Permuation
-            </td>
-            <td>Jee Advanced</td>
-            <td>180 Minutes</td>
-            <td>
-              <button
-                mat-raised-button
-                color="primary"
-                (click)="rankboosterpasttest('Rank Booster 2')"
+                (click)="rankboosterpasttest(i.Name)"
               >
                 Practice
               </button>

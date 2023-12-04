@@ -14,6 +14,7 @@ import { CheckoutpageComponent } from './checkoutpage/checkoutpage.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ResultComponent } from './result/result.component';
 import { AnalysisComponent } from './analysis/analysis.component';
+import { LivetestComponent } from './livetest/livetest.component';
 const routes: Routes = [
   { path: '', redirectTo: 'introduction', pathMatch: 'full' },
   { path: 'introduction', component: IntroductionComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'aboutus', component: AboutusComponent },
   { path: 'result', component: ResultComponent },
   { path: 'analysis', component: AnalysisComponent },
+  { path: 'livetest', component: LivetestComponent },
 ];
 
 @NgModule({

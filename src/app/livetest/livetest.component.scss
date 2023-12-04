@@ -1,0 +1,120 @@
+.test {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  margin: 1.5rem 0 1.5rem 0;
+  //box-shadow: 0 .25rem .5rem #e6edef;
+  box-shadow: 0 0.25rem 0.5rem #959c9c;
+
+  color: #000000;
+  // width: 350px;
+  position: relative;
+  margin: 8px;
+  .questionTag {
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 1rem 1.5rem;
+    color: #7e0000;
+  }
+  .questionString {
+    margin: 0.5rem;
+    padding: 1rem 1.5rem;
+    //border-bottom: 1px solid #f7f7f7;
+    font-size: 1rem;
+    font-weight: 400;
+    align-items: center;
+  }
+  .questionImage {
+    display: block;
+    //margin: auto;
+    //padding: 1rem 1.00rem;
+
+    margin: auto;
+    margin-top: 5px;
+    width: auto;
+    height: auto;
+    max-width: 35%;
+  }
+
+  .restBody {
+    display: block;
+    padding: 1rem 1.25rem;
+    margin: auto;
+    .twobox {
+      display: block;
+    }
+  }
+  .listtype {
+    display: flex;
+    padding: 1rem 1.25rem;
+
+    .listoption {
+      display: block;
+    }
+  }
+
+  .option {
+    width: auto;
+    padding: 1rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    align-items: center;
+    margin: 1px;
+    .answerTag {
+      font-size: 1rem;
+      font-weight: 800;
+      // padding: 1rem 1.5rem;
+      color: #7e0202;
+      text-align: center;
+      margin: 5px;
+    }
+    .optionImage {
+      display: block;
+      //margin: auto;
+      //padding: 1rem 1.00rem;
+
+      margin: auto;
+      margin-top: 10px;
+      width: auto;
+      height: auto;
+      max-width: 90%;
+    }
+    mat-grid-tile {
+      background: lightblue;
+    }
+    .button {
+      background-color: #47be4b; /* Green */
+      border: none;
+      color: rgb(255, 255, 255);
+      padding: 2px;
+      //padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 5px;
+      width: 90%;
+    }
+  }
+  .chooseoption {
+    margin: 5px;
+    padding: 1rem 1rem;
+    font-size: 1rem;
+    font-weight: 800;
+    // padding: 1rem 1.5rem;
+    color: #000000;
+  }
+}
+.example-form {
+  width: 200px;
+  margin: 1rem;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.listopt {
+  margin: 1rem;
+  color: #7e0000;
+}

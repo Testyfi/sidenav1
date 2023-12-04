@@ -1,0 +1,278 @@
+<div class="test">
+  <div class="questionTag">
+    Time Left
+    <cd-timer
+      format="hms"
+      [countdown]="true"
+      [startTime]="180"
+      (onComplete)="getquestion(index + 1)"
+    ></cd-timer>
+  </div>
+  <div class="questionTag">Question {{ index + 1 }}</div>
+  <div class="questionTag" *ngIf="numerical">Type Numerical</div>
+  <div class="questionTag" *ngIf="single">Type Single</div>
+  <div class="questionTag" *ngIf="multiple">Type Multiple</div>
+  <div class="questionTag" *ngIf="list">Type List</div>
+  <div class="questionString" [mathjax]="questionstring"></div>
+  <div *ngIf="questionimage">
+    <img src="{{ questionimageurl }}" alt="" class="questionImage" />
+  </div>
+
+  <div
+    class="restBody"
+    id="restBody"
+    (resized)="onResized($event)"
+    *ngIf="single || multiple"
+  >
+    <div class="twobox">
+      <div class="option">
+        <!--
+                    <div class="answerTag" >A</div>
+                    //-->
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">A</div>
+        <div *ngIf="optiona" [mathjax]="optionastring"></div>
+
+        <div *ngIf="optionaimage">
+          <img src="{{ optionaimageurl }}" alt="" class="optionImage" />
+        </div>
+      </div>
+
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">B</div>
+        <div *ngIf="optionb" [mathjax]="optionbstring"></div>
+        <div *ngIf="optionbimage">
+          <img src="{{ optionbimageurl }}" alt="" class="optionImage" />
+        </div>
+      </div>
+    </div>
+    <div class="twobox">
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">C</div>
+        <div *ngIf="optionc" [mathjax]="optioncstring"></div>
+        <div *ngIf="optioncimage">
+          <img src="{{ optioncimageurl }}" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">D</div>
+        <div *ngIf="optiond" [mathjax]="optiondstring"></div>
+        <div *ngIf="optiondimage">
+          <img src="{{ optiondimageurl }}" alt="" class="optionImage" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="listtype" *ngIf="list">
+    <div class="listoption">
+      <div
+        style="
+          margin-left: 1rem;
+          font-size: 1rem;
+          font-weight: 800;
+          color: #7e0202;
+
+          text-align: center;
+          margin: 5px;
+        "
+      >
+        List I
+      </div>
+      <div class="option">
+        <!--
+                    <div class="answerTag" >A</div>
+                    //-->
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">A</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, id?
+        </div>
+
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">B</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
+          asperiores!
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">C</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
+          asperiores!
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">D</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
+          asperiores!
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+    </div>
+    <div class="listoption">
+      <div
+        style="
+          margin-left: 1rem;
+          font-size: 1rem;
+          font-weight: 800;
+
+          color: #7e0202;
+          text-align: center;
+          margin: 5px;
+        "
+      >
+        List II
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">1</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam,
+          culpa!
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">2</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. At,
+          voluptatibus?
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">3</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. At,
+          voluptatibus?
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">4</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. At,
+          voluptatibus?
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+      <div class="option">
+        <!--   <div class="answerTag">A</div>//-->
+        <div class="answerTag">5</div>
+        <div *ngIf="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. At,
+          voluptatibus?
+        </div>
+        <div *ngIf="true">
+          <img src="/assets/images.png" alt="" class="optionImage" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="option" *ngIf="list">
+    <div class="listopt">A</div>
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
+      asperiores!
+    </div>
+    <div class="listopt">B</div>
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
+      asperiores!
+    </div>
+    <div class="listopt">C</div>
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
+      asperiores!
+    </div>
+    <div class="listopt">D</div>
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
+      asperiores!
+    </div>
+  </div>
+  <div class="chooseoption" *ngIf="single || list">
+    Options
+    <mat-button-toggle-group
+      name="fontStyle"
+      aria-label="Font Style"
+      #group="matButtonToggleGroup"
+      [(ngModel)]="sngans"
+    >
+      <mat-button-toggle value="A">A</mat-button-toggle>
+
+      <mat-button-toggle value="B">B</mat-button-toggle>
+      <mat-button-toggle value="C">C</mat-button-toggle>
+      <mat-button-toggle value="D">D</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="chooseoption" *ngIf="multiple">
+    Options
+    <mat-button-toggle-group
+      name="ingredients"
+      aria-label="Ingredients"
+      multiple
+      [(ngModel)]="multanswer"
+    >
+      <mat-button-toggle value="A">A</mat-button-toggle>
+      <mat-button-toggle value="B">B</mat-button-toggle>
+      <mat-button-toggle value="C">C</mat-button-toggle>
+      <mat-button-toggle value="D">D</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <form class="example-form" *ngIf="numerical">
+    <mat-form-field class="example-full-width">
+      <mat-label>Leave Your Answer</mat-label>
+      <textarea
+        matInput
+        placeholder="Ex. 1.23"
+        [(ngModel)]="numericanswer"
+        [ngModelOptions]="{ standalone: true }"
+      ></textarea>
+    </mat-form-field>
+  </form>
+
+  <section>
+    <button
+      mat-raised-button
+      color="primary"
+      style="float: right; margin: 15px"
+      *ngIf="index == maxindex"
+      (click)="submit()"
+    >
+      Submit
+    </button>
+  </section>
+</div>

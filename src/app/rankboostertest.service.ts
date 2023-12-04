@@ -24,6 +24,22 @@ export class RankboostertestService {
     //console.log(htrs);
     return htrs;
   }
+  getlivetest(tag: string): Observable<any> {
+    // console.log(token);
+
+    const body = {
+      tag: tag,
+    };
+    var htrs = this.http.post<any>(
+      `${environment.backend}/rankbooster/livetest`,
+      body,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    //console.log(htrs);
+    return htrs;
+  }
   getHeader() {
     let str: any = '';
     str = localStorage.getItem('token');
