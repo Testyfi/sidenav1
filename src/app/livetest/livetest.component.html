@@ -6,6 +6,7 @@
       [countdown]="true"
       [startTime]="timeinseconds"
       (onComplete)="getquestion(index + 1)"
+      (onTick)="tick()"
       #basicTimer
     ></cd-timer>
   </div>

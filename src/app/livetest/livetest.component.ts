@@ -119,6 +119,9 @@ export class LivetestComponent implements AfterViewInit {
     this.timeinseconds =
       this.timeinseconds - (secondsgone % this.timeinseconds);
   }
+  tick() {
+    //console.log('tick');
+  }
   Single(question: any) {
     this.single = true;
     this.multiple = false;
