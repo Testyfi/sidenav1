@@ -3,9 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  // backend: 'http://localhost:8080',
   //production: false,
+  //backend: 'http://localhost:8080',
+  production: false,
   // backend:"https://testify-backend.onrender.com"
   backend: 'https://api.testtify.com',
 };

@@ -24,7 +24,8 @@ export class DashboardComponent implements OnInit {
   ) {}
   //private apiUrl = 'http://localhost:8080/rankbooster/pasttest';
   private apiUrl = `${environment.backend}/rankbooster/pasttest`;
-  Tests = Tests;
+  // Tests = Tests;
+  Test: Array<testtype> = new Array();
   num: number = 0;
   contestclass = 'big-container-flex';
   loading: boolean = false;
@@ -43,6 +44,10 @@ export class DashboardComponent implements OnInit {
     this.num = window.innerWidth;
     if (this.num < 700) this.contestclass = 'big-container-block';
     //this.date = this.datePipe.transform(this.date, 'yyyy-MM-dd');
+    this.getalltest();
+    /*
+    this.Tests = this.Test;
+    //console.log(this.Tests);
     this.date = new Date();
     this.pasttest = new Array();
     this.ongoing = new Array();
@@ -60,28 +65,96 @@ export class DashboardComponent implements OnInit {
       '/' +
       this.date.getSeconds();
 
-    for (let i = 0; i < Tests.length; i++) {
-      let starttime = Tests[i].Start.split('/');
-      let endtime = Tests[i].Start.split('/');
+    for (let i = 0; i < this.Test.length; i++) {
+      let starttime = this.Test[i].Start.split('/');
+      let endtime = this.Test[i].Start.split('/');
       endtime[3] = parseInt(endtime[3]) + 3 + '';
       if (this.dateTimeMatch(currenttime.split('/'), endtime) == 0) {
         //console.log(s1 + '   ' + s2 + '  ' + i);
-        this.pasttest.push(Tests[i]);
+        this.pasttest.push(this.Test[i]);
+        //console.log(this.Test[i]);
       }
       if (this.dateTimeMatch(currenttime.split('/'), starttime) == 2) {
-        this.upcoming.push(Tests[i]);
+        this.upcoming.push(this.Test[i]);
       }
       if (
         this.dateTimeMatch(currenttime.split('/'), starttime) == 1 ||
         (this.dateTimeMatch(currenttime.split('/'), starttime) == 0 &&
           this.dateTimeMatch(currenttime.split('/'), endtime) == 2)
       ) {
-        this.ongoing.push(Tests[i]);
+        this.ongoing.push(this.Test[i]);
+        console.log(this.Test[i]);
       }
     }
+    */
     //console.log();
   }
+  getalltest() {
+    this.loading = true;
+    this.Test = new Array();
+    const headers = this.getHeader();
+    const body = {};
+    this.http
+      .post(`${environment.backend}/admins/testinfo`, body, {
+        headers,
+      })
+      .subscribe((data: any) => {
+        for (let i = 0; i < data.data.length; i++) {
+          this.Test.push(data.data[i]);
+        }
+        this.sorttest();
+        this.loading = false;
+      });
+  }
+  sorttest() {
+    this.date = new Date();
+    this.pasttest = new Array();
+    this.ongoing = new Array();
+    this.upcoming = new Array();
+    let currenttime =
+      this.date.getFullYear() +
+      '/' +
+      (this.date.getMonth() + 1) +
+      '/' +
+      this.date.getDate() +
+      '/' +
+      this.date.getHours() +
+      '/' +
+      this.date.getMinutes() +
+      '/' +
+      this.date.getSeconds();
 
+    for (let i = 0; i < this.Test.length; i++) {
+      let starttime = this.Test[i].Start.split('/');
+      let endtime = this.Test[i].Start.split('/');
+      endtime[3] = parseInt(endtime[3]) + 3 + '';
+      if (this.dateTimeMatch(currenttime.split('/'), endtime) == 0) {
+        //console.log(s1 + '   ' + s2 + '  ' + i);
+        this.pasttest.push(this.Test[i]);
+        //console.log(this.Test[i]);
+      }
+      if (this.dateTimeMatch(currenttime.split('/'), starttime) == 2) {
+        this.upcoming.push(this.Test[i]);
+      }
+      if (
+        this.dateTimeMatch(currenttime.split('/'), starttime) == 1 ||
+        (this.dateTimeMatch(currenttime.split('/'), starttime) == 0 &&
+          this.dateTimeMatch(currenttime.split('/'), endtime) == 2)
+      ) {
+        this.ongoing.push(this.Test[i]);
+        console.log(this.Test[i]);
+      }
+    }
+  }
+  getHeader() {
+    let str: any = '';
+    str = localStorage.getItem('token');
+
+    let response = JSON.parse(str);
+    const token: string = response.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return headers;
+  }
   rankboosterpasttest(s: string) {
     this.loading = true;
     let obj = JSON.parse('{"questions":"[]"}');
@@ -184,7 +257,11 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/questionviewer']);
     });
   }
-  rankboosterlivetest(s: string, t: string) {
+  rankboosterlivetest(s: string, time: string) {
+    this.rankbooster.livetesttime = time;
+    this.rankbooster.livetestname = s;
+    this.router.navigate(['/livetest']);
+    /*
     this.loading = true;
     let obj = JSON.parse('{"questions":"[]"}');
     let c: Array<question> = new Array();
@@ -192,7 +269,7 @@ export class DashboardComponent implements OnInit {
     this.rankbooster.livetesttime = t;
     this.rankbooster.getlivetest(s).subscribe((data) => {
       //console.log('datad');
-      //console.log(data.data);
+      console.log(data.data);
       let temp: question[] = [];
 
       for (let i = 0; i < data.data.length; i++) {
@@ -247,6 +324,7 @@ export class DashboardComponent implements OnInit {
         //obj.questions[i] = temp;
         //console.log(obj[i]);
         */
+    /*
         temp.push({
           questionstring: data.data[i].question,
           questionimage: this.imagearraytostring(data.data[i].images),
@@ -284,8 +362,10 @@ export class DashboardComponent implements OnInit {
       //console.log(cs);
       this.paperservice.setpaper(cs);
       this.loading = false;
+    
       this.router.navigate(['/livetest']);
     });
+    */
   }
   imagearraytostring(array: string[]) {
     if (array.length == 0) return '';
@@ -343,23 +423,23 @@ export class DashboardComponent implements OnInit {
       '/' +
       this.date.getSeconds();
 
-    for (let i = 0; i < Tests.length; i++) {
-      let starttime = Tests[i].Start.split('/');
-      let endtime = Tests[i].Start.split('/');
+    for (let i = 0; i < this.Test.length; i++) {
+      let starttime = this.Test[i].Start.split('/');
+      let endtime = this.Test[i].Start.split('/');
       endtime[3] = parseInt(endtime[3]) + 3 + '';
       if (this.dateTimeMatch(currenttime.split('/'), endtime) == 0) {
         //console.log(s1 + '   ' + s2 + '  ' + i);
-        this.pasttest.push(Tests[i]);
+        this.pasttest.push(this.Test[i]);
       }
       if (this.dateTimeMatch(currenttime.split('/'), starttime) == 2) {
-        this.upcoming.push(Tests[i]);
+        this.upcoming.push(this.Test[i]);
       }
       if (
         this.dateTimeMatch(currenttime.split('/'), starttime) == 1 ||
         (this.dateTimeMatch(currenttime.split('/'), starttime) == 0 &&
           this.dateTimeMatch(currenttime.split('/'), endtime) == 2)
       ) {
-        this.ongoing.push(Tests[i]);
+        this.ongoing.push(this.Test[i]);
       }
     }
   }

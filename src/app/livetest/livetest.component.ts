@@ -12,6 +12,7 @@ import { MathjaxModule } from 'mathjax-angular';
 import { GetpaperserviceService } from '../getpaperservice.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RankboostertestService } from '../rankboostertest.service';
+import { question, questiondata } from '../dashboard/questiontype';
 
 @Component({
   selector: 'app-livetest',
@@ -26,9 +27,11 @@ export class LivetestComponent implements AfterViewInit {
     private rnkbo: RankboostertestService
   ) {}
   @ViewChild('basicTimer') cdtimer: CdTimerComponent | undefined;
-
-  timeinseconds = (3 * 60 * 60) / this.paperservice.totalquestion;
+  maxquestion = 54;
+  timeinseconds = (3 * 60 * 60) / this.maxquestion;
+  onequestiontime = (3 * 60 * 60) / this.maxquestion;
   private apiUrl = 'http://localhost:8080';
+  loading: boolean = true;
   num: number = 0;
   coll: boolean = false;
   list: boolean = true;
@@ -81,7 +84,7 @@ export class LivetestComponent implements AfterViewInit {
     }
   }
   ngOnInit(): void {
-    // this.timeinseconds = 200;
+    //this.timeinseconds = 200;
     this.num = window.innerWidth;
 
     if (this.num < 900) {
@@ -96,31 +99,258 @@ export class LivetestComponent implements AfterViewInit {
         e.style.display = 'flex';
       }
     }
+    //this.findquestionindex();
+    /*
     this.findquestionindex();
     let question = JSON.parse(this.paperservice.getquestion(this.index));
     if (question.questiontype == 1) this.Single(question);
     if (question.questiontype == 2) this.Multiple(question);
     if (question.questiontype == 3) this.Numerical(question);
+    */
+    // console.log(this.getquestionfrombackend());
+    // this.loading = true;
+    // this.getquestionfrombackend();
+    this.findquestionindex();
+    this.loading = true;
+    this.getquestionfrombackend();
+  }
+  ontimeend() {
+    this.findquestionindex();
+    this.loading = true;
+    this.getquestionfrombackend();
+    this.resetTimer();
+  }
+  imagearraytostring(array: string[]) {
+    if (array.length == 0) return '';
+    return this.getimageurl(array[0]);
+  }
+  getquestionfrombackend() {
+    // this.loading = true;
+
+    this.rnkbo.getlivetest(this.rnkbo.livetestname).subscribe((data) => {
+      this.loading = false;
+      console.log(data.data);
+      let temp: question = questiondata;
+      temp.questionstring = data.data.question;
+      temp.questionimage = this.imagearraytostring(data.data.images);
+      temp.currectanswer = data.data.currectanswer;
+      temp.questiontype = this.questiontype(data.data.type);
+      temp.optionastring = data.data.options[0].text;
+      temp.optionaimage = data.data.options[0].image;
+      if (temp.optionaimage.length > 0)
+        temp.optionaimage = this.getimageurl(temp.optionaimage);
+      temp.optionbstring = data.data.options[1].text;
+      temp.optionbimage = data.data.options[1].image;
+      if (temp.optionbimage.length > 0)
+        temp.optionbimage = this.getimageurl(temp.optionbimage);
+      temp.optioncstring = data.data.options[2].text;
+      temp.optioncimage = data.data.options[2].image;
+      if (temp.optioncimage.length > 0)
+        temp.optioncimage = this.getimageurl(temp.optioncimage);
+      temp.optiondstring = data.data.options[3].text;
+      temp.optiondimage = data.data.options[3].image;
+      if (temp.optiondimage.length > 0)
+        temp.optiondimage = this.getimageurl(temp.optiondimage);
+      //console.log('yes');
+      // temp[i].questionstring = data.data[i].question;
+      /*
+      temp[i].questionstring = data.data[i].question;
+      temp[i].questionimage = this.imagearraytostring(data.data[i].images);
+      temp[i].currectanswer = data.data[i].currectanswer;
+      
+
+      temp[i].optionastring = data.data[i].options[0].text;
+      temp[i].optionaimage = data.data[i].options[0].image;
+      if (temp[i].optionaimage.length > 0)
+        temp[i].optionaimage = this.getimageurl(temp[i].optionaimage);
+      temp[i].optionbstring = data.data[i].options[1].text;
+      temp[i].optionbimage = data.data[i].options[1].image;
+      if (temp[i].optionbimage.length > 0)
+        temp[i].optionbimage = this.getimageurl(temp[i].optionbimage);
+      temp[i].optioncstring = data.data[i].options[2].text;
+      temp[i].optioncimage = data.data[i].options[2].image;
+      if (temp[i].optioncimage.length > 0)
+        temp[i].optioncimage = this.getimageurl(temp[i].optioncimage);
+      temp[i].optiondstring = data.data[i].options[3].text;
+      temp[i].optiondimage = data.data[i].options[3].image;
+      if (temp[i].optiondimage.length > 0)
+        temp[i].optiondimage = this.getimageurl(temp[i].optiondimage);
+      c[i] = temp[i];
+      //console.log(questiondata);
+      //obj[i] = temp;
+      //obj.questions[i] = temp;
+      //console.log(obj[i]);
+      /*
+    this.loading = true;
+    let obj = JSON.parse('{"questions":"[]"}');
+    let c: Array<question> = new Array();
+    //console.log(s);
+    this.rankbooster.livetesttime = t;
+    this.rankbooster.getlivetest(s).subscribe((data) => {
+      //console.log('datad');
+      console.log(data.data);
+      let temp: question[] = [];
+
+      for (let i = 0; i < data.data.length; i++) {
+        let currectanswer = data.data[i].correctanswer;
+        //temp[i].questiontype = this.questiontype(data.data[i].type);
+        if (this.questiontype(data.data[i].type) == 2)
+          currectanswer = this.multiplecurrect(data.data[i].correctanswers);
+
+        let optionastring = data.data[i].options[0].text;
+        let optionaimage = data.data[i].options[0].image;
+        if (optionaimage.length > 0)
+          optionaimage = this.getimageurl(optionaimage);
+        let optionbstring = data.data[i].options[1].text;
+        let optionbimage = data.data[i].options[1].image;
+        if (optionbimage.length > 0)
+          optionbimage = this.getimageurl(optionbimage);
+        let optioncstring = data.data[i].options[2].text;
+        let optioncimage = data.data[i].options[2].image;
+        if (optioncimage.length > 0)
+          optioncimage = this.getimageurl(optioncimage);
+        let optiondstring = data.data[i].options[3].text;
+        let optiondimage = data.data[i].options[3].image;
+        if (optiondimage.length > 0)
+          optiondimage = this.getimageurl(optiondimage);
+        //console.log('yes');
+        // temp[i].questionstring = data.data[i].question;
+        /*
+        temp[i].questionstring = data.data[i].question;
+        temp[i].questionimage = this.imagearraytostring(data.data[i].images);
+        temp[i].currectanswer = data.data[i].currectanswer;
+        
+
+        temp[i].optionastring = data.data[i].options[0].text;
+        temp[i].optionaimage = data.data[i].options[0].image;
+        if (temp[i].optionaimage.length > 0)
+          temp[i].optionaimage = this.getimageurl(temp[i].optionaimage);
+        temp[i].optionbstring = data.data[i].options[1].text;
+        temp[i].optionbimage = data.data[i].options[1].image;
+        if (temp[i].optionbimage.length > 0)
+          temp[i].optionbimage = this.getimageurl(temp[i].optionbimage);
+        temp[i].optioncstring = data.data[i].options[2].text;
+        temp[i].optioncimage = data.data[i].options[2].image;
+        if (temp[i].optioncimage.length > 0)
+          temp[i].optioncimage = this.getimageurl(temp[i].optioncimage);
+        temp[i].optiondstring = data.data[i].options[3].text;
+        temp[i].optiondimage = data.data[i].options[3].image;
+        if (temp[i].optiondimage.length > 0)
+          temp[i].optiondimage = this.getimageurl(temp[i].optiondimage);
+        c[i] = temp[i];
+        //console.log(questiondata);
+        //obj[i] = temp;
+        //obj.questions[i] = temp;
+        //console.log(obj[i]);
+        */
+      /*
+      
+      }
+
+      //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
+      //console.log(jsonObj);
+      obj.questions = temp;
+      //console.log(obj.questions);
+      //console.log(JSON.stringify(obj));
+
+      //console.log(data.questions);
+      //this.questionstring = data.questions[0].questionstring;
+      let cs = JSON.stringify(obj);
+      //console.log(obj.questions);
+      //console.log(cs);
+      this.paperservice.setpaper(cs);
+      this.loading = false;
+    
+      this.router.navigate(['/livetest']);
+    });
+    */
+      if (temp.questiontype == 1) this.Single(temp);
+      if (temp.questiontype == 2) this.Multiple(temp);
+      if (temp.questiontype == 3) this.Numerical(temp);
+    });
+    //
+    this.rnkbo
+      .putlivetestresponse(this.rnkbo.livetestname, this.returnanswer())
+      .subscribe((data) => {
+        console.log(data.data);
+      });
+  }
+  returnanswer(): string {
+    if (this.single) return this.sngans;
+    if (this.numerical) return this.numericanswer;
+    if (this.multiple) return this.arraytostring(this.multanswer.sort());
+    return '';
+  }
+  multiplecurrect(s: string[]) {
+    let s1 = s[0];
+
+    for (let i = 1; i < s.length; i++) {
+      s1 = s1 + ',' + s[i];
+    }
+    return s1;
+  }
+  questiontype(s: string) {
+    if (s[0] === 'S') return 1;
+    if (s[0] === 'M') return 2;
+    if (s[0] === 'N') return 3;
+    return 4;
+  }
+  getimageurl(s: string) {
+    let s1: string = '';
+    for (let i = 0; i < s.length - 5; i++) {
+      s1 = s1 + s[i];
+    }
+    let url =
+      'https://testify-jee.s3.ap-south-1.amazonaws.com/assets/questions/' +
+      s1 +
+      '/' +
+      s;
+    return url;
   }
   findquestionindex() {
     var starttime = this.rnkbo.livetesttime.split('/');
+    //console.log(starttime);
     var secondsgone = 0;
-    var mul = 1;
+
     var date = new Date();
 
     secondsgone = date.getSeconds() - parseInt(starttime[5]);
+    //console.log(secondsgone);
     secondsgone =
       date.getMinutes() * 60 - parseInt(starttime[4]) * 60 + secondsgone;
     secondsgone =
       date.getHours() * 60 * 60 -
       parseInt(starttime[3]) * 60 * 60 +
       secondsgone;
-    this.index = parseInt(secondsgone / this.timeinseconds + '');
+    this.index = parseInt(secondsgone / this.onequestiontime + '');
     this.timeinseconds =
-      this.timeinseconds - (secondsgone % this.timeinseconds);
+      this.onequestiontime - (secondsgone % this.onequestiontime);
+    //console.log(this.index + '  ' + this.timeinseconds + '  ' + secondsgone);
+  }
+  checktime() {
+    var starttime = this.rnkbo.livetesttime.split('/');
+    //console.log(starttime);
+    var secondsgone = 0;
+
+    var date = new Date();
+    //console.log(date);
+    secondsgone = date.getSeconds() - parseInt(starttime[5]);
+    //console.log(secondsgone);
+    secondsgone =
+      date.getMinutes() * 60 - parseInt(starttime[4]) * 60 + secondsgone;
+    //console.log(secondsgone);
+    secondsgone =
+      date.getHours() * 60 * 60 -
+      parseInt(starttime[3]) * 60 * 60 +
+      secondsgone;
+    //console.log(secondsgone);
+    console.log(parseInt(secondsgone / this.onequestiontime + ''));
+
+    console.log(this.onequestiontime - (secondsgone % this.onequestiontime));
   }
   tick() {
-    //console.log('tick');
+    //console.log(this.checktime());
+    // this.checktime();
   }
   Single(question: any) {
     this.single = true;
@@ -194,6 +424,7 @@ export class LivetestComponent implements AfterViewInit {
     if (str.length > 0) return true;
     return false;
   }
+
   getquestion(index: number) {
     let question = JSON.parse(this.paperservice.getquestion(this.index));
     if (question.questiontype == 1) {
@@ -214,6 +445,8 @@ export class LivetestComponent implements AfterViewInit {
     //console.log(this.sngans);
     //console.log(this.multanswer);
     this.index = index;
+    // this.checktime();
+    //this.findquestionindex();
     this.resetTimer();
     question = JSON.parse(this.paperservice.getquestion(index));
     if (question.questiontype == 1) {
@@ -233,6 +466,7 @@ export class LivetestComponent implements AfterViewInit {
       //this.numericanswer = this.answer[index];
     }
   }
+
   someSelection() {
     this.getquestion(this.selectedquestion - 1);
   }
@@ -339,7 +573,8 @@ export class LivetestComponent implements AfterViewInit {
       // Call a reset method on your cdTimer component
       this.cdtimer.reset();
       //this.cdtimer.autoStart = false;
-      this.cdtimer.startTime = (3 * 60 * 60) / this.paperservice.totalquestion;
+      //this.cdtimer.startTime = (3 * 60 * 60) / this.maxquestion;
+      this.cdtimer.startTime = this.timeinseconds;
       this.cdtimer.start();
     }
   }

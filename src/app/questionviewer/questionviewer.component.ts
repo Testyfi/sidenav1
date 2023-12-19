@@ -169,7 +169,7 @@ export class QuestionviewerComponent implements OnInit {
       // this.sngans = this.answer[index];
     }
     if (question.questiontype == 2) {
-      this.savemult(this.arraytostring(this.multanswer));
+      this.savemult(this.arraytostring(this.multanswer.sort()));
       this.multanswer = Array(4);
       // this.multanswer = this.strtoarray(this.answer[index]);
     }

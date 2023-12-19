@@ -5,7 +5,7 @@
       format="ms"
       [countdown]="true"
       [startTime]="timeinseconds"
-      (onComplete)="getquestion(index + 1)"
+      (onComplete)="ontimeend()"
       (onTick)="tick()"
       #basicTimer
     ></cd-timer>
@@ -277,4 +277,8 @@
       Submit
     </button>
   </section>
+</div>
+<div *ngIf="loading" class="spinner-overlay">
+  <!--<mat-spinner></mat-spinner>-->
+  <div class="spinner"></div>
 </div>

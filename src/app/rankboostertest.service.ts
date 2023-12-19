@@ -9,6 +9,7 @@ export class RankboostertestService {
   constructor(private http: HttpClient) {}
   // private apiUrl = 'http://localhost:8080/rankbooster/pasttest';
   livetesttime = '';
+  livetestname = '';
   getpasttest(tag: string): Observable<any> {
     // console.log(token);
 
@@ -29,10 +30,27 @@ export class RankboostertestService {
     // console.log(token);
 
     const body = {
-      tag: tag,
+      testname: tag,
     };
     var htrs = this.http.post<any>(
       `${environment.backend}/rankbooster/livetest`,
+      body,
+      {
+        headers: this.getHeader(),
+      }
+    );
+    //console.log(htrs);
+    return htrs;
+  }
+  putlivetestresponse(testname: string, testanswer: string): Observable<any> {
+    // console.log(token);
+
+    const body = {
+      testanswer: testanswer,
+      testname: testname,
+    };
+    var htrs = this.http.post<any>(
+      `${environment.backend}/rankbooster/livetest/response`,
       body,
       {
         headers: this.getHeader(),
