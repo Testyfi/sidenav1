@@ -10,8 +10,14 @@
       #basicTimer
     ></cd-timer>
   </div>
+
+  <div class="questionTag">
+    Total Students <span style="color: #020000">{{ totaluser }} </span> Current
+    Rank <span style="color: green">{{ rank }}</span>
+  </div>
   <div class="questionTag">Question {{ index + 1 }}</div>
   <div class="questionTag" *ngIf="numerical">Type Numerical</div>
+
   <div class="questionTag" *ngIf="single">Type Single</div>
   <div class="questionTag" *ngIf="multiple">Type Multiple</div>
   <div class="questionTag" *ngIf="list">Type List</div>

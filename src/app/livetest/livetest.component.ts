@@ -14,6 +14,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RankboostertestService } from '../rankboostertest.service';
 import { question, questiondata } from '../dashboard/questiontype';
 
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-livetest',
   templateUrl: './livetest.component.html',
@@ -27,6 +29,8 @@ export class LivetestComponent implements AfterViewInit {
     private rnkbo: RankboostertestService
   ) {}
   @ViewChild('basicTimer') cdtimer: CdTimerComponent | undefined;
+  totaluser = 1;
+  rank = 1;
   maxquestion = 54;
   timeinseconds = (3 * 60 * 60) / this.maxquestion;
   onequestiontime = (3 * 60 * 60) / this.maxquestion;
@@ -84,6 +88,9 @@ export class LivetestComponent implements AfterViewInit {
     }
   }
   ngOnInit(): void {
+    this.totalstudents(this.rnkbo.livetestname);
+    this.getrank(this.rnkbo.livetestname);
+
     //this.timeinseconds = 200;
     this.num = window.innerWidth;
 
@@ -269,6 +276,7 @@ export class LivetestComponent implements AfterViewInit {
       if (temp.questiontype == 3) this.Numerical(temp);
     });
     //
+
     this.rnkbo
       .putlivetestresponse(this.rnkbo.livetestname, this.returnanswer())
       .subscribe((data) => {
@@ -351,6 +359,45 @@ export class LivetestComponent implements AfterViewInit {
   tick() {
     //console.log(this.checktime());
     // this.checktime();
+  }
+  getrank(testname: string) {
+    const body = {
+      testname: testname,
+    };
+    this.http
+      .post<any>(`${environment.backend}/rankbooster/livetest/rank`, body, {
+        headers: this.getHeader(),
+      })
+      .subscribe((data) => {
+        this.rank = data.data;
+      });
+    //console.log(htrs);
+  }
+  totalstudents(testname: string) {
+    const body = {
+      testname: testname,
+    };
+    this.http
+      .post<any>(
+        `${environment.backend}/rankbooster/livetest/totaluser`,
+        body,
+        {
+          headers: this.getHeader(),
+        }
+      )
+      .subscribe((data) => {
+        this.totaluser = data.data;
+      });
+  }
+  getHeader() {
+    let str: any = '';
+    str = localStorage.getItem('token');
+
+    let response = JSON.parse(str);
+    const token: string = response.token;
+    //console.log(response.token);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return headers;
   }
   Single(question: any) {
     this.single = true;

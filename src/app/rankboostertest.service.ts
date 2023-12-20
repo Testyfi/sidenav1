@@ -65,6 +65,7 @@ export class RankboostertestService {
 
     let response = JSON.parse(str);
     const token: string = response.token;
+    //console.log(response.token);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return headers;
   }
