@@ -88,8 +88,8 @@ export class LivetestComponent implements AfterViewInit {
     }
   }
   ngOnInit(): void {
-    this.totalstudents(this.rnkbo.livetestname);
-    this.getrank(this.rnkbo.livetestname);
+    /// this.totalstudents(this.rnkbo.livetestname);
+    /// this.getrank(this.rnkbo.livetestname);
 
     //this.timeinseconds = 200;
     this.num = window.innerWidth;
@@ -132,6 +132,9 @@ export class LivetestComponent implements AfterViewInit {
     return this.getimageurl(array[0]);
   }
   getquestionfrombackend() {
+    this.totalstudents(this.rnkbo.livetestname);
+    this.getrank(this.rnkbo.livetestname);
+
     // this.loading = true;
 
     this.rnkbo.getlivetest(this.rnkbo.livetestname).subscribe((data) => {
