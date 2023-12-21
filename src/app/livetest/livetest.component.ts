@@ -287,10 +287,14 @@ export class LivetestComponent implements AfterViewInit {
       });
   }
   returnanswer(): string {
-    if (this.single) return this.sngans;
-    if (this.numerical) return this.numericanswer;
-    if (this.multiple) return this.arraytostring(this.multanswer.sort());
-    return '';
+    var s = '';
+    if (this.single) s = this.sngans;
+    if (this.numerical) s = this.numericanswer;
+    if (this.multiple) s = this.arraytostring(this.multanswer.sort());
+    this.sngans = '';
+    this.numericanswer = '';
+    this.multanswer = new Array();
+    return s;
   }
   multiplecurrect(s: string[]) {
     let s1 = s[0];
