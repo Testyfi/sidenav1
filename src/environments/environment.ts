@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   //backend: 'http://localhost:8080',
   //production: false,
-  // backend:"https://testify-backend.onrender.com"
+  //backend:"https://testify-backend.onrender.com"
   backend: 'https://api.testtify.com',
 };
 
