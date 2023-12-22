@@ -254,10 +254,28 @@ export class DashboardComponent implements OnInit {
       //console.log(cs);
       this.paperservice.setpaper(cs);
       this.loading = false;
+
       this.router.navigate(['/questionviewer']);
     });
   }
+  incrementuser(testname: string) {
+    const body = {
+      testname: testname,
+    };
+    this.http
+      .post<any>(
+        `${environment.backend}/rankbooster/livetest/incrementuser`,
+        body,
+        {
+          headers: this.getHeader(),
+        }
+      )
+      .subscribe((data) => {
+        console.log(data.data);
+      });
+  }
   rankboosterlivetest(s: string, time: string) {
+    this.incrementuser(s);
     this.rankbooster.livetesttime = time;
     this.rankbooster.livetestname = s;
     this.router.navigate(['/livetest']);

@@ -133,9 +133,6 @@ export class LivetestComponent implements AfterViewInit {
     return this.getimageurl(array[0]);
   }
   getquestionfrombackend() {
-    this.totalstudents(this.rnkbo.livetestname);
-    this.getrank(this.rnkbo.livetestname);
-
     // this.loading = true;
 
     this.rnkbo.getlivetest(this.rnkbo.livetestname).subscribe((data) => {
@@ -285,6 +282,8 @@ export class LivetestComponent implements AfterViewInit {
       .putlivetestresponse(this.rnkbo.livetestname, this.returnanswer())
       .subscribe((data) => {
         console.log(data.data);
+        this.totalstudents(this.rnkbo.livetestname);
+        this.getrank(this.rnkbo.livetestname);
       });
   }
   returnanswer(): string {
@@ -365,6 +364,8 @@ export class LivetestComponent implements AfterViewInit {
     console.log(this.onequestiontime - (secondsgone % this.onequestiontime));
   }
   tick() {
+    //this.getrank(this.rnkbo.livetestname);
+    //this.totalstudents(this.rnkbo.livetestname);
     //console.log(this.checktime());
     // this.checktime();
   }
@@ -379,6 +380,7 @@ export class LivetestComponent implements AfterViewInit {
       .subscribe((data) => {
         this.rank = data.data.testrank;
         this.marks = data.data.testmarks;
+        console.log(this.rank + '   ' + this.marks);
       });
     //console.log(htrs);
   }
