@@ -32,6 +32,7 @@ export class LivetestComponent implements AfterViewInit {
   totaluser = 1;
   rank = 1;
   maxquestion = 54;
+  marks = 0;
   timeinseconds = (3 * 60 * 60) / this.maxquestion;
   onequestiontime = (3 * 60 * 60) / this.maxquestion;
   private apiUrl = 'http://localhost:8080';
@@ -376,7 +377,8 @@ export class LivetestComponent implements AfterViewInit {
         headers: this.getHeader(),
       })
       .subscribe((data) => {
-        this.rank = data.data;
+        this.rank = data.data.testrank;
+        this.marks = data.data.testmarks;
       });
     //console.log(htrs);
   }
