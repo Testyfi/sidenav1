@@ -1,5 +1,11 @@
 <div class="test">
   <div class="questionTag">
+    <i class="fa-solid fa-users"></i>
+    <span style="color: #020000; margin: 1rem"> {{ totaluser }} </span> Rank
+    <span style="color: green; margin: 1rem">{{ rank }}</span> Marks
+    <span style="color: green; margin: 1rem">{{ marks }}</span>
+  </div>
+  <div class="questionTag">
     Time Left
     <cd-timer
       format="ms"
@@ -11,11 +17,6 @@
     ></cd-timer>
   </div>
 
-  <div class="questionTag">
-    Total Students <span style="color: #020000">{{ totaluser }} </span> Current
-    Rank <span style="color: green">{{ rank }}</span> Marks
-    <span style="color: green">{{ marks }}</span>
-  </div>
   <div class="questionTag">Question {{ index + 1 }}</div>
   <div class="questionTag" *ngIf="numerical">Type Numerical</div>
 
