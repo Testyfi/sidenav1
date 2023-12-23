@@ -173,14 +173,14 @@ export class UserLoginComponent implements OnInit {
       email: this.forgetemail,
     };
     this.http.post<{}>(`${environment.backend}/forgotpass`, data).subscribe(
-      (response) => {
-        console.log(response);
+      (response: any) => {
+        alert(response.data);
         this.forget = false;
         this.loading = false;
       },
       (error) => {
         console.log(error);
-        alert(error.error);
+        alert(error.error.error);
         this.loading = false;
       }
     );
