@@ -180,7 +180,7 @@ export class UserLoginComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        alert(error.error.error);
+        alert(error.error);
         this.loading = false;
       }
     );
