@@ -102,7 +102,349 @@ export class PagesComponent implements OnInit {
         }
       );
   }*/
-  createyourtest() {
+  returnnumberofquestions(x: string): number {
+    if (x == '1') return 4;
+    if (x == '2') return 10;
+    return 30;
+  }
+  createyourtestmains() {
+    this.loading = true;
+    const data = {
+      topics: this.physicstopics,
+      number: this.returnnumberofquestions(this.timme),
+    };
+    const headers = this.getHeader();
+    let obj = JSON.parse('{"questions":"[]"}');
+    let c: Array<question> = new Array();
+    let phy: question[] = [];
+    let mat: question[] = [];
+    let che: question[] = [];
+    //console.log(s);
+    this.http
+      .post(`${environment.backend}/test/createyourtestjeemains`, data, {
+        headers,
+      })
+      .subscribe((data: any) => {
+        //console.log('datad');
+        console.log(data.data);
+        let temp: question[] = [];
+
+        for (let i = 0; i < data.data.length; i++) {
+          let currectanswer = data.data[i].correctAnswer;
+          //console.log(currectanswer);
+          //temp[i].questiontype = this.questiontype(data.data[i].type);
+          if (this.questiontype(data.data[i].questionType) == 2)
+            currectanswer = this.multiplecurrect(data.data[i].correctAnswers);
+
+          let optionastring = data.data[i].options[0].text;
+          let optionaimage = data.data[i].options[0].image;
+          if (optionaimage.length > 0)
+            optionaimage = this.getimageurl(optionaimage);
+          let optionbstring = data.data[i].options[1].text;
+          let optionbimage = data.data[i].options[1].image;
+          if (optionbimage.length > 0)
+            optionbimage = this.getimageurl(optionbimage);
+          let optioncstring = data.data[i].options[2].text;
+          let optioncimage = data.data[i].options[2].image;
+          if (optioncimage.length > 0)
+            optioncimage = this.getimageurl(optioncimage);
+          let optiondstring = data.data[i].options[3].text;
+          let optiondimage = data.data[i].options[3].image;
+          if (optiondimage.length > 0)
+            optiondimage = this.getimageurl(optiondimage);
+          //console.log('yes');
+          // temp[i].questionstring = data.data[i].question;
+          /*
+        temp[i].questionstring = data.data[i].question;
+        temp[i].questionimage = this.imagearraytostring(data.data[i].images);
+        temp[i].currectanswer = data.data[i].currectanswer;
+        
+
+        temp[i].optionastring = data.data[i].options[0].text;
+        temp[i].optionaimage = data.data[i].options[0].image;
+        if (temp[i].optionaimage.length > 0)
+          temp[i].optionaimage = this.getimageurl(temp[i].optionaimage);
+        temp[i].optionbstring = data.data[i].options[1].text;
+        temp[i].optionbimage = data.data[i].options[1].image;
+        if (temp[i].optionbimage.length > 0)
+          temp[i].optionbimage = this.getimageurl(temp[i].optionbimage);
+        temp[i].optioncstring = data.data[i].options[2].text;
+        temp[i].optioncimage = data.data[i].options[2].image;
+        if (temp[i].optioncimage.length > 0)
+          temp[i].optioncimage = this.getimageurl(temp[i].optioncimage);
+        temp[i].optiondstring = data.data[i].options[3].text;
+        temp[i].optiondimage = data.data[i].options[3].image;
+        if (temp[i].optiondimage.length > 0)
+          temp[i].optiondimage = this.getimageurl(temp[i].optiondimage);
+        c[i] = temp[i];
+        //console.log(questiondata);
+        //obj[i] = temp;
+        //obj.questions[i] = temp;
+        //console.log(obj[i]);
+        */
+          temp.push({
+            questionstring: data.data[i].questionText,
+            questionimage: this.imagearraytostring(data.data[i].images),
+            questiontype: this.questiontype(data.data[i].questionType),
+
+            optionastring: optionastring,
+
+            optionbstring: optionbstring,
+
+            optioncstring: optioncstring,
+
+            optiondstring: optiondstring,
+
+            optionaimage: optionaimage,
+            optionbimage: optionbimage,
+            optioncimage: optioncimage,
+            optiondimage: optiondimage,
+            currectanswer: currectanswer,
+            solutionstring: '',
+
+            solutionimage: '',
+          });
+        }
+
+        //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
+        //console.log(jsonObj);
+
+        //console.log(obj.questions);
+        //console.log(JSON.stringify(obj));
+
+        //console.log(data.questions);
+        //this.questionstring = data.questions[0].questionstring;
+
+        //console.log(obj.questions);
+        //console.log(cs);
+        phy = temp;
+        const data2 = {
+          topics: this.chemistrytopics,
+          number: this.returnnumberofquestions(this.timme),
+        };
+
+        this.http
+          .post(`${environment.backend}/test/createyourtestjeemains`, data2, {
+            headers,
+          })
+          .subscribe((data: any) => {
+            //console.log('datad');
+            console.log(data.data);
+            let temp: question[] = [];
+
+            for (let i = 0; i < data.data.length; i++) {
+              let currectanswer = data.data[i].correctAnswer;
+              //console.log(currectanswer);
+              //temp[i].questiontype = this.questiontype(data.data[i].type);
+              if (this.questiontype(data.data[i].questionType) == 2)
+                currectanswer = this.multiplecurrect(
+                  data.data[i].correctAnswers
+                );
+
+              let optionastring = data.data[i].options[0].text;
+              let optionaimage = data.data[i].options[0].image;
+              if (optionaimage.length > 0)
+                optionaimage = this.getimageurl(optionaimage);
+              let optionbstring = data.data[i].options[1].text;
+              let optionbimage = data.data[i].options[1].image;
+              if (optionbimage.length > 0)
+                optionbimage = this.getimageurl(optionbimage);
+              let optioncstring = data.data[i].options[2].text;
+              let optioncimage = data.data[i].options[2].image;
+              if (optioncimage.length > 0)
+                optioncimage = this.getimageurl(optioncimage);
+              let optiondstring = data.data[i].options[3].text;
+              let optiondimage = data.data[i].options[3].image;
+              if (optiondimage.length > 0)
+                optiondimage = this.getimageurl(optiondimage);
+              //console.log('yes');
+              // temp[i].questionstring = data.data[i].question;
+              /*
+            temp[i].questionstring = data.data[i].question;
+            temp[i].questionimage = this.imagearraytostring(data.data[i].images);
+            temp[i].currectanswer = data.data[i].currectanswer;
+            
+    
+            temp[i].optionastring = data.data[i].options[0].text;
+            temp[i].optionaimage = data.data[i].options[0].image;
+            if (temp[i].optionaimage.length > 0)
+              temp[i].optionaimage = this.getimageurl(temp[i].optionaimage);
+            temp[i].optionbstring = data.data[i].options[1].text;
+            temp[i].optionbimage = data.data[i].options[1].image;
+            if (temp[i].optionbimage.length > 0)
+              temp[i].optionbimage = this.getimageurl(temp[i].optionbimage);
+            temp[i].optioncstring = data.data[i].options[2].text;
+            temp[i].optioncimage = data.data[i].options[2].image;
+            if (temp[i].optioncimage.length > 0)
+              temp[i].optioncimage = this.getimageurl(temp[i].optioncimage);
+            temp[i].optiondstring = data.data[i].options[3].text;
+            temp[i].optiondimage = data.data[i].options[3].image;
+            if (temp[i].optiondimage.length > 0)
+              temp[i].optiondimage = this.getimageurl(temp[i].optiondimage);
+            c[i] = temp[i];
+            //console.log(questiondata);
+            //obj[i] = temp;
+            //obj.questions[i] = temp;
+            //console.log(obj[i]);
+            */
+              temp.push({
+                questionstring: data.data[i].questionText,
+                questionimage: this.imagearraytostring(data.data[i].images),
+                questiontype: this.questiontype(data.data[i].questionType),
+
+                optionastring: optionastring,
+
+                optionbstring: optionbstring,
+
+                optioncstring: optioncstring,
+
+                optiondstring: optiondstring,
+
+                optionaimage: optionaimage,
+                optionbimage: optionbimage,
+                optioncimage: optioncimage,
+                optiondimage: optiondimage,
+                currectanswer: currectanswer,
+                solutionstring: '',
+
+                solutionimage: '',
+              });
+            }
+
+            //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
+            //console.log(jsonObj);
+
+            //console.log(obj.questions);
+            //console.log(JSON.stringify(obj));
+
+            //console.log(data.questions);
+            //this.questionstring = data.questions[0].questionstring;
+
+            //console.log(obj.questions);
+            //console.log(cs);
+            che = temp;
+            const data3 = {
+              topics: this.mathtopics,
+              number: this.returnnumberofquestions(this.timme),
+            };
+
+            this.http
+              .post(
+                `${environment.backend}/test/createyourtestjeemains`,
+                data3,
+                {
+                  headers,
+                }
+              )
+              .subscribe((data: any) => {
+                //console.log('datad');
+                console.log(data.data);
+                let temp: question[] = [];
+
+                for (let i = 0; i < data.data.length; i++) {
+                  let currectanswer = data.data[i].correctAnswer;
+                  //console.log(currectanswer);
+                  //temp[i].questiontype = this.questiontype(data.data[i].type);
+                  if (this.questiontype(data.data[i].questionType) == 2)
+                    currectanswer = this.multiplecurrect(
+                      data.data[i].correctAnswers
+                    );
+
+                  let optionastring = data.data[i].options[0].text;
+                  let optionaimage = data.data[i].options[0].image;
+                  if (optionaimage.length > 0)
+                    optionaimage = this.getimageurl(optionaimage);
+                  let optionbstring = data.data[i].options[1].text;
+                  let optionbimage = data.data[i].options[1].image;
+                  if (optionbimage.length > 0)
+                    optionbimage = this.getimageurl(optionbimage);
+                  let optioncstring = data.data[i].options[2].text;
+                  let optioncimage = data.data[i].options[2].image;
+                  if (optioncimage.length > 0)
+                    optioncimage = this.getimageurl(optioncimage);
+                  let optiondstring = data.data[i].options[3].text;
+                  let optiondimage = data.data[i].options[3].image;
+                  if (optiondimage.length > 0)
+                    optiondimage = this.getimageurl(optiondimage);
+                  //console.log('yes');
+                  // temp[i].questionstring = data.data[i].question;
+                  /*
+                temp[i].questionstring = data.data[i].question;
+                temp[i].questionimage = this.imagearraytostring(data.data[i].images);
+                temp[i].currectanswer = data.data[i].currectanswer;
+                
+        
+                temp[i].optionastring = data.data[i].options[0].text;
+                temp[i].optionaimage = data.data[i].options[0].image;
+                if (temp[i].optionaimage.length > 0)
+                  temp[i].optionaimage = this.getimageurl(temp[i].optionaimage);
+                temp[i].optionbstring = data.data[i].options[1].text;
+                temp[i].optionbimage = data.data[i].options[1].image;
+                if (temp[i].optionbimage.length > 0)
+                  temp[i].optionbimage = this.getimageurl(temp[i].optionbimage);
+                temp[i].optioncstring = data.data[i].options[2].text;
+                temp[i].optioncimage = data.data[i].options[2].image;
+                if (temp[i].optioncimage.length > 0)
+                  temp[i].optioncimage = this.getimageurl(temp[i].optioncimage);
+                temp[i].optiondstring = data.data[i].options[3].text;
+                temp[i].optiondimage = data.data[i].options[3].image;
+                if (temp[i].optiondimage.length > 0)
+                  temp[i].optiondimage = this.getimageurl(temp[i].optiondimage);
+                c[i] = temp[i];
+                //console.log(questiondata);
+                //obj[i] = temp;
+                //obj.questions[i] = temp;
+                //console.log(obj[i]);
+                */
+                  temp.push({
+                    questionstring: data.data[i].questionText,
+                    questionimage: this.imagearraytostring(data.data[i].images),
+                    questiontype: this.questiontype(data.data[i].questionType),
+
+                    optionastring: optionastring,
+
+                    optionbstring: optionbstring,
+
+                    optioncstring: optioncstring,
+
+                    optiondstring: optiondstring,
+
+                    optionaimage: optionaimage,
+                    optionbimage: optionbimage,
+                    optioncimage: optioncimage,
+                    optiondimage: optiondimage,
+                    currectanswer: currectanswer,
+                    solutionstring: '',
+
+                    solutionimage: '',
+                  });
+                }
+
+                //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
+                //console.log(jsonObj);
+
+                //console.log(obj.questions);
+                //console.log(JSON.stringify(obj));
+
+                //console.log(data.questions);
+                //this.questionstring = data.questions[0].questionstring;
+
+                //console.log(obj.questions);
+                //console.log(cs);
+                mat = temp;
+                temp = mat.concat(che);
+                temp = temp.concat(phy);
+                obj.questions = temp;
+                let cs = JSON.stringify(obj);
+                this.paperservice.setpaper(cs);
+                this.loading = false;
+
+                this.router.navigate(['/questionviewer']);
+              });
+          });
+      });
+  }
+  createyourtestadvanced() {
     this.loading = true;
     const data = {
       topics: this.physicstopics,
@@ -700,7 +1042,15 @@ export class PagesComponent implements OnInit {
       //console.log(physicstopics);
       //console.log(mathtopics);
       //console.log(chemistrytopics);
-      this.createyourtest();
+      if (this.timme == '1') {
+        this.paperservice.time = 20 * 60;
+
+        console.log(this.timme);
+      }
+      if (this.timme == '2') this.paperservice.time = 1 * 60 * 60;
+      if (this.timme == '6') this.paperservice.time = 3 * 60 * 60;
+      if (this.diff == '2') this.createyourtestadvanced();
+      if (this.diff == '1') this.createyourtestmains();
     }
   }
   getHeader() {

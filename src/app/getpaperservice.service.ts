@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 })
 export class GetpaperserviceService {
   constructor(private router: Router) {}
+  time: number = 0;
   paperjson = JSON.parse('{"":""}');
   totalquestion = 0;
   right = 0;

@@ -17,6 +17,7 @@ export class QuestionviewerComponent implements OnInit {
     private http: HttpClient
   ) {}
   private apiUrl = 'http://localhost:8080';
+  starttime: number = this.paperservice.time;
   num: number = 0;
   coll: boolean = false;
   list: boolean = true;
@@ -69,6 +70,7 @@ export class QuestionviewerComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.starttime = this.paperservice.time;
     this.num = window.innerWidth;
 
     if (this.num < 900) {

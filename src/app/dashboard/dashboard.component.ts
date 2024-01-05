@@ -169,7 +169,8 @@ export class DashboardComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return headers;
   }
-  rankboosterpasttest(s: string) {
+  rankboosterpasttest(s: string, duration: string) {
+    let dr = Number(duration);
     this.loading = true;
     let obj = JSON.parse('{"questions":"[]"}');
     let c: Array<question> = new Array();
@@ -268,7 +269,7 @@ export class DashboardComponent implements OnInit {
       //console.log(cs);
       this.paperservice.setpaper(cs);
       this.loading = false;
-
+      this.paperservice.time = dr * 60;
       this.router.navigate(['/questionviewer']);
     });
   }

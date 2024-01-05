@@ -5,7 +5,6 @@ export const difficulty = [
 */
   { name: 'Jee-mains', id: 1 },
   { name: 'Jee-advance', id: 2 },
-  { name: 'Above jee-advance', id: 3 },
 ];
 export const time = [
   /*

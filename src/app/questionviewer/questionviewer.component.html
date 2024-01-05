@@ -13,7 +13,11 @@
 <div class="test">
   <div class="questionTag">
     Time Left
-    <cd-timer format="hms" [countdown]="true" [startTime]="10800"></cd-timer>
+    <cd-timer
+      format="hms"
+      [countdown]="true"
+      [startTime]="starttime"
+    ></cd-timer>
   </div>
   <div class="questionTag">Question {{ index + 1 }}</div>
   <div class="questionTag" *ngIf="numerical">Type Numerical</div>

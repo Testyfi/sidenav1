@@ -3,16 +3,19 @@ export const Physics = [
   {
     name: 'Fluid Mechanics',
     idNo: 1,
-    topic: ['fluid mechanics', 'Fluid Mechanics'],
+    topic: [
+      //'fluid mechanics',
+      'Fluid Mechanics',
+    ],
   },
   {
     name: 'Geometrical Optics',
     idNo: 2,
     topic: [
       'Geometrical optics',
-      'geometrical optics',
+      //'geometrical optics',
       'Geometrical Optics',
-      'geometrical optics',
+      //'geometrical optics',
     ],
   },
   {
