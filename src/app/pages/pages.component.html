@@ -18,8 +18,23 @@
           [(ngModel)]="diff"
           required="true"
         >
-          <mat-option *ngFor="let def of difficulty" [value]="def.name">
+          <mat-option *ngFor="let def of difficulty" [value]="def.id">
             {{ def.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <form>
+      <mat-form-field style="float: right">
+        <mat-label>Time</mat-label>
+        <mat-select
+          #tim="ngModel"
+          name="time"
+          [(ngModel)]="timme"
+          required="true"
+        >
+          <mat-option *ngFor="let t of time" [value]="t.id">
+            {{ t.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>

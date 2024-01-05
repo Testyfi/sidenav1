@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { CdTimerModule } from 'angular-cd-timer';
 import { TimeInterface } from 'angular-cd-timer';
 import { DatePipe } from '@angular/common';
+import { StatisticsService } from '../statistics.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -20,7 +21,8 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     public paperservice: GetpaperserviceService,
     private http: HttpClient,
-    private rankbooster: RankboostertestService //private datepipe: DatePipe
+    private rankbooster: RankboostertestService, //private datepipe: DatePipe,
+    private statisticsservice: StatisticsService
   ) {}
   //private apiUrl = 'http://localhost:8080/rankbooster/pasttest';
   private apiUrl = `${environment.backend}/rankbooster/pasttest`;
@@ -88,6 +90,7 @@ export class DashboardComponent implements OnInit {
     }
     */
     //console.log();
+    this.statisticsservice.statistics();
   }
   getalltest() {
     this.loading = true;
@@ -98,13 +101,24 @@ export class DashboardComponent implements OnInit {
       .post(`${environment.backend}/admins/testinfo`, body, {
         headers,
       })
-      .subscribe((data: any) => {
-        for (let i = 0; i < data.data.length; i++) {
-          this.Test.push(data.data[i]);
+      .subscribe(
+        (data: any) => {
+          for (let i = 0; i < data.data.length; i++) {
+            this.Test.push(data.data[i]);
+          }
+          this.sorttest();
+          this.loading = false;
+        },
+        (error) => {
+          console.log(error);
+          alert(
+            'Your Token is expire or Login in different Device.Please logout and Relogin'
+          );
+          this.loading = false;
+
+          //this.router.navigate(['/user-login']);
         }
-        this.sorttest();
-        this.loading = false;
-      });
+      );
   }
   sorttest() {
     this.date = new Date();
