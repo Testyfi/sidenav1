@@ -1045,7 +1045,7 @@ export class PagesComponent implements OnInit {
       if (this.timme == '1') {
         this.paperservice.time = 20 * 60;
 
-        console.log(this.timme);
+        //console.log(this.timme);
       }
       if (this.timme == '2') this.paperservice.time = 1 * 60 * 60;
       if (this.timme == '6') this.paperservice.time = 3 * 60 * 60;
