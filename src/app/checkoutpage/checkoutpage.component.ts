@@ -34,10 +34,10 @@ export class CheckoutpageComponent implements OnInit {
     var token: any = this.profile.getprofile()().token;
     //let value = await Promise;
 
-    this.payment.makePaymentRequest(amount, token).subscribe((data) => {
+    this.payment.makePaymentRequest(1, token).subscribe((data) => {
       //window.location.href = data.data.payment_url;
       window.open(data.data.payment_url);
-      console.log(data.data.payment_url);
+      console.log(data.data);
       //window.open(data.data.payment_url);
       //this.pay.success = data.success;
       //this.pay.code = data.code;

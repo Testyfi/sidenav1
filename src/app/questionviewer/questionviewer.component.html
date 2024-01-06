@@ -17,6 +17,7 @@
       format="hms"
       [countdown]="true"
       [startTime]="starttime"
+      (onComplete)="submit()"
     ></cd-timer>
   </div>
   <div class="questionTag">Question {{ index + 1 }}</div>
