@@ -119,6 +119,7 @@ export class PagesComponent implements OnInit {
     let phy: question[] = [];
     let mat: question[] = [];
     let che: question[] = [];
+    let qid: string[] = [];
     //console.log(s);
     this.http
       .post(`${environment.backend}/test/createyourtestjeemains`, data, {
@@ -204,6 +205,7 @@ export class PagesComponent implements OnInit {
 
             solutionimage: '',
           });
+          qid.push(data.data[i].qid);
         }
 
         //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
@@ -309,6 +311,7 @@ export class PagesComponent implements OnInit {
 
                 solutionimage: '',
               });
+              qid.push(data.data[i].qid);
             }
 
             //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
@@ -418,6 +421,7 @@ export class PagesComponent implements OnInit {
 
                     solutionimage: '',
                   });
+                  qid.push(data.data[i].qid);
                 }
 
                 //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
@@ -434,15 +438,38 @@ export class PagesComponent implements OnInit {
                 mat = temp;
                 temp = mat.concat(che);
                 temp = temp.concat(phy);
+
                 obj.questions = temp;
                 let cs = JSON.stringify(obj);
                 this.paperservice.setpaper(cs);
                 this.loading = false;
+                const data4 = {
+                  difficulty: 'Jee Mains',
+                  duration: this.returntime(this.timme),
+                  questionid: qid,
+                };
+                this.http
+                  .post(
+                    `${environment.backend}/test/createyourtestdatabase`,
+                    data4,
+                    {
+                      headers,
+                    }
+                  )
+                  .subscribe((data: any) => {
+                    console.log(data.data);
+                  });
 
                 this.router.navigate(['/questionviewer']);
               });
           });
       });
+  }
+
+  returntime(id: string): string {
+    if (id == '1') return '20 Minutes';
+    if (id == '2') return '60 Minutes';
+    return '180 Minutes';
   }
   createyourtestadvanced() {
     this.loading = true;
@@ -456,6 +483,7 @@ export class PagesComponent implements OnInit {
     let phy: question[] = [];
     let mat: question[] = [];
     let che: question[] = [];
+    let qid: string[] = [];
     //console.log(s);
     this.http
       .post(`${environment.backend}/test/createyourtest`, data, {
@@ -541,6 +569,7 @@ export class PagesComponent implements OnInit {
 
             solutionimage: '',
           });
+          qid.push(data.data[i].qid);
         }
 
         //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
@@ -646,6 +675,7 @@ export class PagesComponent implements OnInit {
 
                 solutionimage: '',
               });
+              qid.push(data.data[i].qid);
             }
 
             //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
@@ -751,6 +781,7 @@ export class PagesComponent implements OnInit {
 
                     solutionimage: '',
                   });
+                  qid.push(data.data[i].qid);
                 }
 
                 //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
@@ -771,6 +802,22 @@ export class PagesComponent implements OnInit {
                 let cs = JSON.stringify(obj);
                 this.paperservice.setpaper(cs);
                 this.loading = false;
+                const data4 = {
+                  difficulty: 'Jee Advanced',
+                  duration: this.returntime(this.timme),
+                  questionid: qid,
+                };
+                this.http
+                  .post(
+                    `${environment.backend}/test/createyourtestdatabase`,
+                    data4,
+                    {
+                      headers,
+                    }
+                  )
+                  .subscribe((data: any) => {
+                    console.log(data.data);
+                  });
 
                 this.router.navigate(['/questionviewer']);
               });

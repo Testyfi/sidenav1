@@ -53,6 +53,7 @@ import { MathjaxModule } from 'mathjax-angular';
 import { ResultComponent } from './result/result.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { LivetestComponent } from './livetest/livetest.component';
+import { AllcreatedtestComponent } from './allcreatedtest/allcreatedtest.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +75,7 @@ import { LivetestComponent } from './livetest/livetest.component';
     ResultComponent,
     AnalysisComponent,
     LivetestComponent,
+    AllcreatedtestComponent,
   ],
   imports: [
     BrowserModule,

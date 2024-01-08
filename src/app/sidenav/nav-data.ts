@@ -21,11 +21,18 @@ export const navbarData = [
     icon: 'fas fa-brain',
     Label: 'Create Your Test',
   },
+
+  {
+    routeLink: 'allcreatedtest',
+    icon: 'fas fa-edit',
+    Label: 'allcreatedtest',
+  },
   {
     routeLink: 'media',
     icon: 'fal fa-camera',
     Label: 'Media',
   },
+
   /*
                                             {
                                                 routeLink: 'coupens',
