@@ -31,7 +31,7 @@ export class AllcreatedtestComponent implements OnInit {
         headers,
       })
       .subscribe((data: any) => {
-        console.log(data.data);
+        //console.log(data.data);
         for (let i = 0; i < data.data.length; i++) {
           let x: QP = {
             Name: '',
@@ -72,7 +72,7 @@ export class AllcreatedtestComponent implements OnInit {
         headers,
       })
       .subscribe((data: any) => {
-        console.log(data);
+        //console.log(data);
         //console.log('datad');
         //console.log(data.data);
         let temp: question[] = [];

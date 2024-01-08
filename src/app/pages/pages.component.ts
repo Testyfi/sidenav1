@@ -127,7 +127,7 @@ export class PagesComponent implements OnInit {
       })
       .subscribe((data: any) => {
         //console.log('datad');
-        console.log(data.data);
+        //console.log(data.data);
         let temp: question[] = [];
 
         for (let i = 0; i < data.data.length; i++) {
@@ -341,7 +341,7 @@ export class PagesComponent implements OnInit {
               )
               .subscribe((data: any) => {
                 //console.log('datad');
-                console.log(data.data);
+                //console.log(data.data);
                 let temp: question[] = [];
 
                 for (let i = 0; i < data.data.length; i++) {
@@ -457,7 +457,7 @@ export class PagesComponent implements OnInit {
                     }
                   )
                   .subscribe((data: any) => {
-                    console.log(data.data);
+                    //console.log(data.data);
                   });
 
                 this.router.navigate(['/questionviewer']);
@@ -491,7 +491,7 @@ export class PagesComponent implements OnInit {
       })
       .subscribe((data: any) => {
         //console.log('datad');
-        console.log(data.data);
+        //console.log(data.data);
         let temp: question[] = [];
 
         for (let i = 0; i < data.data.length; i++) {
