@@ -182,6 +182,10 @@
 }
 
 .overlay-user {
+  position: fixed;
+  //margin-right: 5rem;
+  //width: 7rem;
+  width: 8rem;
   ul {
     padding: 0.5rem 0;
     list-style: none;

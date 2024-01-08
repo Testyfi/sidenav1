@@ -31,6 +31,7 @@ export class AllcreatedtestComponent implements OnInit {
         headers,
       })
       .subscribe((data: any) => {
+        this.loading = false;
         //console.log(data.data);
         for (let i = 0; i < data.data.length; i++) {
           let x: QP = {
@@ -48,7 +49,6 @@ export class AllcreatedtestComponent implements OnInit {
           x.Qs = data.data[i].questions;
           this.qp.push(x);
         }
-        this.loading = false;
       });
   }
   returnminutes(str: string): number {
