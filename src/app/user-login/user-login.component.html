@@ -119,19 +119,6 @@
         <div *ngIf="signupPhone.invalid && signupPhone.touched" class="error">
           Please enter a valid 10-digit phone number.
         </div>
-        <input
-          disabled="{{ verification }}"
-          #signupEmail="ngModel"
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="email"
-          placeholder="Email"
-          required
-        />
-        <div *ngIf="signupEmail.invalid && signupEmail.touched" class="error">
-          Please enter a valid email.
-        </div>
 
         <input
           disabled="{{ verification }}"
@@ -148,16 +135,6 @@
           Password must be at least 6 characters long.
         </div>
         <input
-          disabled="{{ verification }}"
-          #signupRefferalCode="ngModel"
-          type="text"
-          id="refferalcode"
-          name="refferalcode"
-          [(ngModel)]="refferal_code"
-          placeholder="Refferal code"
-          value=""
-        />
-        <input
           *ngIf="verification"
           #signupMobileOtp="ngModel"
           type="text"
@@ -165,16 +142,6 @@
           name="mobileotp"
           [(ngModel)]="mobileotp"
           placeholder="Mobile OTP"
-          value=""
-        />
-        <input
-          *ngIf="verification"
-          #signupEmailOtp="ngModel"
-          type="text"
-          id="emailotp"
-          name="emailotp"
-          [(ngModel)]="emailotp"
-          placeholder="Email OTP"
           value=""
         />
 
@@ -194,17 +161,18 @@
         <label for="chk" aria-hidden="true">Login</label>
 
         <input
-          #loginEmail="ngModel"
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="loginemail"
-          placeholder="Email"
+          disabled="{{ verification }}"
+          #loginPhone="ngModel"
+          type="tel"
+          id="phone"
+          name="phone"
+          [(ngModel)]="loginphone"
+          pattern="[0-9]{10}"
           required
-          email
+          placeholder="Phone"
         />
-        <div *ngIf="loginEmail.invalid && loginEmail.touched" class="error">
-          Please enter a valid email.
+        <div *ngIf="loginPhone.invalid && loginPhone.touched" class="error">
+          Please enter a valid 10-digit phone number.
         </div>
         <input
           #loginPass="ngModel"
@@ -223,17 +191,16 @@
       <form (ngSubmit)="forgotpassword()" #forgetForm="ngForm" *ngIf="forget">
         <label for="chk" aria-hidden="true">Forgot Password</label>
         <input
-          #forgetEmail="ngModel"
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="forgetemail"
-          placeholder="Email"
+          #forgetPhone="ngModel"
+          id="phone"
+          name="phone"
+          [(ngModel)]="forgetphone"
+          pattern="[0-9]{10}"
           required
-          email
+          placeholder="Phone"
         />
-        <div *ngIf="forgetEmail.invalid && forgetEmail.touched" class="error">
-          Please enter a valid email.
+        <div *ngIf="forgetPhone.invalid && forgetPhone.touched" class="error">
+          Please enter a valid 10-digit phone number.
         </div>
 
         <button type="submit" [disabled]="forgetForm.invalid">Submit</button>

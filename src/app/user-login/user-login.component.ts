@@ -22,7 +22,9 @@ export class UserLoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   loginemail: string = '';
+  loginphone: string = '';
   forgetemail: string = '';
+  forgetphone: string = '';
   loginpass: string = '';
   chk: boolean = false;
   loading: boolean = false;
@@ -61,30 +63,32 @@ export class UserLoginComponent implements OnInit {
     }
   }
   userverification() {
-    this.loading = true;
-    const signupData = {
-      first_name: this.firstName,
-      // last_name: this.lastName,
-      phone: this.phone,
-      email: this.email,
-      // password: this.password,
-      // referral_code: this.refferal_code,
-    };
-    //console.log(signupData);
-    this.http.post(`${environment.backend}/usersignup`, signupData).subscribe(
-      (response) => {
-        this.loading = false;
-        alert(' Please Verify Your Mobile & Email.');
-        // this.chk = false;
-        this.verification = true;
-      },
-      (error) => {
-        this.loading = false;
-        alert(error.error);
-        console.log(error.error);
-        this.chk = false;
-      }
-    );
+    if (!this.verification) {
+      this.loading = true;
+      const signupData = {
+        first_name: this.firstName,
+        // last_name: this.lastName,
+        phone: this.phone,
+        email: this.email,
+        // password: this.password,
+        // referral_code: this.refferal_code,
+      };
+      //console.log(signupData);
+      this.http.post(`${environment.backend}/usersignup`, signupData).subscribe(
+        (response) => {
+          this.loading = false;
+          alert(' Please Verify Your Mobile & Email');
+          // this.chk = false;
+          this.verification = true;
+        },
+        (error) => {
+          this.loading = false;
+          alert(error.error);
+          console.log(error.error);
+          this.chk = false;
+        }
+      );
+    }
   }
   signup() {
     this.loading = true;
@@ -102,8 +106,11 @@ export class UserLoginComponent implements OnInit {
     this.http.post(`${environment.backend}/userverify`, signupData).subscribe(
       (response) => {
         this.loading = false;
-        alert('Signup successful. Please Login now.');
+        //alert('Signup successful. Please Login now.');
         this.chk = false;
+        this.loginphone = this.phone;
+        this.loginpass = this.password;
+        this.login();
       },
       (error) => {
         this.loading = false;
@@ -115,7 +122,7 @@ export class UserLoginComponent implements OnInit {
   login() {
     this.loading = true;
     const loginData = {
-      email: this.loginemail,
+      phone: this.loginphone,
       password: this.loginpass,
     };
     //console.log(loginData);
@@ -170,7 +177,7 @@ export class UserLoginComponent implements OnInit {
   forgotpassword() {
     this.loading = true;
     const data = {
-      email: this.forgetemail,
+      phone: this.forgetphone,
     };
     this.http.post<{}>(`${environment.backend}/forgotpass`, data).subscribe(
       (response: any) => {
