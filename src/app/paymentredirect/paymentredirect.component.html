@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-head">Complete Your Order</div>
+
+  <div class="card-body">Plan: {{ paymentname }}</div>
+  <div class="card-body">
+    Amount: <i class="icon" [ngClass]="'fa fa-inr'"></i> {{ paymentamount }}
+  </div>
+  <div class="card-body">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="makepayrequest(paymentamount)"
+    >
+      Pay {{ paymentamount }}& subscribe
+    </button>
+  </div>
+</div>
+<div class="card">
+  <div class="card-head">Non-Returnable Amounts:</div>
+
+  <div class="card-body">
+    Testtify deals with non-returnable amounts for products/services, and once a
+    purchase is made, the amount is considered final and non-refundable.
+  </div>
+</div>

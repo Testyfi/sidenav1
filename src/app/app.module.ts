@@ -54,6 +54,7 @@ import { ResultComponent } from './result/result.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { LivetestComponent } from './livetest/livetest.component';
 import { AllcreatedtestComponent } from './allcreatedtest/allcreatedtest.component';
+import { PaymentredirectComponent } from './paymentredirect/paymentredirect.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +77,7 @@ import { AllcreatedtestComponent } from './allcreatedtest/allcreatedtest.compone
     AnalysisComponent,
     LivetestComponent,
     AllcreatedtestComponent,
+    PaymentredirectComponent,
   ],
   imports: [
     BrowserModule,

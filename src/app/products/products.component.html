@@ -1,5 +1,5 @@
-<div class="courseheading">Choose Your Plan</div>
-<div id="displaycourses" (resized)="onResized($event)">
+<div class="courseheading" *ngIf="view">Choose Your Plan</div>
+<div id="displaycourses" (resized)="onResized($event)" *ngIf="view">
   <div class="card" *ngFor="let course of combo">
     <div class="card-head">{{ course.name }}</div>
     <div class="card-body">
@@ -21,7 +21,9 @@
     </div>
   </div>
 </div>
-
+<div *ngIf="!view">
+  You Choose {{ planstr }} plan valid up to {{ expirydate }}
+</div>
 <div *ngIf="loading" class="spinner-overlay">
   <!--<mat-spinner></mat-spinner>-->
   <div class="spinner"></div>

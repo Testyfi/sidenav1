@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { CheckoutpagedataService } from '../checkoutpagedata.service';
+import { Time } from '@angular/common';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -24,7 +25,10 @@ export class ProductsComponent implements OnInit {
   courses = courses;
   num: number = 0;
   combo = combo;
-
+  view = false;
+  loading = false;
+  planstr = '';
+  expirydate: any;
   onResized(event: ResizedEvent) {
     this.num = event.newRect.width;
     // console.log(this.num);
@@ -41,6 +45,8 @@ export class ProductsComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.loading = true;
+    this.sendrequest();
     this.num = window.innerWidth;
 
     if (this.num < 550) {
@@ -55,8 +61,38 @@ export class ProductsComponent implements OnInit {
       e.style.display = 'flex';
     }
   }
+  sendrequest() {
+    const body = {};
+    //console.log('i am in');
+    this.http
+      .post<any>(`${environment.backend}/payment/getuserpaymentdetails`, body, {
+        headers: this.getHeader(),
+      })
+      .subscribe(
+        (data) => {
+          console.log(data.data);
+          this.loading = false;
+          if (data.data.success) {
+            console.log('success');
+            if (data.data.purchaseplan == 0) {
+              this.planstr = 'Pro Monthly';
+            } else {
+              this.planstr = 'Pro Annually';
+            }
+            this.expirydate = data.data.expiry;
+          } else {
+            this.view = !this.view;
+          }
+          //localStorage.setItem('token', JSON.stringify(response));
+        },
+        (error) => {
+          this.loading = false;
+          console.log(error);
+          alert(error.error);
+        }
+      );
+  }
   createtest = this.profile.getprofile()().purchased;
-  loading = false;
 
   buy(id: string) {
     if (id == '1') {

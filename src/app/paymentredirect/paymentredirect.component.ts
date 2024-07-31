@@ -2,20 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { CheckoutpagedataService } from '../checkoutpagedata.service';
 import { PaymentService } from '../payment.service';
 import { ProfilepictureupdateService } from '../profilepictureupdate.service';
-import { Router } from '@angular/router';
 @Component({
-  selector: 'app-checkoutpage',
-  templateUrl: './checkoutpage.component.html',
-  styleUrls: ['./checkoutpage.component.scss'],
+  selector: 'app-paymentredirect',
+  templateUrl: './paymentredirect.component.html',
+  styleUrls: ['./paymentredirect.component.scss'],
 })
-export class CheckoutpageComponent implements OnInit {
+export class PaymentredirectComponent implements OnInit {
   constructor(
     private checkoutdata: CheckoutpagedataService,
     private payment: PaymentService,
-    public profile: ProfilepictureupdateService,
-    private router: Router
+    public profile: ProfilepictureupdateService
   ) {}
-
   paymentname: string = '';
   paymentamount: number = 0;
   ngOnInit(): void {
@@ -24,7 +21,7 @@ export class CheckoutpageComponent implements OnInit {
   }
 
   makepayrequest(amount: number) {
-    //console.log('click');
+    console.log('click');
     /*
     var pay: Paymentresponse = {
       success: false,
@@ -38,10 +35,9 @@ export class CheckoutpageComponent implements OnInit {
     //let value = await Promise;
 
     this.payment.makePaymentRequest(1, token).subscribe((data) => {
-      this.router.navigate(['/paymentredirect']);
       //window.location.href = data.data.payment_url;
-      //window.open(data.data.payment_url);
-      //console.log(data.data);
+      window.open(data.data.payment_url);
+      console.log(data.data);
       //window.open(data.data.payment_url);
       //this.pay.success = data.success;
       //this.pay.code = data.code;
