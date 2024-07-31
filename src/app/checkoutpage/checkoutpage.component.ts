@@ -38,8 +38,8 @@ export class CheckoutpageComponent implements OnInit {
     //let value = await Promise;
 
     this.payment.makePaymentRequest(1, token).subscribe((data) => {
-      this.router.navigate(['/paymentredirect']);
-      //window.location.href = data.data.payment_url;
+      //this.router.navigate(['/paymentredirect']);
+      window.location.href = data.data.payment_url;
       //window.open(data.data.payment_url);
       //console.log(data.data);
       //window.open(data.data.payment_url);
