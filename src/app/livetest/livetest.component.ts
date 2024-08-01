@@ -120,7 +120,11 @@ export class LivetestComponent implements AfterViewInit {
     // this.getquestionfrombackend();
     this.findquestionindex();
     this.loading = true;
-    this.getquestionfrombackend();
+    if (this.checklimit()) {
+      this.getquestionfrombackend();
+    } else {
+      this.router.navigate(['/dashboard']);
+    }
   }
   ontimeend() {
     this.findquestionindex();
@@ -285,6 +289,28 @@ export class LivetestComponent implements AfterViewInit {
         this.totalstudents(this.rnkbo.livetestname);
         this.getrank(this.rnkbo.livetestname);
       });
+  }
+  checklimit(): boolean {
+    const body = {};
+    //console.log('i am in');
+    this.http
+      .post<any>(`${environment.backend}/rankbooster/limit`, body, {
+        headers: this.getHeader(),
+      })
+      .subscribe(
+        (data) => {
+          console.log(data.data);
+          this.loading = false;
+          return true;
+          //localStorage.setItem('token', JSON.stringify(response));
+        },
+        (error) => {
+          this.loading = false;
+          console.log(error);
+          alert(error.error);
+        }
+      );
+    return false;
   }
   returnanswer(): string {
     var s = '';
