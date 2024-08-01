@@ -5,9 +5,9 @@ export const combo = [
     rate: 0,
     id: 1,
     points: [
-      '5 Create your test', // just choose your topic and difficulty',
+      '3 Create your test', // just choose your topic and difficulty',
       // 'Regular tests with students from all over India to analyze your performance and may win the exciting rewards',
-      '5 RankBooster Test',
+      '3 RankBooster Test',
       'No Doubt Chat Facility',
     ],
     st: 'Month',
