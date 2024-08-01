@@ -15,7 +15,7 @@ export const combo = [
   {
     name: 'Pro Monthly',
     image: '/assets/createyourtest.png',
-    rate: 299,
+    rate: 199,
     id: 2,
     points: [
       'Unlimited Create your test', // just choose your topic and difficulty',
@@ -28,7 +28,7 @@ export const combo = [
   {
     name: 'Pro Annual',
     image: '/assets/createyourtest.png',
-    rate: 2499,
+    rate: 1999,
     id: 3,
     points: [
       'Unlimited Create your test', // just choose your topic and difficulty',
