@@ -175,36 +175,37 @@ export class DashboardComponent implements OnInit {
     let obj = JSON.parse('{"questions":"[]"}');
     let c: Array<question> = new Array();
     //console.log(s);
-    this.rankbooster.getpasttest(s).subscribe((data) => {
-      //console.log('datad');
-      //console.log(data.data);
-      let temp: question[] = [];
+    this.rankbooster.getpasttest(s).subscribe(
+      (data) => {
+        //console.log('datad');
+        //console.log(data.data);
+        let temp: question[] = [];
 
-      for (let i = 0; i < data.data.length; i++) {
-        let currectanswer = data.data[i].correctanswer;
-        //temp[i].questiontype = this.questiontype(data.data[i].type);
-        if (this.questiontype(data.data[i].type) == 2)
-          currectanswer = this.multiplecurrect(data.data[i].correctanswers);
+        for (let i = 0; i < data.data.length; i++) {
+          let currectanswer = data.data[i].correctanswer;
+          //temp[i].questiontype = this.questiontype(data.data[i].type);
+          if (this.questiontype(data.data[i].type) == 2)
+            currectanswer = this.multiplecurrect(data.data[i].correctanswers);
 
-        let optionastring = data.data[i].options[0].text;
-        let optionaimage = data.data[i].options[0].image;
-        if (optionaimage.length > 0)
-          optionaimage = this.getimageurl(optionaimage);
-        let optionbstring = data.data[i].options[1].text;
-        let optionbimage = data.data[i].options[1].image;
-        if (optionbimage.length > 0)
-          optionbimage = this.getimageurl(optionbimage);
-        let optioncstring = data.data[i].options[2].text;
-        let optioncimage = data.data[i].options[2].image;
-        if (optioncimage.length > 0)
-          optioncimage = this.getimageurl(optioncimage);
-        let optiondstring = data.data[i].options[3].text;
-        let optiondimage = data.data[i].options[3].image;
-        if (optiondimage.length > 0)
-          optiondimage = this.getimageurl(optiondimage);
-        //console.log('yes');
-        // temp[i].questionstring = data.data[i].question;
-        /*
+          let optionastring = data.data[i].options[0].text;
+          let optionaimage = data.data[i].options[0].image;
+          if (optionaimage.length > 0)
+            optionaimage = this.getimageurl(optionaimage);
+          let optionbstring = data.data[i].options[1].text;
+          let optionbimage = data.data[i].options[1].image;
+          if (optionbimage.length > 0)
+            optionbimage = this.getimageurl(optionbimage);
+          let optioncstring = data.data[i].options[2].text;
+          let optioncimage = data.data[i].options[2].image;
+          if (optioncimage.length > 0)
+            optioncimage = this.getimageurl(optioncimage);
+          let optiondstring = data.data[i].options[3].text;
+          let optiondimage = data.data[i].options[3].image;
+          if (optiondimage.length > 0)
+            optiondimage = this.getimageurl(optiondimage);
+          //console.log('yes');
+          // temp[i].questionstring = data.data[i].question;
+          /*
         temp[i].questionstring = data.data[i].question;
         temp[i].questionimage = this.imagearraytostring(data.data[i].images);
         temp[i].currectanswer = data.data[i].currectanswer;
@@ -232,46 +233,52 @@ export class DashboardComponent implements OnInit {
         //obj.questions[i] = temp;
         //console.log(obj[i]);
         */
-        temp.push({
-          questionstring: data.data[i].question,
-          questionimage: this.imagearraytostring(data.data[i].images),
-          questiontype: this.questiontype(data.data[i].type),
+          temp.push({
+            questionstring: data.data[i].question,
+            questionimage: this.imagearraytostring(data.data[i].images),
+            questiontype: this.questiontype(data.data[i].type),
 
-          optionastring: optionastring,
+            optionastring: optionastring,
 
-          optionbstring: optionbstring,
+            optionbstring: optionbstring,
 
-          optioncstring: optioncstring,
+            optioncstring: optioncstring,
 
-          optiondstring: optiondstring,
+            optiondstring: optiondstring,
 
-          optionaimage: optionaimage,
-          optionbimage: optionbimage,
-          optioncimage: optioncimage,
-          optiondimage: optiondimage,
-          currectanswer: currectanswer,
-          solutionstring: '',
+            optionaimage: optionaimage,
+            optionbimage: optionbimage,
+            optioncimage: optioncimage,
+            optiondimage: optiondimage,
+            currectanswer: currectanswer,
+            solutionstring: '',
 
-          solutionimage: '',
-        });
+            solutionimage: '',
+          });
+        }
+
+        //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
+        //console.log(jsonObj);
+        obj.questions = temp;
+        //console.log(obj.questions);
+        //console.log(JSON.stringify(obj));
+
+        //console.log(data.questions);
+        //this.questionstring = data.questions[0].questionstring;
+        let cs = JSON.stringify(obj);
+        //console.log(obj.questions);
+        //console.log(cs);
+        this.paperservice.setpaper(cs);
+        this.loading = false;
+        this.paperservice.time = dr * 60;
+        this.router.navigate(['/questionviewer']);
+      },
+      (error) => {
+        this.loading = false;
+        console.log(error);
+        alert(error.error.message);
       }
-
-      //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
-      //console.log(jsonObj);
-      obj.questions = temp;
-      //console.log(obj.questions);
-      //console.log(JSON.stringify(obj));
-
-      //console.log(data.questions);
-      //this.questionstring = data.questions[0].questionstring;
-      let cs = JSON.stringify(obj);
-      //console.log(obj.questions);
-      //console.log(cs);
-      this.paperservice.setpaper(cs);
-      this.loading = false;
-      this.paperservice.time = dr * 60;
-      this.router.navigate(['/questionviewer']);
-    });
+    );
   }
   incrementuser(testname: string) {
     const body = {

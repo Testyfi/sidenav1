@@ -125,37 +125,38 @@ export class PagesComponent implements OnInit {
       .post(`${environment.backend}/test/createyourtestjeemains`, data, {
         headers,
       })
-      .subscribe((data: any) => {
-        //console.log('datad');
-        //console.log(data.data);
-        let temp: question[] = [];
+      .subscribe(
+        (data: any) => {
+          //console.log('datad');
+          //console.log(data.data);
+          let temp: question[] = [];
 
-        for (let i = 0; i < data.data.length; i++) {
-          let currectanswer = data.data[i].correctAnswer;
-          //console.log(currectanswer);
-          //temp[i].questiontype = this.questiontype(data.data[i].type);
-          if (this.questiontype(data.data[i].questionType) == 2)
-            currectanswer = this.multiplecurrect(data.data[i].correctAnswers);
+          for (let i = 0; i < data.data.length; i++) {
+            let currectanswer = data.data[i].correctAnswer;
+            //console.log(currectanswer);
+            //temp[i].questiontype = this.questiontype(data.data[i].type);
+            if (this.questiontype(data.data[i].questionType) == 2)
+              currectanswer = this.multiplecurrect(data.data[i].correctAnswers);
 
-          let optionastring = data.data[i].options[0].text;
-          let optionaimage = data.data[i].options[0].image;
-          if (optionaimage.length > 0)
-            optionaimage = this.getimageurl(optionaimage);
-          let optionbstring = data.data[i].options[1].text;
-          let optionbimage = data.data[i].options[1].image;
-          if (optionbimage.length > 0)
-            optionbimage = this.getimageurl(optionbimage);
-          let optioncstring = data.data[i].options[2].text;
-          let optioncimage = data.data[i].options[2].image;
-          if (optioncimage.length > 0)
-            optioncimage = this.getimageurl(optioncimage);
-          let optiondstring = data.data[i].options[3].text;
-          let optiondimage = data.data[i].options[3].image;
-          if (optiondimage.length > 0)
-            optiondimage = this.getimageurl(optiondimage);
-          //console.log('yes');
-          // temp[i].questionstring = data.data[i].question;
-          /*
+            let optionastring = data.data[i].options[0].text;
+            let optionaimage = data.data[i].options[0].image;
+            if (optionaimage.length > 0)
+              optionaimage = this.getimageurl(optionaimage);
+            let optionbstring = data.data[i].options[1].text;
+            let optionbimage = data.data[i].options[1].image;
+            if (optionbimage.length > 0)
+              optionbimage = this.getimageurl(optionbimage);
+            let optioncstring = data.data[i].options[2].text;
+            let optioncimage = data.data[i].options[2].image;
+            if (optioncimage.length > 0)
+              optioncimage = this.getimageurl(optioncimage);
+            let optiondstring = data.data[i].options[3].text;
+            let optiondimage = data.data[i].options[3].image;
+            if (optiondimage.length > 0)
+              optiondimage = this.getimageurl(optiondimage);
+            //console.log('yes');
+            // temp[i].questionstring = data.data[i].question;
+            /*
         temp[i].questionstring = data.data[i].question;
         temp[i].questionimage = this.imagearraytostring(data.data[i].images);
         temp[i].currectanswer = data.data[i].currectanswer;
@@ -183,85 +184,85 @@ export class PagesComponent implements OnInit {
         //obj.questions[i] = temp;
         //console.log(obj[i]);
         */
-          temp.push({
-            questionstring: data.data[i].questionText,
-            questionimage: this.imagearraytostring(data.data[i].images),
-            questiontype: this.questiontype(data.data[i].questionType),
+            temp.push({
+              questionstring: data.data[i].questionText,
+              questionimage: this.imagearraytostring(data.data[i].images),
+              questiontype: this.questiontype(data.data[i].questionType),
 
-            optionastring: optionastring,
+              optionastring: optionastring,
 
-            optionbstring: optionbstring,
+              optionbstring: optionbstring,
 
-            optioncstring: optioncstring,
+              optioncstring: optioncstring,
 
-            optiondstring: optiondstring,
+              optiondstring: optiondstring,
 
-            optionaimage: optionaimage,
-            optionbimage: optionbimage,
-            optioncimage: optioncimage,
-            optiondimage: optiondimage,
-            currectanswer: currectanswer,
-            solutionstring: '',
+              optionaimage: optionaimage,
+              optionbimage: optionbimage,
+              optioncimage: optioncimage,
+              optiondimage: optiondimage,
+              currectanswer: currectanswer,
+              solutionstring: '',
 
-            solutionimage: '',
-          });
-          qid.push(data.data[i].qid);
-        }
+              solutionimage: '',
+            });
+            qid.push(data.data[i].qid);
+          }
 
-        //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
-        //console.log(jsonObj);
+          //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
+          //console.log(jsonObj);
 
-        //console.log(obj.questions);
-        //console.log(JSON.stringify(obj));
+          //console.log(obj.questions);
+          //console.log(JSON.stringify(obj));
 
-        //console.log(data.questions);
-        //this.questionstring = data.questions[0].questionstring;
+          //console.log(data.questions);
+          //this.questionstring = data.questions[0].questionstring;
 
-        //console.log(obj.questions);
-        //console.log(cs);
-        phy = temp;
-        const data2 = {
-          topics: this.chemistrytopics,
-          number: this.returnnumberofquestions(this.timme),
-        };
+          //console.log(obj.questions);
+          //console.log(cs);
+          phy = temp;
+          const data2 = {
+            topics: this.chemistrytopics,
+            number: this.returnnumberofquestions(this.timme),
+          };
 
-        this.http
-          .post(`${environment.backend}/test/createyourtestjeemains`, data2, {
-            headers,
-          })
-          .subscribe((data: any) => {
-            //console.log('datad');
-            console.log(data.data);
-            let temp: question[] = [];
+          this.http
+            .post(`${environment.backend}/test/createyourtestjeemains`, data2, {
+              headers,
+            })
+            .subscribe((data: any) => {
+              //console.log('datad');
+              console.log(data.data);
+              let temp: question[] = [];
 
-            for (let i = 0; i < data.data.length; i++) {
-              let currectanswer = data.data[i].correctAnswer;
-              //console.log(currectanswer);
-              //temp[i].questiontype = this.questiontype(data.data[i].type);
-              if (this.questiontype(data.data[i].questionType) == 2)
-                currectanswer = this.multiplecurrect(
-                  data.data[i].correctAnswers
-                );
+              for (let i = 0; i < data.data.length; i++) {
+                let currectanswer = data.data[i].correctAnswer;
+                //console.log(currectanswer);
+                //temp[i].questiontype = this.questiontype(data.data[i].type);
+                if (this.questiontype(data.data[i].questionType) == 2)
+                  currectanswer = this.multiplecurrect(
+                    data.data[i].correctAnswers
+                  );
 
-              let optionastring = data.data[i].options[0].text;
-              let optionaimage = data.data[i].options[0].image;
-              if (optionaimage.length > 0)
-                optionaimage = this.getimageurl(optionaimage);
-              let optionbstring = data.data[i].options[1].text;
-              let optionbimage = data.data[i].options[1].image;
-              if (optionbimage.length > 0)
-                optionbimage = this.getimageurl(optionbimage);
-              let optioncstring = data.data[i].options[2].text;
-              let optioncimage = data.data[i].options[2].image;
-              if (optioncimage.length > 0)
-                optioncimage = this.getimageurl(optioncimage);
-              let optiondstring = data.data[i].options[3].text;
-              let optiondimage = data.data[i].options[3].image;
-              if (optiondimage.length > 0)
-                optiondimage = this.getimageurl(optiondimage);
-              //console.log('yes');
-              // temp[i].questionstring = data.data[i].question;
-              /*
+                let optionastring = data.data[i].options[0].text;
+                let optionaimage = data.data[i].options[0].image;
+                if (optionaimage.length > 0)
+                  optionaimage = this.getimageurl(optionaimage);
+                let optionbstring = data.data[i].options[1].text;
+                let optionbimage = data.data[i].options[1].image;
+                if (optionbimage.length > 0)
+                  optionbimage = this.getimageurl(optionbimage);
+                let optioncstring = data.data[i].options[2].text;
+                let optioncimage = data.data[i].options[2].image;
+                if (optioncimage.length > 0)
+                  optioncimage = this.getimageurl(optioncimage);
+                let optiondstring = data.data[i].options[3].text;
+                let optiondimage = data.data[i].options[3].image;
+                if (optiondimage.length > 0)
+                  optiondimage = this.getimageurl(optiondimage);
+                //console.log('yes');
+                // temp[i].questionstring = data.data[i].question;
+                /*
             temp[i].questionstring = data.data[i].question;
             temp[i].questionimage = this.imagearraytostring(data.data[i].images);
             temp[i].currectanswer = data.data[i].currectanswer;
@@ -289,89 +290,90 @@ export class PagesComponent implements OnInit {
             //obj.questions[i] = temp;
             //console.log(obj[i]);
             */
-              temp.push({
-                questionstring: data.data[i].questionText,
-                questionimage: this.imagearraytostring(data.data[i].images),
-                questiontype: this.questiontype(data.data[i].questionType),
+                temp.push({
+                  questionstring: data.data[i].questionText,
+                  questionimage: this.imagearraytostring(data.data[i].images),
+                  questiontype: this.questiontype(data.data[i].questionType),
 
-                optionastring: optionastring,
+                  optionastring: optionastring,
 
-                optionbstring: optionbstring,
+                  optionbstring: optionbstring,
 
-                optioncstring: optioncstring,
+                  optioncstring: optioncstring,
 
-                optiondstring: optiondstring,
+                  optiondstring: optiondstring,
 
-                optionaimage: optionaimage,
-                optionbimage: optionbimage,
-                optioncimage: optioncimage,
-                optiondimage: optiondimage,
-                currectanswer: currectanswer,
-                solutionstring: '',
+                  optionaimage: optionaimage,
+                  optionbimage: optionbimage,
+                  optioncimage: optioncimage,
+                  optiondimage: optiondimage,
+                  currectanswer: currectanswer,
+                  solutionstring: '',
 
-                solutionimage: '',
-              });
-              qid.push(data.data[i].qid);
-            }
+                  solutionimage: '',
+                });
+                qid.push(data.data[i].qid);
+              }
 
-            //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
-            //console.log(jsonObj);
+              //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
+              //console.log(jsonObj);
 
-            //console.log(obj.questions);
-            //console.log(JSON.stringify(obj));
+              //console.log(obj.questions);
+              //console.log(JSON.stringify(obj));
 
-            //console.log(data.questions);
-            //this.questionstring = data.questions[0].questionstring;
+              //console.log(data.questions);
+              //this.questionstring = data.questions[0].questionstring;
 
-            //console.log(obj.questions);
-            //console.log(cs);
-            che = temp;
-            const data3 = {
-              topics: this.mathtopics,
-              number: this.returnnumberofquestions(this.timme),
-            };
+              //console.log(obj.questions);
+              //console.log(cs);
+              che = temp;
+              const data3 = {
+                topics: this.mathtopics,
+                number: this.returnnumberofquestions(this.timme),
+              };
 
-            this.http
-              .post(
-                `${environment.backend}/test/createyourtestjeemains`,
-                data3,
-                {
-                  headers,
-                }
-              )
-              .subscribe((data: any) => {
-                //console.log('datad');
-                //console.log(data.data);
-                let temp: question[] = [];
+              this.http
+                .post(
+                  `${environment.backend}/test/createyourtestjeemains`,
+                  data3,
+                  {
+                    headers,
+                  }
+                )
+                .subscribe(
+                  (data: any) => {
+                    //console.log('datad');
+                    //console.log(data.data);
+                    let temp: question[] = [];
 
-                for (let i = 0; i < data.data.length; i++) {
-                  let currectanswer = data.data[i].correctAnswer;
-                  //console.log(currectanswer);
-                  //temp[i].questiontype = this.questiontype(data.data[i].type);
-                  if (this.questiontype(data.data[i].questionType) == 2)
-                    currectanswer = this.multiplecurrect(
-                      data.data[i].correctAnswers
-                    );
+                    for (let i = 0; i < data.data.length; i++) {
+                      let currectanswer = data.data[i].correctAnswer;
+                      //console.log(currectanswer);
+                      //temp[i].questiontype = this.questiontype(data.data[i].type);
+                      if (this.questiontype(data.data[i].questionType) == 2)
+                        currectanswer = this.multiplecurrect(
+                          data.data[i].correctAnswers
+                        );
 
-                  let optionastring = data.data[i].options[0].text;
-                  let optionaimage = data.data[i].options[0].image;
-                  if (optionaimage.length > 0)
-                    optionaimage = this.getimageurl(optionaimage);
-                  let optionbstring = data.data[i].options[1].text;
-                  let optionbimage = data.data[i].options[1].image;
-                  if (optionbimage.length > 0)
-                    optionbimage = this.getimageurl(optionbimage);
-                  let optioncstring = data.data[i].options[2].text;
-                  let optioncimage = data.data[i].options[2].image;
-                  if (optioncimage.length > 0)
-                    optioncimage = this.getimageurl(optioncimage);
-                  let optiondstring = data.data[i].options[3].text;
-                  let optiondimage = data.data[i].options[3].image;
-                  if (optiondimage.length > 0)
-                    optiondimage = this.getimageurl(optiondimage);
-                  //console.log('yes');
-                  // temp[i].questionstring = data.data[i].question;
-                  /*
+                      let optionastring = data.data[i].options[0].text;
+                      let optionaimage = data.data[i].options[0].image;
+                      if (optionaimage.length > 0)
+                        optionaimage = this.getimageurl(optionaimage);
+                      let optionbstring = data.data[i].options[1].text;
+                      let optionbimage = data.data[i].options[1].image;
+                      if (optionbimage.length > 0)
+                        optionbimage = this.getimageurl(optionbimage);
+                      let optioncstring = data.data[i].options[2].text;
+                      let optioncimage = data.data[i].options[2].image;
+                      if (optioncimage.length > 0)
+                        optioncimage = this.getimageurl(optioncimage);
+                      let optiondstring = data.data[i].options[3].text;
+                      let optiondimage = data.data[i].options[3].image;
+                      if (optiondimage.length > 0)
+                        optiondimage = this.getimageurl(optiondimage);
+                      //console.log('yes');
+                      // temp[i].questionstring = data.data[i].question;
+                      /*
                 temp[i].questionstring = data.data[i].question;
                 temp[i].questionimage = this.imagearraytostring(data.data[i].images);
                 temp[i].currectanswer = data.data[i].currectanswer;
@@ -399,71 +401,94 @@ export class PagesComponent implements OnInit {
                 //obj.questions[i] = temp;
                 //console.log(obj[i]);
                 */
-                  temp.push({
-                    questionstring: data.data[i].questionText,
-                    questionimage: this.imagearraytostring(data.data[i].images),
-                    questiontype: this.questiontype(data.data[i].questionType),
+                      temp.push({
+                        questionstring: data.data[i].questionText,
+                        questionimage: this.imagearraytostring(
+                          data.data[i].images
+                        ),
+                        questiontype: this.questiontype(
+                          data.data[i].questionType
+                        ),
 
-                    optionastring: optionastring,
+                        optionastring: optionastring,
 
-                    optionbstring: optionbstring,
+                        optionbstring: optionbstring,
 
-                    optioncstring: optioncstring,
+                        optioncstring: optioncstring,
 
-                    optiondstring: optiondstring,
+                        optiondstring: optiondstring,
 
-                    optionaimage: optionaimage,
-                    optionbimage: optionbimage,
-                    optioncimage: optioncimage,
-                    optiondimage: optiondimage,
-                    currectanswer: currectanswer,
-                    solutionstring: '',
+                        optionaimage: optionaimage,
+                        optionbimage: optionbimage,
+                        optioncimage: optioncimage,
+                        optiondimage: optiondimage,
+                        currectanswer: currectanswer,
+                        solutionstring: '',
 
-                    solutionimage: '',
-                  });
-                  qid.push(data.data[i].qid);
-                }
-
-                //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
-                //console.log(jsonObj);
-
-                //console.log(obj.questions);
-                //console.log(JSON.stringify(obj));
-
-                //console.log(data.questions);
-                //this.questionstring = data.questions[0].questionstring;
-
-                //console.log(obj.questions);
-                //console.log(cs);
-                mat = temp;
-                temp = mat.concat(che);
-                temp = temp.concat(phy);
-
-                obj.questions = temp;
-                let cs = JSON.stringify(obj);
-                this.paperservice.setpaper(cs);
-                this.loading = false;
-                const data4 = {
-                  difficulty: 'Jee Mains',
-                  duration: this.returntime(this.timme),
-                  questionid: qid,
-                };
-                this.http
-                  .post(
-                    `${environment.backend}/test/createyourtestdatabase`,
-                    data4,
-                    {
-                      headers,
+                        solutionimage: '',
+                      });
+                      qid.push(data.data[i].qid);
                     }
-                  )
-                  .subscribe((data: any) => {
-                    //console.log(data.data);
-                  });
 
-                this.router.navigate(['/questionviewer']);
-              });
-          });
-      });
+                    //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
+                    //console.log(jsonObj);
+
+                    //console.log(obj.questions);
+                    //console.log(JSON.stringify(obj));
+
+                    //console.log(data.questions);
+                    //this.questionstring = data.questions[0].questionstring;
+
+                    //console.log(obj.questions);
+                    //console.log(cs);
+                    mat = temp;
+                    temp = mat.concat(che);
+                    temp = temp.concat(phy);
+
+                    obj.questions = temp;
+                    let cs = JSON.stringify(obj);
+                    this.paperservice.setpaper(cs);
+                    this.loading = false;
+                    const data4 = {
+                      difficulty: 'Jee Mains',
+                      duration: this.returntime(this.timme),
+                      questionid: qid,
+                    };
+                    this.http
+                      .post(
+                        `${environment.backend}/test/createyourtestdatabase`,
+                        data4,
+                        {
+                          headers,
+                        }
+                      )
+                      .subscribe(
+                        (data: any) => {
+                          //console.log(data.data);
+                        },
+                        (error) => {
+                          this.loading = false;
+                          console.log(error);
+                          alert(error.error.message);
+                        }
+                      );
+
+                    this.router.navigate(['/questionviewer']);
+                  },
+                  (error) => {
+                    this.loading = false;
+                    console.log(error);
+                    alert(error.error.message);
+                  }
+                );
+            });
+        },
+        (error) => {
+          this.loading = false;
+          console.log(error);
+          alert(error.error.message);
+        }
+      );
   }
 
   returntime(id: string): string {
@@ -489,37 +514,38 @@ export class PagesComponent implements OnInit {
       .post(`${environment.backend}/test/createyourtest`, data, {
         headers,
       })
-      .subscribe((data: any) => {
-        //console.log('datad');
-        //console.log(data.data);
-        let temp: question[] = [];
+      .subscribe(
+        (data: any) => {
+          //console.log('datad');
+          //console.log(data.data);
+          let temp: question[] = [];
 
-        for (let i = 0; i < data.data.length; i++) {
-          let currectanswer = data.data[i].correctAnswer;
-          //console.log(currectanswer);
-          //temp[i].questiontype = this.questiontype(data.data[i].type);
-          if (this.questiontype(data.data[i].questionType) == 2)
-            currectanswer = this.multiplecurrect(data.data[i].correctAnswers);
+          for (let i = 0; i < data.data.length; i++) {
+            let currectanswer = data.data[i].correctAnswer;
+            //console.log(currectanswer);
+            //temp[i].questiontype = this.questiontype(data.data[i].type);
+            if (this.questiontype(data.data[i].questionType) == 2)
+              currectanswer = this.multiplecurrect(data.data[i].correctAnswers);
 
-          let optionastring = data.data[i].options[0].text;
-          let optionaimage = data.data[i].options[0].image;
-          if (optionaimage.length > 0)
-            optionaimage = this.getimageurl(optionaimage);
-          let optionbstring = data.data[i].options[1].text;
-          let optionbimage = data.data[i].options[1].image;
-          if (optionbimage.length > 0)
-            optionbimage = this.getimageurl(optionbimage);
-          let optioncstring = data.data[i].options[2].text;
-          let optioncimage = data.data[i].options[2].image;
-          if (optioncimage.length > 0)
-            optioncimage = this.getimageurl(optioncimage);
-          let optiondstring = data.data[i].options[3].text;
-          let optiondimage = data.data[i].options[3].image;
-          if (optiondimage.length > 0)
-            optiondimage = this.getimageurl(optiondimage);
-          //console.log('yes');
-          // temp[i].questionstring = data.data[i].question;
-          /*
+            let optionastring = data.data[i].options[0].text;
+            let optionaimage = data.data[i].options[0].image;
+            if (optionaimage.length > 0)
+              optionaimage = this.getimageurl(optionaimage);
+            let optionbstring = data.data[i].options[1].text;
+            let optionbimage = data.data[i].options[1].image;
+            if (optionbimage.length > 0)
+              optionbimage = this.getimageurl(optionbimage);
+            let optioncstring = data.data[i].options[2].text;
+            let optioncimage = data.data[i].options[2].image;
+            if (optioncimage.length > 0)
+              optioncimage = this.getimageurl(optioncimage);
+            let optiondstring = data.data[i].options[3].text;
+            let optiondimage = data.data[i].options[3].image;
+            if (optiondimage.length > 0)
+              optiondimage = this.getimageurl(optiondimage);
+            //console.log('yes');
+            // temp[i].questionstring = data.data[i].question;
+            /*
         temp[i].questionstring = data.data[i].question;
         temp[i].questionimage = this.imagearraytostring(data.data[i].images);
         temp[i].currectanswer = data.data[i].currectanswer;
@@ -547,85 +573,85 @@ export class PagesComponent implements OnInit {
         //obj.questions[i] = temp;
         //console.log(obj[i]);
         */
-          temp.push({
-            questionstring: data.data[i].questionText,
-            questionimage: this.imagearraytostring(data.data[i].images),
-            questiontype: this.questiontype(data.data[i].questionType),
+            temp.push({
+              questionstring: data.data[i].questionText,
+              questionimage: this.imagearraytostring(data.data[i].images),
+              questiontype: this.questiontype(data.data[i].questionType),
 
-            optionastring: optionastring,
+              optionastring: optionastring,
 
-            optionbstring: optionbstring,
+              optionbstring: optionbstring,
 
-            optioncstring: optioncstring,
+              optioncstring: optioncstring,
 
-            optiondstring: optiondstring,
+              optiondstring: optiondstring,
 
-            optionaimage: optionaimage,
-            optionbimage: optionbimage,
-            optioncimage: optioncimage,
-            optiondimage: optiondimage,
-            currectanswer: currectanswer,
-            solutionstring: '',
+              optionaimage: optionaimage,
+              optionbimage: optionbimage,
+              optioncimage: optioncimage,
+              optiondimage: optiondimage,
+              currectanswer: currectanswer,
+              solutionstring: '',
 
-            solutionimage: '',
-          });
-          qid.push(data.data[i].qid);
-        }
+              solutionimage: '',
+            });
+            qid.push(data.data[i].qid);
+          }
 
-        //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
-        //console.log(jsonObj);
+          //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
+          //console.log(jsonObj);
 
-        //console.log(obj.questions);
-        //console.log(JSON.stringify(obj));
+          //console.log(obj.questions);
+          //console.log(JSON.stringify(obj));
 
-        //console.log(data.questions);
-        //this.questionstring = data.questions[0].questionstring;
+          //console.log(data.questions);
+          //this.questionstring = data.questions[0].questionstring;
 
-        //console.log(obj.questions);
-        //console.log(cs);
-        phy = temp;
-        const data2 = {
-          topics: this.chemistrytopics,
-          number: this.timme,
-        };
+          //console.log(obj.questions);
+          //console.log(cs);
+          phy = temp;
+          const data2 = {
+            topics: this.chemistrytopics,
+            number: this.timme,
+          };
 
-        this.http
-          .post(`${environment.backend}/test/createyourtest`, data2, {
-            headers,
-          })
-          .subscribe((data: any) => {
-            //console.log('datad');
-            console.log(data.data);
-            let temp: question[] = [];
+          this.http
+            .post(`${environment.backend}/test/createyourtest`, data2, {
+              headers,
+            })
+            .subscribe((data: any) => {
+              //console.log('datad');
+              console.log(data.data);
+              let temp: question[] = [];
 
-            for (let i = 0; i < data.data.length; i++) {
-              let currectanswer = data.data[i].correctAnswer;
-              //console.log(currectanswer);
-              //temp[i].questiontype = this.questiontype(data.data[i].type);
-              if (this.questiontype(data.data[i].questionType) == 2)
-                currectanswer = this.multiplecurrect(
-                  data.data[i].correctAnswers
-                );
+              for (let i = 0; i < data.data.length; i++) {
+                let currectanswer = data.data[i].correctAnswer;
+                //console.log(currectanswer);
+                //temp[i].questiontype = this.questiontype(data.data[i].type);
+                if (this.questiontype(data.data[i].questionType) == 2)
+                  currectanswer = this.multiplecurrect(
+                    data.data[i].correctAnswers
+                  );
 
-              let optionastring = data.data[i].options[0].text;
-              let optionaimage = data.data[i].options[0].image;
-              if (optionaimage.length > 0)
-                optionaimage = this.getimageurl(optionaimage);
-              let optionbstring = data.data[i].options[1].text;
-              let optionbimage = data.data[i].options[1].image;
-              if (optionbimage.length > 0)
-                optionbimage = this.getimageurl(optionbimage);
-              let optioncstring = data.data[i].options[2].text;
-              let optioncimage = data.data[i].options[2].image;
-              if (optioncimage.length > 0)
-                optioncimage = this.getimageurl(optioncimage);
-              let optiondstring = data.data[i].options[3].text;
-              let optiondimage = data.data[i].options[3].image;
-              if (optiondimage.length > 0)
-                optiondimage = this.getimageurl(optiondimage);
-              //console.log('yes');
-              // temp[i].questionstring = data.data[i].question;
-              /*
+                let optionastring = data.data[i].options[0].text;
+                let optionaimage = data.data[i].options[0].image;
+                if (optionaimage.length > 0)
+                  optionaimage = this.getimageurl(optionaimage);
+                let optionbstring = data.data[i].options[1].text;
+                let optionbimage = data.data[i].options[1].image;
+                if (optionbimage.length > 0)
+                  optionbimage = this.getimageurl(optionbimage);
+                let optioncstring = data.data[i].options[2].text;
+                let optioncimage = data.data[i].options[2].image;
+                if (optioncimage.length > 0)
+                  optioncimage = this.getimageurl(optioncimage);
+                let optiondstring = data.data[i].options[3].text;
+                let optiondimage = data.data[i].options[3].image;
+                if (optiondimage.length > 0)
+                  optiondimage = this.getimageurl(optiondimage);
+                //console.log('yes');
+                // temp[i].questionstring = data.data[i].question;
+                /*
             temp[i].questionstring = data.data[i].question;
             temp[i].questionimage = this.imagearraytostring(data.data[i].images);
             temp[i].currectanswer = data.data[i].currectanswer;
@@ -653,85 +679,86 @@ export class PagesComponent implements OnInit {
             //obj.questions[i] = temp;
             //console.log(obj[i]);
             */
-              temp.push({
-                questionstring: data.data[i].questionText,
-                questionimage: this.imagearraytostring(data.data[i].images),
-                questiontype: this.questiontype(data.data[i].questionType),
+                temp.push({
+                  questionstring: data.data[i].questionText,
+                  questionimage: this.imagearraytostring(data.data[i].images),
+                  questiontype: this.questiontype(data.data[i].questionType),
 
-                optionastring: optionastring,
+                  optionastring: optionastring,
 
-                optionbstring: optionbstring,
+                  optionbstring: optionbstring,
 
-                optioncstring: optioncstring,
+                  optioncstring: optioncstring,
 
-                optiondstring: optiondstring,
+                  optiondstring: optiondstring,
 
-                optionaimage: optionaimage,
-                optionbimage: optionbimage,
-                optioncimage: optioncimage,
-                optiondimage: optiondimage,
-                currectanswer: currectanswer,
-                solutionstring: '',
+                  optionaimage: optionaimage,
+                  optionbimage: optionbimage,
+                  optioncimage: optioncimage,
+                  optiondimage: optiondimage,
+                  currectanswer: currectanswer,
+                  solutionstring: '',
 
-                solutionimage: '',
-              });
-              qid.push(data.data[i].qid);
-            }
+                  solutionimage: '',
+                });
+                qid.push(data.data[i].qid);
+              }
 
-            //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
-            //console.log(jsonObj);
+              //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
+              //console.log(jsonObj);
 
-            //console.log(obj.questions);
-            //console.log(JSON.stringify(obj));
+              //console.log(obj.questions);
+              //console.log(JSON.stringify(obj));
 
-            //console.log(data.questions);
-            //this.questionstring = data.questions[0].questionstring;
+              //console.log(data.questions);
+              //this.questionstring = data.questions[0].questionstring;
 
-            //console.log(obj.questions);
-            //console.log(cs);
-            che = temp;
-            const data3 = {
-              topics: this.mathtopics,
-              number: this.timme,
-            };
+              //console.log(obj.questions);
+              //console.log(cs);
+              che = temp;
+              const data3 = {
+                topics: this.mathtopics,
+                number: this.timme,
+              };
 
-            this.http
-              .post(`${environment.backend}/test/createyourtest`, data3, {
-                headers,
-              })
-              .subscribe((data: any) => {
-                //console.log('datad');
-                console.log(data.data);
-                let temp: question[] = [];
+              this.http
+                .post(`${environment.backend}/test/createyourtest`, data3, {
+                  headers,
+                })
+                .subscribe(
+                  (data: any) => {
+                    //console.log('datad');
+                    console.log(data.data);
+                    let temp: question[] = [];
 
-                for (let i = 0; i < data.data.length; i++) {
-                  let currectanswer = data.data[i].correctAnswer;
-                  //console.log(currectanswer);
-                  //temp[i].questiontype = this.questiontype(data.data[i].type);
-                  if (this.questiontype(data.data[i].questionType) == 2)
-                    currectanswer = this.multiplecurrect(
-                      data.data[i].correctAnswers
-                    );
+                    for (let i = 0; i < data.data.length; i++) {
+                      let currectanswer = data.data[i].correctAnswer;
+                      //console.log(currectanswer);
+                      //temp[i].questiontype = this.questiontype(data.data[i].type);
+                      if (this.questiontype(data.data[i].questionType) == 2)
+                        currectanswer = this.multiplecurrect(
+                          data.data[i].correctAnswers
+                        );
 
-                  let optionastring = data.data[i].options[0].text;
-                  let optionaimage = data.data[i].options[0].image;
-                  if (optionaimage.length > 0)
-                    optionaimage = this.getimageurl(optionaimage);
-                  let optionbstring = data.data[i].options[1].text;
-                  let optionbimage = data.data[i].options[1].image;
-                  if (optionbimage.length > 0)
-                    optionbimage = this.getimageurl(optionbimage);
-                  let optioncstring = data.data[i].options[2].text;
-                  let optioncimage = data.data[i].options[2].image;
-                  if (optioncimage.length > 0)
-                    optioncimage = this.getimageurl(optioncimage);
-                  let optiondstring = data.data[i].options[3].text;
-                  let optiondimage = data.data[i].options[3].image;
-                  if (optiondimage.length > 0)
-                    optiondimage = this.getimageurl(optiondimage);
-                  //console.log('yes');
-                  // temp[i].questionstring = data.data[i].question;
-                  /*
+                      let optionastring = data.data[i].options[0].text;
+                      let optionaimage = data.data[i].options[0].image;
+                      if (optionaimage.length > 0)
+                        optionaimage = this.getimageurl(optionaimage);
+                      let optionbstring = data.data[i].options[1].text;
+                      let optionbimage = data.data[i].options[1].image;
+                      if (optionbimage.length > 0)
+                        optionbimage = this.getimageurl(optionbimage);
+                      let optioncstring = data.data[i].options[2].text;
+                      let optioncimage = data.data[i].options[2].image;
+                      if (optioncimage.length > 0)
+                        optioncimage = this.getimageurl(optioncimage);
+                      let optiondstring = data.data[i].options[3].text;
+                      let optiondimage = data.data[i].options[3].image;
+                      if (optiondimage.length > 0)
+                        optiondimage = this.getimageurl(optiondimage);
+                      //console.log('yes');
+                      // temp[i].questionstring = data.data[i].question;
+                      /*
                 temp[i].questionstring = data.data[i].question;
                 temp[i].questionimage = this.imagearraytostring(data.data[i].images);
                 temp[i].currectanswer = data.data[i].currectanswer;
@@ -759,70 +786,93 @@ export class PagesComponent implements OnInit {
                 //obj.questions[i] = temp;
                 //console.log(obj[i]);
                 */
-                  temp.push({
-                    questionstring: data.data[i].questionText,
-                    questionimage: this.imagearraytostring(data.data[i].images),
-                    questiontype: this.questiontype(data.data[i].questionType),
+                      temp.push({
+                        questionstring: data.data[i].questionText,
+                        questionimage: this.imagearraytostring(
+                          data.data[i].images
+                        ),
+                        questiontype: this.questiontype(
+                          data.data[i].questionType
+                        ),
 
-                    optionastring: optionastring,
+                        optionastring: optionastring,
 
-                    optionbstring: optionbstring,
+                        optionbstring: optionbstring,
 
-                    optioncstring: optioncstring,
+                        optioncstring: optioncstring,
 
-                    optiondstring: optiondstring,
+                        optiondstring: optiondstring,
 
-                    optionaimage: optionaimage,
-                    optionbimage: optionbimage,
-                    optioncimage: optioncimage,
-                    optiondimage: optiondimage,
-                    currectanswer: currectanswer,
-                    solutionstring: '',
+                        optionaimage: optionaimage,
+                        optionbimage: optionbimage,
+                        optioncimage: optioncimage,
+                        optiondimage: optiondimage,
+                        currectanswer: currectanswer,
+                        solutionstring: '',
 
-                    solutionimage: '',
-                  });
-                  qid.push(data.data[i].qid);
-                }
-
-                //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
-                //console.log(jsonObj);
-
-                //console.log(obj.questions);
-                //console.log(JSON.stringify(obj));
-
-                //console.log(data.questions);
-                //this.questionstring = data.questions[0].questionstring;
-
-                //console.log(obj.questions);
-                //console.log(cs);
-                mat = temp;
-                temp = mat.concat(che);
-                temp = temp.concat(phy);
-                obj.questions = temp;
-                let cs = JSON.stringify(obj);
-                this.paperservice.setpaper(cs);
-                this.loading = false;
-                const data4 = {
-                  difficulty: 'Jee Advanced',
-                  duration: this.returntime(this.timme),
-                  questionid: qid,
-                };
-                this.http
-                  .post(
-                    `${environment.backend}/test/createyourtestdatabase`,
-                    data4,
-                    {
-                      headers,
+                        solutionimage: '',
+                      });
+                      qid.push(data.data[i].qid);
                     }
-                  )
-                  .subscribe((data: any) => {
-                    console.log(data.data);
-                  });
 
-                this.router.navigate(['/questionviewer']);
-              });
-          });
-      });
+                    //const jsonObj = JSON.stringify(Object.assign({ questions: '' }, c));
+                    //console.log(jsonObj);
+
+                    //console.log(obj.questions);
+                    //console.log(JSON.stringify(obj));
+
+                    //console.log(data.questions);
+                    //this.questionstring = data.questions[0].questionstring;
+
+                    //console.log(obj.questions);
+                    //console.log(cs);
+                    mat = temp;
+                    temp = mat.concat(che);
+                    temp = temp.concat(phy);
+                    obj.questions = temp;
+                    let cs = JSON.stringify(obj);
+                    this.paperservice.setpaper(cs);
+                    this.loading = false;
+                    const data4 = {
+                      difficulty: 'Jee Advanced',
+                      duration: this.returntime(this.timme),
+                      questionid: qid,
+                    };
+                    this.http
+                      .post(
+                        `${environment.backend}/test/createyourtestdatabase`,
+                        data4,
+                        {
+                          headers,
+                        }
+                      )
+                      .subscribe(
+                        (data: any) => {
+                          console.log(data.data);
+                        },
+                        (error) => {
+                          this.loading = false;
+                          console.log(error);
+                          alert(error.error.message);
+                        }
+                      );
+
+                    this.router.navigate(['/questionviewer']);
+                  },
+                  (error) => {
+                    this.loading = false;
+                    console.log(error);
+                    alert(error.error.message);
+                  }
+                );
+            });
+        },
+        (error) => {
+          this.loading = false;
+          console.log(error);
+          alert(error.error.message);
+        }
+      );
   }
   /*
  @HostListener('window:resize',['$event'])

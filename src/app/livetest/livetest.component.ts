@@ -307,7 +307,7 @@ export class LivetestComponent implements AfterViewInit {
         (error) => {
           this.loading = false;
           console.log(error);
-          alert(error.error);
+          alert(error.error.message);
         }
       );
     return false;
