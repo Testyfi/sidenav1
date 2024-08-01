@@ -22,7 +22,10 @@
   </div>
 </div>
 <div *ngIf="!view">
-  You Choose {{ planstr }} plan valid up to {{ expirydate }}
+  You Choose
+  <span style="font-size: 20px; color: rgb(37, 73, 0)">{{ planstr }}</span>
+  plan, valid until
+  <span style="font-size: 20px; color: rgb(2, 117, 54)">{{ expirydate }}</span>
 </div>
 <div *ngIf="loading" class="spinner-overlay">
   <!--<mat-spinner></mat-spinner>-->
