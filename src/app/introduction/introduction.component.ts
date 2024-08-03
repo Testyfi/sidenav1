@@ -31,6 +31,7 @@ export class IntroductionComponent implements OnInit {
       e.style.display = 'block';
       e = document.getElementById('image');
       e.style.width = '100%';
+
       e = document.getElementById('welcomebox');
       e.style.width = '100%';
       //console.log("yes");
