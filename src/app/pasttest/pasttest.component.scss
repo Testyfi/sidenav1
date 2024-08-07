@@ -1,3 +1,12 @@
+.courseheading {
+  //margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 3rem;
+  //padding: 1.5rem;
+  background-color: #fcfcfc;
+  line-height: 3rem;
+  //margin: 1rem;
+}
 .para {
   font-size: 20px;
   border: transparent;
@@ -5,20 +14,27 @@
   padding: 5px;
 }
 .card {
-  display: flex;
+  min-width: 50%;
+  //display: flex;
+  //border-color: #319702;
   flex-direction: column;
-  border-radius: 0.5rem;
-  background-color: #fff;
+  border-radius: 1rem;
+  //background-color: #fff;
+  //border-color: rgb(252, 70, 9);
+  //border-width: 2rem;
   margin: 1.5rem 1rem 1.5rem 0;
   box-shadow: 0 0.25rem 0.5rem #e6edef;
-  color: #495057;
-  width: auto;
+  color: #415a72;
   background-color: #e2dede;
+  padding: 1rem 1rem;
   //margin-left: 2px;
   position: relative;
   //margin: 5px;
   height: auto;
+  align-items: center;
   .card-head {
+    //margin: auto;
+
     padding: 1rem 1.5rem;
     border-bottom: 1px solid #edf1f7;
     font-size: 1rem;
@@ -26,8 +42,9 @@
   }
 
   .card-body {
-    padding: 1rem 1.5rem;
-    margin: 1rem;
+    margin: auto;
+    padding: 1rem 1.5rem 0.5rem 0.5rem;
+    align-items: center;
   }
 }
 .container-flex {
@@ -45,27 +62,14 @@
   padding: 1rem;
 }
 .big-container-flex {
-  display: block;
+  display: flex;
 }
 .big-container-block {
   display: block;
 }
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  //min-width: 400px;
-}
-
-td,
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #d4d0d0;
+.courseimage {
+  max-width: 100%;
+  height: 110px;
 }
 .spinner-overlay {
   position: fixed;
@@ -87,6 +91,7 @@ tr:nth-child(even) {
   height: 30px;
   animation: spin 1s linear infinite; /* Animation for rotating the spinner */
 }
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

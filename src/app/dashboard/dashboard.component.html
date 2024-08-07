@@ -1,6 +1,8 @@
 <cd-timer format="hms" (onTick)="ontick()" style="display: none"></cd-timer>
+
 <div [ngClass]="contestclass" (resized)="onResized($event)">
   <div class="container-flex">
+    <!--
     <div class="card">
       <div class="card-head">Ongoing Contests</div>
       <div class="card-body" id="presenttest">
@@ -34,33 +36,91 @@
         </table>
       </div>
     </div>
-    <div class="card">
-      <div class="card-head">Up Comming Test</div>
-      <div class="card-body" id="upcomingtest">
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Difficulty</th>
-            <th>Start</th>
-            <th>Duration</th>
-
-            <th>Topics</th>
-            <th>Prize</th>
-          </tr>
-          <tr *ngFor="let i of upcoming">
-            <td>{{ i.Name }}</td>
-            <td>{{ i.Difficulty }}</td>
-            <td>{{ i.StartAt }}</td>
-            <td>{{ i.Duration }} Minutes</td>
-            <td>
-              {{ i.Topics }}
-            </td>
-            <td>{{ i.Prize }}</td>
-          </tr>
-        </table>
+  -->
+    <div class="card" *ngIf="ifongoing">
+      <div class="card-head">Ongoing Contests</div>
+      <div *ngFor="let i of ongoing">
+        <div class="card">
+          <div class="card-head">{{ i.Name }}</div>
+          <div class="card-body">
+            <ul>
+              <span style="font-size: 1rem; font-weight: 600">Topics: </span>
+              {{
+                i.Topics
+              }}
+            </ul>
+            <ul>
+              <span style="font-size: 1rem; font-weight: 600">TimeLeft: </span>
+              {{
+                i.Duration
+              }}
+              Minutes
+            </ul>
+            <ul>
+              <span style="font-size: 1rem; font-weight: 600"
+                >Difficulty:
+              </span>
+              {{
+                i.Difficulty
+              }}
+            </ul>
+            <div style="margin-top: 20px">
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="rankboosterlivetest(i.Name, i.Start)"
+              >
+                Start
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
+    <div class="card" *ngIf="ifupcomming">
+      <div class="card-head">UpCommingTest</div>
+      <div *ngFor="let i of upcoming">
+        <div class="card">
+          <div class="card-head">{{ i.Name }}</div>
+          <div class="card-body">
+            <ul>
+              <span style="font-size: 1rem; font-weight: 600">Topics: </span>
+              {{
+                i.Topics
+              }}
+            </ul>
+            <ul>
+              <span style="font-size: 1rem; font-weight: 600">Duration: </span>
+              {{
+                i.Duration
+              }}
+              Minutes
+            </ul>
+            <ul>
+              <span style="font-size: 1rem; font-weight: 600"
+                >Difficulty:
+              </span>
+              {{
+                i.Difficulty
+              }}
+            </ul>
+            <ul>
+              <span style="font-size: 1rem; font-weight: 600">StartAt: </span>
+              {{
+                i.StartAt
+              }}
+            </ul>
+            <ul>
+              <span style="font-size: 1rem; font-weight: 600">Prize: </span>
+              {{
+                i.Prize
+              }}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
     <div class="card">
       <div class="card-head">Past Test</div>
       <div class="card-body" id="pasttest">
@@ -93,7 +153,7 @@
       </div>
     </div>
   </div>
-  <!--
+  
   <div>
     <div class="card">
       <div class="card-head">Create Your Test Just Follow The Steps Below</div>
@@ -112,9 +172,52 @@
       </div>
     </div>
   </div>
-  -->
+ 
 </div>
-<div *ngIf="loading" class="spinner-overlay">
-  <!--<mat-spinner></mat-spinner>-->
-  <div class="spinner"></div>
+ -->
+    <div class="card">
+      <div class="card-head">All PastTests</div>
+      <div *ngFor="let i of pasttest">
+        <div class="card">
+          <div class="card-head">{{ i.Name }}</div>
+          <div class="card-body">
+            <ul>
+              <span style="font-size: 1rem; font-weight: 600">Topics: </span>
+              {{
+                i.Topics
+              }}
+            </ul>
+            <ul>
+              <span style="font-size: 1rem; font-weight: 600">Duration: </span>
+              {{
+                i.Duration
+              }}
+              Minutes
+            </ul>
+            <ul>
+              <span style="font-size: 1rem; font-weight: 600"
+                >Difficulty:
+              </span>
+              {{
+                i.Difficulty
+              }}
+            </ul>
+            <div style="margin-top: 20px">
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="rankboosterpasttest(i.Name, i.Duration)"
+              >
+                Practice
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="loading" class="spinner-overlay">
+      <!--<mat-spinner></mat-spinner>-->
+      <div class="spinner"></div>
+    </div>
+  </div>
 </div>

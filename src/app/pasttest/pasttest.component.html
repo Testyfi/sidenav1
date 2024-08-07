@@ -1,0 +1,28 @@
+<div id="displaycourses" (resized)="onResized($event)">
+  <div class="card" *ngFor="let course of pasttest">
+    <div class="card-head">{{ course.name }}</div>
+
+    <div class="card-body">
+      <div>
+        <ul>
+          Difficulty
+          {{
+            course.difficulty
+          }}
+        </ul>
+        <ul>
+          Duration
+          {{
+            course.duration
+          }}
+        </ul>
+        <ul>
+          <li *ngFor="let pt of course.points">{{ pt }}</li>
+        </ul>
+      </div>
+      <div style="margin: 5px">
+        <button mat-raised-button color="primary">Start</button>
+      </div>
+    </div>
+  </div>
+</div>

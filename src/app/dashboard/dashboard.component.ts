@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostListener,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { ResizedEvent } from 'angular-resize-event';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GetpaperserviceService } from '../getpaperservice.service';
@@ -29,6 +35,8 @@ export class DashboardComponent implements OnInit {
   // Tests = Tests;
   Test: Array<testtype> = new Array();
   num: number = 0;
+  ifupcomming = false;
+  ifongoing = false;
   contestclass = 'big-container-flex';
   loading: boolean = false;
   date: Date = new Date();
@@ -36,6 +44,7 @@ export class DashboardComponent implements OnInit {
   ongoing: Array<testtype> = new Array();
   upcoming: Array<testtype> = new Array();
   ds: string = '';
+  @Output() logout: EventEmitter<boolean> = new EventEmitter();
   onResized(event: ResizedEvent) {
     this.num = event.newRect.width;
     if (this.num <= 700) this.contestclass = 'big-container-block';
@@ -91,6 +100,15 @@ export class DashboardComponent implements OnInit {
     */
     //console.log();
     this.statisticsservice.statistics();
+    if (this.upcoming.length > 0) {
+      this.ifupcomming = true;
+    }
+    if (this.ongoing.length > 0) {
+      this.ifongoing = true;
+    }
+  }
+  getpasttest() {
+    this.router.navigate(['/pasttests']);
   }
   getalltest() {
     this.loading = true;
@@ -115,8 +133,9 @@ export class DashboardComponent implements OnInit {
             'Your Token is expire or Login in different Device.Please logout and Relogin'
           );
           this.loading = false;
-
-          //this.router.navigate(['/user-login']);
+          localStorage.removeItem('token');
+          this.logout.emit(true);
+          this.router.navigate(['/user-login']);
         }
       );
   }
@@ -277,6 +296,7 @@ export class DashboardComponent implements OnInit {
         this.loading = false;
         console.log(error);
         alert(error.error.message);
+        this.router.navigate(['/products']);
       }
     );
   }

@@ -17,6 +17,7 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import { LivetestComponent } from './livetest/livetest.component';
 import { AllcreatedtestComponent } from './allcreatedtest/allcreatedtest.component';
 import { PaymentredirectComponent } from './paymentredirect/paymentredirect.component';
+import { PasttestComponent } from './pasttest/pasttest.component';
 const routes: Routes = [
   { path: '', redirectTo: 'introduction', pathMatch: 'full' },
   { path: 'introduction', component: IntroductionComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'livetest', component: LivetestComponent },
   { path: 'allcreatedtest', component: AllcreatedtestComponent },
   { path: 'paymentredirect', component: PaymentredirectComponent },
+  { path: 'pasttests', component: PasttestComponent },
 ];
 
 @NgModule({

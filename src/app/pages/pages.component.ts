@@ -470,6 +470,7 @@ export class PagesComponent implements OnInit {
                           this.loading = false;
                           console.log(error);
                           alert(error.error.message);
+                          this.router.navigate(['/products']);
                         }
                       );
 
@@ -479,6 +480,7 @@ export class PagesComponent implements OnInit {
                     this.loading = false;
                     console.log(error);
                     alert(error.error.message);
+                    this.router.navigate(['/products']);
                   }
                 );
             });
@@ -487,6 +489,7 @@ export class PagesComponent implements OnInit {
           this.loading = false;
           console.log(error);
           alert(error.error.message);
+          this.router.navigate(['/products']);
         }
       );
   }
