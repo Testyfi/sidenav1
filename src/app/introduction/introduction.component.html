@@ -1,20 +1,30 @@
-<div class="card">
-  <div class="card-head">
-    <div style="margin-right: auto">
-      <button
-        mat-raised-button
-        color="primary"
-        style="margin-left: 10px"
-        (click)="tologinpage()"
-      >
-        SignUp/Login
-      </button>
-    </div>
-    <!--
+<div class="buttonclass">
+  <div style="margin-right: auto">
+    <button
+      mat-raised-button
+      color="primary"
+      style="margin-left: 10px"
+      (click)="tologinpage()"
+    >
+      SignUp/Login
+    </button>
+  </div>
+
+  <!--
     <div style="color: rgb(123, 123, 138); margin: auto">
       <i class="fa-solid fa-square-t">Testtify</i>
     </div>-->
+</div>
+<body>
+  <div class="container">
+    <div class="row">
+      <span class="text1">Welcome To!</span>
+      <span class="text2">Testtify</span>
+    </div>
   </div>
+</body>
+
+<div class="card">
   <div class="card-body" id="cardbody" (resized)="onResized($event)">
     <div style="max-height: 80%; min-width: 200px" id="image">
       <img src="/assets/logo.jpg" class="img" alt="" />

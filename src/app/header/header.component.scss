@@ -148,7 +148,8 @@
 }
 .overlay {
   background: #fff;
-  margin-top: 10px;
+  margin: auto;
+  //margin-right: 5rem;
   box-shadow: 0 1rem 3rem rgb(0 0 0/18%);
   border-radius: 0.25rem;
 }
@@ -182,8 +183,10 @@
 }
 
 .overlay-user {
+  //position: fixed;
+  //margin-right: 0.5rem;
+
   position: fixed;
-  //margin-right: 5rem;
   //width: 7rem;
   width: 8rem;
   ul {
