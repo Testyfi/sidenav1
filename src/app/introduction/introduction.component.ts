@@ -54,6 +54,12 @@ export class IntroductionComponent implements OnInit {
   }
   ngOnInit(): void {
     this.titleService.setTitle(this.title);
+    this.metaTagService.addTags([
+      { name: 'testtify:introduction', content: 'testtifyintroduction' },
+      { name: 'description', content: 'testtify' },
+
+      // ...
+    ]);
     this.metaTagService.updateTag({
       name: 'description',
       content:
