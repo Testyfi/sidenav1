@@ -52,12 +52,12 @@ export class AppComponent implements OnInit {
       {
         name: 'keywords',
         content:
-          'jee mains , jee advanced, jee mains test series, jee advanced test series, create your test,testtify,testify,',
+          'jee mains , jee advanced, jee mains test series, jee advanced test series, create your test,testtify,testify,mock test jee mains,mock test jee advanced',
       },
       { name: 'robots', content: 'index, follow' },
-      { name: 'author', content: 'Ronak Patel' },
+      { name: 'author', content: 'Anuj sharma' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'date', content: '2021-05-17', scheme: 'YYYY-MM-DD' },
+      { name: 'date', content: '2024-05-17', scheme: 'YYYY-MM-DD' },
       { charset: 'UTF-8' },
     ]);
   }
