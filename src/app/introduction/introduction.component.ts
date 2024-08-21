@@ -15,7 +15,7 @@ import { Title, Meta } from '@angular/platform-browser';
 export class IntroductionComponent implements OnInit {
   @Output() intro = new EventEmitter<boolean>();
   num: number = 0;
-  title = 'Testtify - Angular Universal Jee ';
+  title = 'Testtify For Jee ';
   constructor(
     private router: Router,
     private titleService: Title,
