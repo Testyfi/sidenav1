@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Router } from '@angular/router';
 import { ResizedEvent } from 'angular-resize-event';
 import { OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 @Component({
   selector: 'app-introduction',
   templateUrl: './introduction.component.html',
@@ -14,7 +15,12 @@ import { OnInit } from '@angular/core';
 export class IntroductionComponent implements OnInit {
   @Output() intro = new EventEmitter<boolean>();
   num: number = 0;
-  constructor(private router: Router) {}
+  title = 'Testtify - Angular Universal Jee ';
+  constructor(
+    private router: Router,
+    private titleService: Title,
+    private metaTagService: Meta
+  ) {}
   tologinpage() {
     console.log('working');
     this.router.navigate(['/user-login']);
@@ -47,6 +53,12 @@ export class IntroductionComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
+    this.metaTagService.updateTag({
+      name: 'description',
+      content:
+        'jee mains , jee advanced, jee mains test series, jee advanced test series, create your test,testtify,testify,',
+    });
     this.num = window.innerWidth;
     if (this.num < 1200) {
       let e: any = document.getElementById('cardbody');

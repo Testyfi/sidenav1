@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularResizeEventModule } from 'angular-resize-event';
+import { Meta } from '@angular/platform-browser';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -11,6 +12,8 @@ interface SideNavToggle {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  constructor(private metaTagService: Meta) {}
+
   loggedin = true;
   profilepicture = '';
   title = 'sidenav';
@@ -45,6 +48,18 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem('token')) {
       this.intro = false;
     }
+    this.metaTagService.addTags([
+      {
+        name: 'keywords',
+        content:
+          'jee mains , jee advanced, jee mains test series, jee advanced test series, create your test,testtify,testify,',
+      },
+      { name: 'robots', content: 'index, follow' },
+      { name: 'author', content: 'Ronak Patel' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'date', content: '2021-05-17', scheme: 'YYYY-MM-DD' },
+      { charset: 'UTF-8' },
+    ]);
   }
   getintro(status: boolean) {
     this.intro = status;
